@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "lightshadestudioworks/my-custom-block",
+    "title": "My Custom Block",
+    "category": "design",
+    "icon": "smiley",
+    "description": "A custom block built with the modern WP standard.",
+    "supports": {
+        "html": false
+    },
+    "editorScript": "file:./build/index.js",
+    "renderTemplate": "render.php"
+}
