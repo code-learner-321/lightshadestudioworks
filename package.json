@@ -5,13 +5,8 @@
   },
   "scripts": {
     "start": "npm run watch",
-    "css:watch": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/lightshadestudioworks-tailwindcss.css --watch",
-    "sync": "browser-sync start --proxy \"http://localhost:10028\" --files \"*.php, assets/css/lightshadestudioworks-tailwindcss.css\"",
-    "watch": "concurrently \"npm run css:watch\" \"npm run sync\"",
+    "watch": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/lightshadestudioworks-tailwindcss.css --watch",
     "build": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/lightshadestudioworks-tailwindcss.css --minify && wp-scripts build"
   },
-  "devDependencies": {
-    "browser-sync": "^3.0.4",
-    "concurrently": "^10.0.1"
-  }
+  "devDependencies": {}
 }

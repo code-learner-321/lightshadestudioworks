@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "palette": [
+        { "slug": "base-60", "color": "var(--color-60)", "name": "Primary (60%)" },
+        { "slug": "base-30", "color": "var(--color-30)", "name": "Secondary (30%)" },
+        { "slug": "base-10", "color": "var(--color-10)", "name": "Accent (10%)" }
+      ]
+    }
+  }
+}

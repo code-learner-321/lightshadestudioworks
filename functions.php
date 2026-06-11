@@ -1,5 +1,9 @@
 <?php
 add_action('after_setup_theme', 'lightshadestudioworks_setup');
+
+
+require_once get_template_directory() . '/inc/class-tailwind-nav-walker.php';
+
 function lightshadestudioworks_setup()
 {
     load_theme_textdomain('lightshadestudioworks', get_template_directory() . '/languages');
@@ -205,15 +209,16 @@ function lightshadestudioworks_comment_count($count)
 }
 
 // Enqueue stylesheets
-function lightshadestudioworks_resources() {
+function lightshadestudioworks_resources()
+{
     // 1. Enqueue standard style.css (only contains theme headers)
     wp_enqueue_style('theme-main-activation', get_stylesheet_uri());
 
     // 2. Enqueue the Tailwind compiled utilities stylesheet
     wp_enqueue_style(
-        'theme-tailwind-utilities', 
-        get_template_directory_uri() . '/assets/css/lightshadestudioworks-tailwindcss.css', 
-        array('theme-main-activation'), 
+        'theme-tailwind-utilities',
+        get_template_directory_uri() . '/assets/css/lightshadestudioworks-tailwindcss.css',
+        array('theme-main-activation'),
         filemtime(get_template_directory() . '/assets/css/lightshadestudioworks-tailwindcss.css')
     );
 }
@@ -221,17 +226,20 @@ add_action('wp_enqueue_scripts', 'lightshadestudioworks_resources');
 
 
 // Enqueue block editor styles.............................................
-function lightshadestudioworks_render_my_custom_block( $attributes, $content ) {
+function lightshadestudioworks_render_my_custom_block($attributes, $content)
+{
     ob_start();
     include __DIR__ . '/blocks/my-custom-block/render.php';
     return ob_get_clean();
 }
-function lightshadestudioworks_render_my_custom_block_two( $attributes, $content ) {
+function lightshadestudioworks_render_my_custom_block_two($attributes, $content)
+{
     ob_start();
     include __DIR__ . '/blocks/my-custom-block-two/render.php';
     return ob_get_clean();
 }
-function lightshadestudioworks_register_blocks() {
+function lightshadestudioworks_register_blocks()
+{
     // This points to the folder containing block.json
     register_block_type(
         __DIR__ . '/blocks/my-custom-block',
@@ -246,4 +254,637 @@ function lightshadestudioworks_register_blocks() {
         )
     );
 }
-add_action( 'init', 'lightshadestudioworks_register_blocks' );
+add_action('init', 'lightshadestudioworks_register_blocks');
+
+
+
+
+
+// CUSTOMIZER SETTINGS....................................................................
+add_action('after_setup_theme', 'lightshadestudioworks_theme_setups');
+function lightshadestudioworks_theme_setups()
+{
+    load_theme_textdomain('lightshadestudioworks', get_template_directory() . '/languages');
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('custom-logo');
+    add_theme_support('html5', array('search-form', 'comment-list', 'comment-form', 'gallery', 'caption', 'style', 'script', 'navigation-widgets'));
+    add_theme_support('editor-styles');
+    add_editor_style('editor-style.css');
+    add_theme_support('appearance-tools');
+    register_nav_menus(array('main-menu' => esc_html__('Main Menu', 'lightshadestudioworks')));
+}
+
+add_action('customize_register', 'lightshadestudioworks_register_full_customizer');
+function lightshadestudioworks_register_full_customizer($wp_customize)
+{
+    // 1. Add Section
+    $wp_customize->add_section('lightshadestudioworks_theme_colors', array(
+        'title'    => __('Theme Color Palette', 'lightshadestudioworks'),
+        'priority' => 30,
+    ));
+
+    // 2. Add Scheme Selector
+    $wp_customize->add_setting('color_scheme_select', array(
+        'default'           => 'scheme_1',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('color_scheme_select', array(
+        'label'    => __('Select Base Color Scheme', 'lightshadestudioworks'),
+        'section'  => 'lightshadestudioworks_theme_colors',
+        'type'     => 'select',
+        'choices'  => [
+            'scheme_1' => 'Scheme 1 (Pastel)',
+            'scheme_2' => 'Scheme 2 (Dark)',
+            'scheme_3' => 'Scheme 3 (Ocean)',
+        ],
+    ));
+
+    // 3. Add Individual Color Controls
+    $colors = ['primary_60' => 'Primary (60%)', 'secondary_30' => 'Secondary (30%)', 'accent_10' => 'Accent (10%)'];
+    foreach ($colors as $id => $label) {
+        $wp_customize->add_setting($id, array(
+            'default'           => ($id == 'primary_60') ? '#ffe9ec' : (($id == 'secondary_30') ? '#f4f4f4' : '#000000'),
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'postMessage',
+        ));
+        $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $id, array(
+            'label'    => $label,
+            'section'  => 'lightshadestudioworks_theme_colors',
+            'settings' => $id,
+        )));
+    }
+}
+
+function lightshadestudioworks_get_color_scheme_values()
+{
+    $scheme = get_theme_mod('color_scheme_select', 'scheme_1');
+    $schemes = array(
+        'scheme_1' => ['#ffe9ec', '#f4f4f4', '#000000'],
+        'scheme_2' => ['#2d3436', '#636e72', '#ffffff'],
+        'scheme_3' => ['#0984e3', '#74b9ff', '#ffffff'],
+    );
+
+    $defaults = isset($schemes[$scheme]) ? $schemes[$scheme] : $schemes['scheme_1'];
+
+    $c60 = get_theme_mod('primary_60', $defaults[0]);
+    $c30 = get_theme_mod('secondary_30', $defaults[1]);
+    $c10 = get_theme_mod('accent_10', $defaults[2]);
+
+    return array($c60, $c30, $c10);
+}
+
+// 3. Dynamic CSS Injection (Your working implementation)
+function lightshadestudioworks_enqueue_dynamic_css()
+{
+    list($c60, $c30, $c10) = lightshadestudioworks_get_color_scheme_values();
+
+    // Combined selectors to ensure coverage on all editors
+    $css = ":root, html, body, .editor-styles-wrapper, .block-editor-iframe__body, .block-editor__container, .widgets-editor, .widgets-editor .editor-styles-wrapper, .edit-widgets, .edit-widgets .block-editor-wrapper, .wp-block-widgets { 
+        --color-60: {$c60}; 
+        --color-30: {$c30}; 
+        --color-10: {$c10}; 
+    }";
+
+    wp_register_style('lightshadestudioworks-dynamic-vars', false);
+    wp_enqueue_style('lightshadestudioworks-dynamic-vars');
+    wp_add_inline_style('lightshadestudioworks-dynamic-vars', $css);
+}
+
+add_action('wp_enqueue_scripts', 'lightshadestudioworks_enqueue_dynamic_css');
+add_action('admin_enqueue_scripts', 'lightshadestudioworks_enqueue_dynamic_css');
+add_action('enqueue_block_editor_assets', 'lightshadestudioworks_enqueue_dynamic_css');
+
+add_action('customize_preview_init', 'lightshadestudioworks_theme_customizer_live_preview');
+add_action('customize_controls_enqueue_scripts', 'lightshadestudioworks_theme_customizer_controls_preview');
+
+function lightshadestudioworks_theme_customizer_live_preview()
+{
+    wp_enqueue_script('customize-preview');
+
+    $schemes = [
+        'scheme_1' => ['#ffe9ec', '#f4f4f4', '#000000'],
+        'scheme_2' => ['#2d3436', '#636e72', '#ffffff'],
+        'scheme_3' => ['#0984e3', '#74b9ff', '#ffffff']
+    ];
+    $json_schemes = json_encode($schemes);
+
+    $script = "(function() {
+    if (!window.wp || !window.wp.customize) {
+        return;
+    }
+    const schemes = {$json_schemes};
+
+    function updatePreviewVars(colors) {
+        document.documentElement.style.setProperty('--color-60', colors[0]);
+        document.documentElement.style.setProperty('--color-30', colors[1]);
+        document.documentElement.style.setProperty('--color-10', colors[2]);
+    }
+
+    wp.customize('color_scheme_select', function(value) {
+        value.bind(function(newval) {
+            const colors = schemes[newval];
+            if (!colors) return;
+            updatePreviewVars(colors);
+        });
+    });
+
+    wp.customize('primary_60', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--color-60', newval);
+        });
+    });
+
+    wp.customize('secondary_30', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--color-30', newval);
+        });
+    });
+
+    wp.customize('accent_10', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--color-10', newval);
+        });
+    });
+    wp.customize('navbar_bg_color', function(value) {
+        value.bind(function(newval) {
+            // Target the specific container class used in all layouts
+            const navbar = document.querySelector('.lsw-navbar-container');
+            if (navbar) {
+                navbar.style.backgroundColor = newval;
+            }
+        });
+    });
+    wp.customize('footer_bg_color', function(value) {
+        value.bind(function(newval) {
+            const footer = document.getElementById('footer');
+            if (footer) {
+                footer.style.backgroundColor = newval;
+            }
+        });
+    });
+
+    // Button Settings Live Preview
+    function updateButtonPreview() {
+        // Get all CTA buttons in navbar
+        const buttons = document.querySelectorAll('.lsw-navbar-button');
+        if (!buttons.length) return;
+
+        const bgColor = wp.customize('navbar_btn_bg').get();
+        const shadowX = wp.customize('navbar_btn_shadow_x').get() || 0;
+        const shadowY = wp.customize('navbar_btn_shadow_y').get() || 10;
+        const shadowBlur = wp.customize('navbar_btn_shadow_blur').get() || 15;
+        const shadowColor = wp.customize('navbar_btn_shadow_color').get() || '#bfdbfe';
+        const borderRadius = wp.customize('navbar_btn_radius').get() || 9999;
+        const btnText = wp.customize('navbar_btn_text').get() || 'Book Now';
+
+        buttons.forEach(btn => {
+            btn.style.backgroundColor = bgColor;
+            btn.style.boxShadow = shadowX + 'px ' + shadowY + 'px ' + shadowBlur + 'px ' + shadowColor;
+            btn.style.borderRadius = borderRadius + 'px';
+            btn.textContent = btnText;
+        });
+    }
+
+    wp.customize('navbar_btn_text', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+
+    wp.customize('navbar_btn_bg', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+
+    wp.customize('navbar_btn_shadow_x', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+
+    wp.customize('navbar_btn_shadow_y', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+
+    wp.customize('navbar_btn_shadow_blur', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+
+    wp.customize('navbar_btn_shadow_color', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+
+    wp.customize('navbar_btn_radius', function(value) {
+        value.bind(function(newval) {
+            updateButtonPreview();
+        });
+    });
+})();";
+
+    wp_add_inline_script('customize-preview', $script);
+}
+
+function lightshadestudioworks_theme_customizer_controls_preview()
+{
+    wp_enqueue_script('customize-controls');
+
+    $schemes = [
+        'scheme_1' => ['#ffe9ec', '#f4f4f4', '#000000'],
+        'scheme_2' => ['#2d3436', '#636e72', '#ffffff'],
+        'scheme_3' => ['#0984e3', '#74b9ff', '#ffffff']
+    ];
+    $json_schemes = json_encode($schemes);
+
+    $script = "(function() {
+    if (!window.wp || !window.wp.customize) {
+        return;
+    }
+    const schemes = {$json_schemes};
+
+    wp.customize('color_scheme_select', function(value) {
+        value.bind(function(newval) {
+            const colors = schemes[newval];
+            if (!colors) return;
+
+            ['primary_60', 'secondary_30', 'accent_10'].forEach(function(id, index) {
+                const control = wp.customize.control(id);
+                if (!control) return;
+
+                control.setting.set(colors[index]);
+
+                const \$input = control.container.find('input.wp-color-picker');
+                if (\$input.length && typeof \$input.wpColorPicker === 'function') {
+                    \$input.wpColorPicker('color', colors[index]);
+                } else {
+                    control.container.find('input[type=text]').val(colors[index]);
+                }
+            });
+        });
+    });
+})();";
+
+    wp_add_inline_script('customize-controls', $script);
+}
+
+
+
+
+function add_additional_class_on_a($classes, $item, $args)
+{
+    if (isset($args->link_class)) {
+        $classes['class'] = $args->link_class;
+    }
+    return $classes;
+}
+add_filter('nav_menu_link_attributes', 'add_additional_class_on_a', 10, 3);
+
+
+function lightshadestudioworks_customizer_settings($wp_customize)
+{
+    if (! class_exists('LSW_Customize_Heading_Control') && class_exists('WP_Customize_Control')) {
+        class LSW_Customize_Heading_Control extends WP_Customize_Control
+        {
+            public $type = 'heading';
+            public function render_content()
+            {
+                echo '<h3 style="margin: 20px 0 10px; padding-bottom: 5px; border-bottom: 1px solid #ccc; text-transform: uppercase; font-size: 13px;">' . esc_html($this->label) . '</h3>';
+            }
+        }
+    }
+
+    $wp_customize->add_section('navbar_layout_section', array(
+        'title'    => 'Header Navbar Layouts',
+        'priority' => 30,
+    ));
+    // Layout Choice
+    $wp_customize->add_setting('navbar_layout_choice', array(
+        'default'           => 'lsw_menu_layout_1',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('navbar_layout_choice', array(
+        'label'    => 'Select Navbar Layout',
+        'section'  => 'navbar_layout_section',
+        'type'     => 'radio',
+        'choices'  => array(
+            'lsw_menu_layout_1' => 'Standard Minimalist',
+            'lsw_menu_layout_2' => 'Sleek Minimalist Navbar',
+            'lsw_menu_layout_3' => 'Vertical Sidebar',
+            'lsw_menu_layout_4' => 'Floating Capsule',
+        ),
+    ));
+
+    // --- NAVBAR SETTINGS HEADING ---
+    if (class_exists('LSW_Customize_Heading_Control')) {
+        $wp_customize->add_setting('navbar_settings_heading', array('sanitize_callback' => 'sanitize_text_field'));
+        $wp_customize->add_control(new LSW_Customize_Heading_Control($wp_customize, 'navbar_settings_header_label', array(
+            'label'    => 'Navbar Settings',
+            'section'  => 'navbar_layout_section',
+            'settings' => 'navbar_settings_heading',
+        )));
+    }
+
+    // Logo Upload
+    $wp_customize->add_setting('navbar_custom_logo', array('sanitize_callback' => 'absint'));
+    if (class_exists('WP_Customize_Cropped_Image_Control')) {
+        $wp_customize->add_control(new WP_Customize_Cropped_Image_Control($wp_customize, 'navbar_custom_logo', array(
+            'label'    => 'Navbar Custom Logo',
+            'section'  => 'navbar_layout_section',
+            'width'    => 400,
+            'height'   => 200,
+        )));
+    }
+
+    $wp_customize->add_setting('navbar_logo_width', array('default' => 150, 'sanitize_callback' => 'absint'));
+    $wp_customize->add_control('navbar_logo_width', array('label' => 'Logo Width (px)', 'section' => 'navbar_layout_section', 'type' => 'number'));
+
+    // Spacing
+    $padding_sides = ['top', 'right', 'bottom', 'left'];
+    foreach ($padding_sides as $side) {
+        $id = 'navbar_padding_' . $side;
+        $wp_customize->add_setting($id, array(
+            'default'           => 0, // Default 0 so the user starts fresh
+            'sanitize_callback' => 'absint'
+        ));
+        $wp_customize->add_control($id, array(
+            'label'   => 'Padding ' . ucfirst($side) . ' (px)',
+            'section' => 'navbar_layout_section',
+            'type'    => 'number'
+        ));
+    }
+    // Add this inside lightshadestudioworks_customizer_settings()
+    $wp_customize->add_setting('navbar_bg_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage', // Enables live preview
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'navbar_bg_color', array(
+        'label'    => 'Navbar Background Color',
+        'section'  => 'navbar_layout_section',
+    )));
+    $wp_customize->add_setting('navbar_menu_gap', array('default' => 32, 'sanitize_callback' => 'absint'));
+    $wp_customize->add_control('navbar_menu_gap', array('label' => 'Menu Item Gap (px)', 'section' => 'navbar_layout_section', 'type' => 'number'));
+
+    // 1. The Switcher (Checkbox)
+    $wp_customize->add_setting('navbar_show_button', array(
+        'default'           => 1,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('navbar_show_button', array(
+        'label'    => 'Show CTA Button',
+        'section'  => 'navbar_layout_section',
+        'type'     => 'checkbox',
+    ));
+
+    // Callback function to check if button is enabled
+    function is_button_enabled($control)
+    {
+        return $control->manager->get_setting('navbar_show_button')->value() == true;
+    }
+
+    // 2. Button Settings (with active_callback)
+
+
+    // Text Field
+    $wp_customize->add_setting('navbar_btn_text', array(
+        'default'           => 'Book Now',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_text', array(
+        'label'   => 'Button Text',
+        'section' => 'navbar_layout_section',
+        'type'    => 'text'
+    ));
+
+    // Background Color
+    $wp_customize->add_setting('navbar_btn_bg', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control(
+        $wp_customize,
+        'navbar_btn_bg',
+        array(
+            'label'   => 'Button Background Color',
+            'section' => 'navbar_layout_section'
+        )
+    ));
+
+    // Box Shadow - Shadow X Position
+    $wp_customize->add_setting('navbar_btn_shadow_x', array(
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_shadow_x', array(
+        'label'   => 'Shadow X Position (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number'
+    ));
+
+    // Shadow Y Position
+    $wp_customize->add_setting('navbar_btn_shadow_y', array(
+        'default'           => 10,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_shadow_y', array(
+        'label'   => 'Shadow Y Position (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number'
+    ));
+
+    // Shadow Blur
+    $wp_customize->add_setting('navbar_btn_shadow_blur', array(
+        'default'           => 15,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_shadow_blur', array(
+        'label'   => 'Shadow Blur (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number'
+    ));
+
+    // Shadow Color
+    $wp_customize->add_setting('navbar_btn_shadow_color', array(
+        'default'           => '#bfdbfe',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control(
+        $wp_customize,
+        'navbar_btn_shadow_color',
+        array(
+            'label'   => 'Shadow Color',
+            'section' => 'navbar_layout_section'
+        )
+    ));
+
+    // Button Border Radius
+    $wp_customize->add_setting('navbar_btn_radius', array(
+        'default'           => 9999,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_radius', array(
+        'label'   => 'Button Border Radius (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number'
+    ));
+
+
+    // --- FOOTER SETTINGS ---
+    $wp_customize->add_section('footer_style_section', array(
+        'title'    => __('Footer Style', 'lightshadestudioworks'),
+        'priority' => 40,
+    ));
+
+    // 2. Background Color Setting
+    $wp_customize->add_setting('footer_bg_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'footer_bg_color', array(
+        'label'    => __('Footer Background Color', 'lightshadestudioworks'),
+        'section'  => 'footer_style_section',
+    )));
+
+    // 3. ADD PADDING CONTROLS (Top, Right, Bottom, Left)
+    $padding_sides = ['top', 'right', 'bottom', 'left'];
+    foreach ($padding_sides as $side) {
+        $id = 'footer_padding_' . $side;
+        $wp_customize->add_setting($id, array(
+            'default'           => 0,
+            'sanitize_callback' => 'absint'
+        ));
+        $wp_customize->add_control($id, array(
+            'label'   => 'Footer Padding ' . ucfirst($side) . ' (px)',
+            'section' => 'footer_style_section',
+            'type'    => 'number'
+        ));
+    }
+}
+// Sanitization helper
+function my_sanitize_checkbox($checked)
+{
+    return ((isset($checked) && true == $checked) ? true : false);
+}
+add_action('customize_register', 'lightshadestudioworks_customizer_settings');
+
+
+
+// SITE LAYOUT SETTINGS...................................
+function lsw_site_layout_customizer($wp_customize)
+{
+    // 1. Add Section
+    $wp_customize->add_section('site_layout_section', array(
+        'title'    => 'Site Layout & Typography',
+        'priority' => 20,
+    ));
+
+    // 2. Container Width Control
+    $wp_customize->add_setting('site_container_width', array('default' => 1200, 'sanitize_callback' => 'absint'));
+    $wp_customize->add_control('site_container_width', array('label' => 'Max Container Width (px)', 'section' => 'site_layout_section', 'type' => 'number'));
+
+    // 3. Font Family Control
+    $wp_customize->add_setting('site_font_family', array('default' => 'Inter', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('site_font_family', array(
+        'label'    => 'Global Font Family',
+        'section'  => 'site_layout_section',
+        'type'     => 'select',
+        'choices'  => array(
+            // System Stacks
+            'system-ui, -apple-system, sans-serif' => 'System Default (Optimized)',
+            'sans-serif'                           => 'Sans Serif (Generic)',
+            'serif'                                => 'Serif (Generic)',
+            'monospace'                            => 'Monospace (Generic)',
+
+            // Popular Web-Safe/System Stacks
+            'Arial, Helvetica, sans-serif'         => 'Arial',
+            'Verdana, Geneva, sans-serif'          => 'Verdana',
+            'Trebuchet MS, sans-serif'             => 'Trebuchet MS',
+            'Georgia, serif'                       => 'Georgia',
+            'Times New Roman, serif'               => 'Times New Roman',
+            'Courier New, monospace'               => 'Courier New',
+
+            // Modern Professional Stacks
+            'Inter, system-ui, sans-serif'         => 'Inter (Modern)',
+            'Segoe UI, Tahoma, sans-serif'         => 'Segoe UI',
+            'Helvetica Neue, Helvetica, Arial, sans-serif' => 'Helvetica Neue',
+            'Palatino Linotype, serif'             => 'Palatino'
+        )
+    ));
+}
+add_action('customize_register', 'lsw_site_layout_customizer');
+
+// 4. Inject Dynamic CSS
+// 1. Ensure you know the handle used for your main CSS
+function lsw_enqueue_styles()
+{
+    // Let's assume the handle is 'lsw-style'
+    wp_enqueue_style('lsw-style', get_stylesheet_uri());
+}
+add_action('wp_enqueue_scripts', 'lsw_enqueue_styles');
+
+// 2. Inject CSS using that same handle
+function lsw_generate_dynamic_css()
+{
+    $width = get_theme_mod('site_container_width', 1200);
+    $font  = get_theme_mod('site_font_family', 'Inter');
+
+    $css = "
+        .site-container { 
+            max-width: {$width}px !important; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        /* Changed from ID to Class for better reusability */
+        .lsw-max-width-container { 
+            max-width: {$width}px !important; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        body { font-family: {$font}; }
+    ";
+
+    // THE HANDLE HERE MUST MATCH THE HANDLE IN WP_ENQUEUE_STYLE
+    wp_add_inline_style('lsw-style', $css);
+}
+add_action('wp_enqueue_scripts', 'lsw_generate_dynamic_css', 20);
+
+// footer sections...............
+add_action('customize_register', 'lsw_footer_customizer_settings');
+function lsw_footer_customizer_settings($wp_customize)
+{
+    // 1. Add Footer Section
+    $wp_customize->add_section('footer_style_section', array(
+        'title'    => __('Footer Style', 'lightshadestudioworks'),
+        'priority' => 40,
+    ));
+
+    // 2. Add Background Color Setting
+    $wp_customize->add_setting('footer_bg_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage', // Required for live preview
+    ));
+
+    // 3. Add Control
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'footer_bg_color', array(
+        'label'    => __('Footer Background Color', 'lightshadestudioworks'),
+        'section'  => 'footer_style_section',
+    )));
+}

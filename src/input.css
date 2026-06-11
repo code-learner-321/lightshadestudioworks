@@ -7,3 +7,8 @@
     color: #333;
   }
 }
+@theme {
+    --color-bg-60: var(--color-60);
+    --color-bg-30: var(--color-30);
+    --color-accent-10: var(--color-10);
+}
