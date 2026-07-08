@@ -24,7 +24,7 @@ $s_color = get_theme_mod('navbar_btn_shadow_color', '#bfdbfe');
 $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
 ?>
 <header style="background-color: <?php echo esc_attr($nav_bg); ?>;" class="lsw-navbar-container w-full flex items-center justify-between border-b border-gray-100">
-    <div style="padding: <?php echo $padding_css; ?>;" class="lsw-max-width-container w-full mx-auto flex justify-between items-center">
+    <div style="padding: <?php echo $padding_css; ?>;" class="lsw-max-width-container w-full mx-auto flex justify-between items-center h-20">
         <!-- Logo (Left) -->
         <div class="flex-shrink-0 flex items-center">
             <a href="<?php echo esc_url(home_url('/')); ?>">
@@ -93,7 +93,17 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             ));
         }
         ?>
-        <a href="#" class="bg-indigo-600 text-white py-3 rounded-full">Book Now</a>
+        <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+                <div class="block lg:hidden">
+                    <a href="#"
+                        class="lsw-navbar-button text-white px-6 py-2 font-semibold transition duration-300"
+                        style="background-color: <?php echo esc_attr($cta_bg); ?>; 
+                  border-radius: <?php echo esc_attr($cta_radius); ?>px;
+                  box-shadow: <?php echo esc_attr($shadow_css); ?>;">
+                        <?php echo esc_html($cta_text); ?>
+                    </a>
+                </div>
+            <?php endif; ?>
     </nav>
 </div>
 

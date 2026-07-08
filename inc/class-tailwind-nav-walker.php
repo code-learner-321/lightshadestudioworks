@@ -12,7 +12,7 @@ class Tailwind_Nav_Walker extends Walker_Nav_Menu {
 
         // 3. Combine classes based on whether the item is active
         if ($is_current) {
-            $link_classes = $layout_classes . ' ' . $layout_active_classes;
+            $link_classes = $layout_classes . ' ' . $layout_active_classes . ' lsw-active-link';
         } else {
             $link_classes = $layout_classes;
         }

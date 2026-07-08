@@ -12,7 +12,7 @@
         height: 2px;
         bottom: 0;
         left: 0;
-        background-color: #000;
+        background-color: var(--modern-nav-hover-line-color, #000);
         transform-origin: bottom right;
         transition: transform 0.25s ease-out;
     }
@@ -20,6 +20,10 @@
     .hover-underline:hover::after {
         transform: scaleX(1);
         transform-origin: bottom left;
+    }
+
+    .hover-underline:hover {
+        color: var(--modern-nav-hover-color, #000) !important;
     }
 
     /* Hidden state for mobile menu */
@@ -106,7 +110,9 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
         </button>
     </div>
 
-    <div id="mobile-menu" class="hidden-menu md:hidden border-t border-black bg-white px-6 py-8 flex-col space-y-6">
+    
+</header>
+<div id="mobile-menu" class="hidden-menu md:hidden border-t border-black bg-white px-6 py-8 flex-col space-y-6">
         <?php
         if (has_nav_menu('main-menu')) {
             wp_nav_menu(array(
@@ -119,12 +125,18 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             ));
         }
         ?>
-        <a href="#" class="border-2 border-black px-8 py-3 text-center font-bold uppercase hover:bg-black hover:text-white transition-colors duration-300">
-            Book Now
-        </a>
+        <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+            <div class="block lg:hidden">
+                <a href="#"
+                    class="lsw-navbar-button text-white px-6 py-2 font-semibold transition duration-300"
+                    style="background-color: <?php echo esc_attr($cta_bg); ?>; 
+                  border-radius: <?php echo esc_attr($cta_radius); ?>px;
+                  box-shadow: <?php echo esc_attr($shadow_css); ?>;">
+                    <?php echo esc_html($cta_text); ?>
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
-</header>
-
 <script>
     const btn = document.getElementById('hamburger');
     const menu = document.getElementById('mobile-menu');

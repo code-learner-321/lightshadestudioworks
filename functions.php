@@ -1,4 +1,449 @@
 <?php
+// ADDING PREBUILD PAGES AND TGM PLUGINDIR............................
+require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
+add_action('tgmpa_register', 'lssd_install_plugins');
+
+function lssd_install_plugins()
+{
+    $plugins = array(
+        array(
+            'name'      => 'Axis Folio',
+            'slug'      => 'axis-folio',
+            'source'    => 'axis-folio.zip',
+            'required'  => true,
+        ),
+        // Add the bPlugins Carousel Block
+        array(
+            'name'      => 'Carousel Block',
+            'slug'      => 'b-carousel-block', // Ensure this matches the folder name exactly
+            'required'  => true,
+        ),
+    );
+
+    $config = array(
+        'id'           => 'lssd-theme',
+        'default_path' => get_template_directory() . '/inc/plugins/',
+        'menu'         => 'tgmpa-install-plugins',
+        'parent_slug'  => 'themes.php',
+        'has_notices'  => false,
+        'is_automatic' => false,
+    );
+
+    tgmpa($plugins, $config);
+}
+function lsw_is_plugin_active($plugin_basename)
+{
+    if (!function_exists('is_plugin_active')) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+
+    return is_plugin_active($plugin_basename);
+}
+
+function lsw_required_plugins_ready()
+{
+    $required_plugins = array(
+        'axis-folio/axis-folio.php',
+        'b-carousel-block/b-carousel-block.php',
+    );
+
+    $active_plugins = get_option('active_plugins', array());
+
+    foreach ($required_plugins as $plugin_basename) {
+        if (lsw_is_plugin_active($plugin_basename)) {
+            continue;
+        }
+
+        $plugin_slug = dirname($plugin_basename);
+        if ($plugin_slug === '.' || $plugin_slug === '') {
+            return false;
+        }
+
+        $found = false;
+        foreach ($active_plugins as $active_plugin) {
+            if (strpos($active_plugin, $plugin_slug . '/') === 0) {
+                $found = true;
+                break;
+            }
+        }
+
+        if (!$found) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function lsw_is_plugins_installed()
+{
+    return lsw_required_plugins_ready();
+}
+
+function lsw_default_pages_exist()
+{
+    $page_slugs = array(
+        'home',
+        'services',
+    );
+
+    foreach ($page_slugs as $slug) {
+        if (!get_page_by_path($slug, OBJECT, 'page')) {
+            return false;
+        }
+    }
+
+    return true;
+}
+/**
+ * Redirect helper that falls back to JS/meta refresh when headers were already sent.
+ */
+function lsw_safe_redirect_fallback($url)
+{
+    if (!empty($url) && headers_sent()) {
+        // Use a JS redirect when headers already sent to avoid header() warnings
+        echo '<script type="text/javascript">window.location.href = ' . wp_json_encode($url) . ';</script>';
+        echo '<noscript><meta http-equiv="refresh" content="0;url=' . esc_url($url) . '" /></noscript>';
+        exit;
+    }
+
+    wp_safe_redirect($url);
+    exit;
+}
+// adding page 
+add_action('after_switch_theme', 'lsw_set_activation_flag');
+function lsw_set_activation_flag()
+{
+    set_transient('lsw_theme_just_activated', true, 60);
+}
+add_action('admin_init', 'lsw_redirect_after_activation');
+function lsw_redirect_after_activation()
+{
+    if (!get_transient('lsw_theme_just_activated') || !current_user_can('manage_options')) {
+        return;
+    }
+
+    if (isset($_GET['lsw_skip_setup'])) {
+        delete_transient('lsw_theme_just_activated');
+        return;
+    }
+
+    $current_page = isset($_GET['page']) ? sanitize_key($_GET['page']) : '';
+
+    if (in_array($current_page, array('lsw-setup-wizard', 'lsw-default-pages'), true)) {
+        delete_transient('lsw_theme_just_activated');
+        return;
+    }
+
+    if (lsw_required_plugins_ready()) {
+        delete_transient('lsw_theme_just_activated');
+        lsw_safe_redirect_fallback(admin_url('admin.php?page=lsw-setup-wizard'));
+    }
+
+    if ($current_page !== 'tgmpa-install-plugins') {
+        lsw_safe_redirect_fallback(admin_url('themes.php?page=tgmpa-install-plugins'));
+    }
+}
+function lsw_is_axis_folio_installed()
+{
+    return lsw_is_plugin_active('axis-folio/axis-folio.php');
+}
+add_action('tgmpa_admin_notices', 'lsw_inject_setup_button_into_tgm', 0);
+add_action('admin_notices', 'lsw_inject_setup_button_into_tgm', 0);
+
+function lsw_inject_setup_button_into_tgm()
+{
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    // If default pages already exist, do not prompt to create them
+    if (function_exists('lsw_default_pages_exist') && lsw_default_pages_exist()) {
+        return;
+    }
+
+    $current_page = sanitize_key($_REQUEST['page'] ?? '');
+
+    if ($current_page !== 'tgmpa-install-plugins') {
+        return;
+    }
+
+    $is_activate_result = isset($_REQUEST['plugin_status']) && sanitize_key($_REQUEST['plugin_status']) === 'activate';
+    $is_activation_request = isset($_REQUEST['tgmpa-activate']) && sanitize_key($_REQUEST['tgmpa-activate']) === 'activate-plugin';
+    $is_plugins_ready = lsw_required_plugins_ready();
+
+    if (! $is_plugins_ready && ! $is_activate_result && ! $is_activation_request) {
+        return;
+    }
+
+    echo '<div class="notice notice-success is-dismissible" style="margin-top: 20px;">';
+    echo '<p><strong>' . esc_html__('Plugins are ready!', 'lightshadestudioworks') . '</strong> ' . esc_html__('Continue to the setup wizard to create your default pages.', 'lightshadestudioworks') . '</p>';
+    echo '<p><a href="' . esc_url(admin_url('admin.php?page=lsw-setup-wizard')) . '" class="button button-primary">' . esc_html__('Create Default Pages', 'lightshadestudioworks') . '</a> <a href="' . esc_url(admin_url('index.php?lsw_skip_setup=1')) . '" class="button">' . esc_html__('Skip to Dashboard', 'lightshadestudioworks') . '</a></p>';
+    echo '</div>';
+}
+add_action('admin_menu', 'lsw_register_all_menu_pages');
+function lsw_register_all_menu_pages()
+{
+    add_submenu_page('themes.php', 'Theme Setup', 'Theme Setup', 'manage_options', 'lsw-setup-wizard', 'lsw_setup_wizard_content');
+    add_management_page('Default Pages', 'Default Pages', 'manage_options', 'lsw-default-pages', 'lsw_default_pages_content');
+}
+function lsw_setup_wizard_content()
+{
+    if (lsw_default_pages_exist()) {
+        lsw_safe_redirect_fallback(admin_url('index.php?lsw_skip_setup=1'));
+    }
+?>
+    <div class="wrap" style="max-width: 600px; margin-top: 50px; text-align: center; background: #fff; padding: 40px; border: 1px solid #ccd0d4; border-radius: 5px;">
+        <h1>Ready to finalize?</h1>
+        <p>Click below to automatically create your <strong>Home</strong> and <strong>Services</strong> pages.</p>
+        <form method="post">
+            <?php wp_nonce_field('lsw_setup_action', 'lsw_nonce'); ?>
+            <input type="submit" name="lsw_run_setup" class="button button-primary button-hero" value="Create Pages & Finish">
+            <a href="<?php echo esc_url(admin_url('index.php?lsw_skip_setup=1')); ?>" class="button button-hero">Skip to Dashboard</a>
+        </form>
+    </div>
+<?php
+}
+function lsw_default_pages_content()
+{
+    $created = (isset($_GET['status']) && $_GET['status'] == 'created');
+?>
+    <div class="wrap">
+        <h1>Default Pages Setup</h1>
+        <?php if ($created) : ?>
+            <div class="updated">
+                <p>Pages created successfully! <a href="<?php echo admin_url('edit.php?post_type=page'); ?>">View your pages</a></p>
+            </div>
+        <?php else : ?>
+            <p>If you missed creating the default pages during theme setup, you can do so here.</p>
+            <form method="post">
+                <?php wp_nonce_field('lsw_setup_action', 'lsw_nonce'); ?>
+                <input type="submit" name="lsw_run_manual_setup" class="button button-primary" value="Create Default Pages">
+            </form>
+        <?php endif; ?>
+    </div>
+<?php
+}
+
+
+require_once get_template_directory() . '/inc/page-templates.php';
+require_once get_template_directory() . '/inc/post-templates.php';
+function lsw_import_image_from_url($url, $title = '')
+{
+    if (empty($url)) return null;
+
+    // Check if image already exists via mapping the original URL string value
+    $existing = new WP_Query([
+        'post_type'      => 'attachment',
+        'post_status'    => 'inherit',
+        'posts_per_page' => 1,
+        'meta_query'     => [[
+            'key'     => '_source_imagekit_url',
+            'value'   => $url,
+            'compare' => '='
+        ]]
+    ]);
+
+    if ($existing->have_posts()) {
+        return $existing->post->ID;
+    }
+
+    require_once(ABSPATH . 'wp-admin/includes/media.php');
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+    // Download file to temp directory
+    $tmp = download_url($url);
+    if (is_wp_error($tmp)) {
+        return null;
+    }
+
+    $file_array = array(
+        'name'     => basename(parse_url($url, PHP_URL_PATH)),
+        'tmp_name' => $tmp
+    );
+
+    // Sideload into media library
+    $attachment_id = media_handle_sideload($file_array, 0, $title);
+
+    if (is_wp_error($attachment_id)) {
+        @unlink($tmp);
+        return null;
+    }
+
+    // Save metadata tracking tag to prevent continuous duplications on repeated trigger clicks
+    update_post_meta($attachment_id, '_source_imagekit_url', $url);
+
+    return $attachment_id;
+}
+function lightshadestudioworks_create_default_pages()
+{
+    // 1. Prepare HTML Content directly
+    $home_content = lightshadestudioworks_render_home();
+
+    // 2. Define Pages
+    $pages = [
+        'Home' => [
+            'slug'    => 'home',
+            'content' => $home_content
+        ]
+    ];
+
+    // 3. Insert/Update Pages
+    foreach ($pages as $title => $data) {
+        $existing_page = get_page_by_path($data['slug'], OBJECT, 'page');
+
+        $post_data = [
+            'post_title'   => $title,
+            'post_name'    => $data['slug'],
+            'post_content' => $data['content'],
+            'post_status'  => 'publish',
+            'post_type'    => 'page'
+        ];
+
+        if ($existing_page) {
+            $post_data['ID'] = $existing_page->ID;
+            $page_id = wp_update_post($post_data);
+        } else {
+            $page_id = wp_insert_post($post_data);
+            if ($page_id) {
+                update_option('show_on_front', 'page');
+                update_option('page_on_front', $page_id);
+            }
+        }
+    }
+    // 6. Define and Add 5 Blog Posts with ImageKit Featured Images
+    // Note: Swap these URLs out with your exact ImageKit paths.
+    $home_post1 = lightshadestudioworks_render_posts1_home();
+    $home_post2 = lightshadestudioworks_render_posts2_home();
+    $home_post3 = lightshadestudioworks_render_posts3_home();
+    $home_post4 = lightshadestudioworks_render_posts4_home();
+    $home_post5 = lightshadestudioworks_render_posts5_home();
+
+    $blog_posts = [
+        [
+            'title'   => 'Ten Years in Photography and the Evolution of Style',
+            'slug'    => 'ten-years-photography-evolution-style',
+            'content' => $home_post1,
+            'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2147607770.jpg'
+        ],
+        [
+            'title'   => 'The Art of Candid Shots and Unscripted Beauty',
+            'slug'    => 'the-art-of-candid-shots-and-unscripted-beauty',
+            'content' => $home_post2,
+            'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2149887737.jpg'
+        ],
+        [
+            'title'   => 'Preparing Your Property for a Real Estate Shoot',
+            'slug'    => 'preparing-your-property-for-a-real-estate-shoot',
+            'content' => $home_post3,
+            'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/61.jpg'
+        ],
+        [
+            'title'   => 'Finding the Right Light for Every Portrait Session',
+            'slug'    => 'finding-the-right-light-for-every-portrait-session',
+            'content' => $home_post4,
+            'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2149438606.jpg'
+        ],
+        [
+            'title'   => 'Chasing the Grain: Why I’m Falling Back in Love with Film Photography',
+            'slug'    => 'chasing-the-grain-why-im-falling-back-in-love-with-film-photography',
+            'content' => $home_post5,
+            'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2150506094.jpg'
+        ]
+    ];
+
+    foreach ($blog_posts as $post_item) {
+        $existing_post = get_page_by_path($post_item['slug'], OBJECT, 'post');
+
+        $post_args = [
+            'post_title'   => $post_item['title'],
+            'post_name'    => $post_item['slug'],
+            'post_content' => $post_item['content'],
+            'post_status'  => 'publish',
+            'post_type'    => 'post'
+        ];
+
+        if ($existing_post) {
+            $post_args['ID'] = $existing_post->ID;
+            $post_id = wp_update_post($post_args);
+        } else {
+            $post_id = wp_insert_post($post_args);
+        }
+
+        // Handle ImageKit Featured Image Assignment
+        if ($post_id && !is_wp_error($post_id)) {
+            $featured_img_id = lsw_import_image_from_url($post_item['img_url'], $post_item['title']);
+            if ($featured_img_id) {
+                set_post_thumbnail($post_id, $featured_img_id);
+            }
+        }
+    }
+
+    // 5. Generate 'lssw_menu' Navigation and Bind to Theme Main Menu Location
+    // Generate 'lssw_menu' Navigation and Bind to Theme Location
+    $menu_name = 'lssw_menu';
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+
+    if (!$menu_exists) {
+        $menu_id = wp_create_nav_menu($menu_name);
+
+        if (!is_wp_error($menu_id)) {
+            if (isset($created_page_ids['Home'])) {
+                wp_update_nav_menu_item($menu_id, 0, array(
+                    'menu-item-title'     => __('Home', 'lightshadestudioworks'),
+                    'menu-item-object-id' => $created_page_ids['Home'],
+                    'menu-item-object'    => 'page',
+                    'menu-item-type'      => 'post_type',
+                    'menu-item-status'    => 'publish',
+                ));
+            }
+
+            $locations = get_theme_mod('nav_menu_locations');
+            $locations['main-menu'] = $menu_id;
+            set_theme_mod('nav_menu_locations', $locations);
+        }
+    } else {
+        $locations = get_theme_mod('nav_menu_locations');
+        $locations['main-menu'] = $menu_exists->term_id;
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+
+
+    update_option('lsw_pages_created', true);
+
+    // After page creation, send to Dashboard
+    lsw_safe_redirect_fallback(admin_url());
+}
+add_action('admin_init', 'lsw_handle_form_submissions');
+function lsw_handle_form_submissions()
+{
+    if (isset($_POST['lsw_run_setup']) || isset($_POST['lsw_run_manual_setup'])) {
+        // ... (Keep your nonce check here) ...
+        
+        lightshadestudioworks_create_default_pages();
+        
+        // CRITICAL: Clear the flag so redirect loop stops
+        delete_transient('lsw_theme_just_activated');
+        
+        $redirect_url = isset($_POST['lsw_run_setup'])
+            ? admin_url('admin.php?page=lsw-setup-wizard&status=created')
+            : admin_url('tools.php?page=lsw-default-pages&status=created');
+            
+        lsw_safe_redirect_fallback($redirect_url);
+    }
+}
+
+// ADDING PREBUILD PAGES AND TGM PLUGINDIR ENDS............................
+
+
+
+
+
+
+
+
+
 add_action('after_setup_theme', 'lightshadestudioworks_setup');
 
 
@@ -192,7 +637,7 @@ function lightshadestudioworks_custom_pings($comment)
 {
 ?>
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>"><?php comment_author_link(); ?></li>
-<?php
+    <?php
 }
 
 add_filter('get_comments_number', 'lightshadestudioworks_comment_count', 0);
@@ -286,7 +731,7 @@ function lightshadestudioworks_register_full_customizer($wp_customize)
 
     // 2. Add Scheme Selector
     $wp_customize->add_setting('color_scheme_select', array(
-        'default'           => 'scheme_1',
+        'default'           => 'scheme_4',
         'transport'         => 'postMessage',
         'sanitize_callback' => 'sanitize_text_field',
     ));
@@ -298,14 +743,36 @@ function lightshadestudioworks_register_full_customizer($wp_customize)
             'scheme_1' => 'Scheme 1 (Pastel)',
             'scheme_2' => 'Scheme 2 (Dark)',
             'scheme_3' => 'Scheme 3 (Ocean)',
+            'scheme_4' => 'Scheme 4 (Golden Ember)',
         ],
     ));
 
-    // 3. Add Individual Color Controls
+    // 3. Add Primary / Secondary / Accent Controls
     $colors = ['primary_60' => 'Primary (60%)', 'secondary_30' => 'Secondary (30%)', 'accent_10' => 'Accent (10%)'];
     foreach ($colors as $id => $label) {
+        $default_value = ($id == 'primary_60') ? '#ffffff' : (($id == 'secondary_30') ? '#000000' : '#c5a059');
         $wp_customize->add_setting($id, array(
-            'default'           => ($id == 'primary_60') ? '#ffe9ec' : (($id == 'secondary_30') ? '#f4f4f4' : '#000000'),
+            'default'           => $default_value,
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'postMessage',
+        ));
+        $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $id, array(
+            'label'    => $label,
+            'section'  => 'lightshadestudioworks_theme_colors',
+            'settings' => $id,
+        )));
+    }
+
+    // 4. Add Neutral Color Controls
+    $neutral_colors = [
+        'neutral_white' => 'Neutral White',
+        'neutral_black' => 'Neutral Black',
+        'neutral_grey'  => 'Neutral Grey',
+    ];
+    foreach ($neutral_colors as $id => $label) {
+        $default_value = ($id == 'neutral_white') ? '#dcdcdc' : (($id == 'neutral_black') ? '#454545' : '#f2f2f7');
+        $wp_customize->add_setting($id, array(
+            'default'           => $default_value,
             'sanitize_callback' => 'sanitize_hex_color',
             'transport'         => 'postMessage',
         ));
@@ -316,35 +783,97 @@ function lightshadestudioworks_register_full_customizer($wp_customize)
         )));
     }
 }
+function lightshadestudioworks_enqueue_typography_css()
+{
+    // Fetch customizer options with safe defaults
+    $body_sz = get_theme_mod('body_font_size', '16px');
+    $h1_sz   = get_theme_mod('h1_font_size', '36px');
+    $h2_sz   = get_theme_mod('h2_font_size', '30px');
+    $h3_sz   = get_theme_mod('h3_font_size', '24px');
+    $h4_sz   = get_theme_mod('h4_font_size', '20px');
+    $h5_sz   = get_theme_mod('h5_font_size', '18px');
+    $h6_sz   = get_theme_mod('h6_font_size', '16px');
+
+    // Build the structural override rule definitions
+    $css = "
+    :root {
+        --lsw-body-size: {$body_sz};
+        --lsw-h1-size: {$h1_sz};
+        --lsw-h2-size: {$h2_sz};
+        --lsw-h3-size: {$h3_sz};
+        --lsw-h4-size: {$h4_sz};
+        --lsw-h5-size: {$h5_sz};
+        --lsw-h6-size: {$h6_sz};
+    }
+
+    .site-main, .site-content, .entry-content, .wp-block-post-content, .editor-styles-wrapper {
+        font-size: var(--lsw-body-size) !important;
+    }
+    .site-main h1, .site-content h1, .entry-content h1, .wp-block-post-content h1, .editor-styles-wrapper h1 {
+        font-size: var(--lsw-h1-size) !important;
+    }
+    .site-main h2, .site-content h2, .entry-content h2, .wp-block-post-content h2, .editor-styles-wrapper h2 {
+        font-size: var(--lsw-h2-size) !important;
+    }
+    .site-main h3, .site-content h3, .entry-content h3, .wp-block-post-content h3, .editor-styles-wrapper h3 {
+        font-size: var(--lsw-h3-size) !important;
+    }
+    .site-main h4, .site-content h4, .entry-content h4, .wp-block-post-content h4, .editor-styles-wrapper h4 {
+        font-size: var(--lsw-h4-size) !important;
+    }
+    .site-main h5, .site-content h5, .entry-content h5, .wp-block-post-content h5, .editor-styles-wrapper h5 {
+        font-size: var(--lsw-h5-size) !important;
+    }
+    .site-main h6, .site-content h6, .entry-content h6, .wp-block-post-content h6, .editor-styles-wrapper h6 {
+        font-size: var(--lsw-h6-size) !important;
+    }
+    ";
+
+    wp_register_style('lightshadestudioworks-typography-vars', false);
+    wp_enqueue_style('lightshadestudioworks-typography-vars');
+    wp_add_inline_style('lightshadestudioworks-typography-vars', $css);
+}
+// Hook into both front-end, old widgets editor and the modern blocks editor layout
+add_action('wp_enqueue_scripts', 'lightshadestudioworks_enqueue_typography_css');
+add_action('admin_enqueue_scripts', 'lightshadestudioworks_enqueue_typography_css');
+add_action('enqueue_block_editor_assets', 'lightshadestudioworks_enqueue_typography_css');
+
 
 function lightshadestudioworks_get_color_scheme_values()
 {
-    $scheme = get_theme_mod('color_scheme_select', 'scheme_1');
+    $scheme = get_theme_mod('color_scheme_select', 'scheme_4');
     $schemes = array(
-        'scheme_1' => ['#ffe9ec', '#f4f4f4', '#000000'],
-        'scheme_2' => ['#2d3436', '#636e72', '#ffffff'],
-        'scheme_3' => ['#0984e3', '#74b9ff', '#ffffff'],
+        'scheme_1' => ['#f0f8ff', '#005a8c', '#ff4444', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_2' => ['#d2ebd0', '#3b6b3a', '#f1c40f', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_3' => ['#f3f6f6', '#36777d', '#33cca7', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_4' => ['#ffffff', '#000000', '#c5a059', '#dcdcdc', '#454545', '#f2f2f7'],
     );
 
-    $defaults = isset($schemes[$scheme]) ? $schemes[$scheme] : $schemes['scheme_1'];
+    $defaults = isset($schemes[$scheme]) ? $schemes[$scheme] : $schemes['scheme_4'];
 
     $c60 = get_theme_mod('primary_60', $defaults[0]);
     $c30 = get_theme_mod('secondary_30', $defaults[1]);
     $c10 = get_theme_mod('accent_10', $defaults[2]);
+    $neutral_white = get_theme_mod('neutral_white', $defaults[3]);
+    $neutral_black = get_theme_mod('neutral_black', $defaults[4]);
+    $neutral_grey = get_theme_mod('neutral_grey', $defaults[5]);
 
-    return array($c60, $c30, $c10);
+    return array($c60, $c30, $c10, $neutral_white, $neutral_black, $neutral_grey);
 }
 
 // 3. Dynamic CSS Injection (Your working implementation)
 function lightshadestudioworks_enqueue_dynamic_css()
 {
-    list($c60, $c30, $c10) = lightshadestudioworks_get_color_scheme_values();
+    list($c60, $c30, $c10, $neutral_white, $neutral_black, $neutral_grey) = lightshadestudioworks_get_color_scheme_values();
 
     // Combined selectors to ensure coverage on all editors
     $css = ":root, html, body, .editor-styles-wrapper, .block-editor-iframe__body, .block-editor__container, .widgets-editor, .widgets-editor .editor-styles-wrapper, .edit-widgets, .edit-widgets .block-editor-wrapper, .wp-block-widgets { 
         --color-60: {$c60}; 
         --color-30: {$c30}; 
-        --color-10: {$c10}; 
+        --color-10: {$c10};
+        --lsw-color-neutral-white: {$neutral_white};
+        --lsw-color-neutral-black: {$neutral_black};
+        --lsw-color-neutral-grey: {$neutral_grey};
     }";
 
     wp_register_style('lightshadestudioworks-dynamic-vars', false);
@@ -364,9 +893,10 @@ function lightshadestudioworks_theme_customizer_live_preview()
     wp_enqueue_script('customize-preview');
 
     $schemes = [
-        'scheme_1' => ['#ffe9ec', '#f4f4f4', '#000000'],
-        'scheme_2' => ['#2d3436', '#636e72', '#ffffff'],
-        'scheme_3' => ['#0984e3', '#74b9ff', '#ffffff']
+        'scheme_1' => ['#f0f8ff', '#005a8c', '#ff4444', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_2' => ['#d2ebd0', '#3b6b3a', '#f1c40f', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_3' => ['#f3f6f6', '#36777d', '#33cca7', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_4' => ['#ffffff', '#000000', '#c5a059', '#dcdcdc', '#454545', '#f2f2f7']
     ];
     $json_schemes = json_encode($schemes);
 
@@ -380,6 +910,9 @@ function lightshadestudioworks_theme_customizer_live_preview()
         document.documentElement.style.setProperty('--color-60', colors[0]);
         document.documentElement.style.setProperty('--color-30', colors[1]);
         document.documentElement.style.setProperty('--color-10', colors[2]);
+        document.documentElement.style.setProperty('--lsw-color-neutral-white', colors[3]);
+        document.documentElement.style.setProperty('--lsw-color-neutral-black', colors[4]);
+        document.documentElement.style.setProperty('--lsw-color-neutral-grey', colors[5]);
     }
 
     wp.customize('color_scheme_select', function(value) {
@@ -407,6 +940,58 @@ function lightshadestudioworks_theme_customizer_live_preview()
             document.documentElement.style.setProperty('--color-10', newval);
         });
     });
+    wp.customize('neutral_white', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-color-neutral-white', newval);
+        });
+    });
+    wp.customize('neutral_black', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-color-neutral-black', newval);
+        });
+    });
+    wp.customize('neutral_grey', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-color-neutral-grey', newval);
+        });
+    });
+
+    wp.customize('body_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-body-size', newval);
+        });
+    });
+    wp.customize('h1_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-h1-size', newval);
+        });
+    });
+    wp.customize('h2_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-h2-size', newval);
+        });
+    });
+    wp.customize('h3_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-h3-size', newval);
+        });
+    });
+    wp.customize('h4_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-h4-size', newval);
+        });
+    });
+    wp.customize('h5_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-h5-size', newval);
+        });
+    });
+    wp.customize('h6_font_size', function(value) {
+        value.bind(function(newval) {
+            document.documentElement.style.setProperty('--lsw-h6-size', newval);
+        });
+    });
+
     wp.customize('navbar_bg_color', function(value) {
         value.bind(function(newval) {
             // Target the specific container class used in all layouts
@@ -421,6 +1006,36 @@ function lightshadestudioworks_theme_customizer_live_preview()
             const footer = document.getElementById('footer');
             if (footer) {
                 footer.style.backgroundColor = newval;
+            }
+        });
+    });
+    wp.customize('display_footer_text', function(value) {
+        value.bind(function(newval) {
+            const footerContainer = document.querySelector('#footer .lsw-max-width-container');
+            if (footerContainer) {
+                footerContainer.style.textAlign = newval;
+            }
+        });
+    });
+
+    wp.customize('footer_text_color', function(value) {
+        value.bind(function(newval) {
+            const footer = document.getElementById('footer');
+            const footerContainer = document.querySelector('#footer .lsw-max-width-container');
+            if (footer) {
+                footer.style.setProperty('color', newval, 'important');
+            }
+            if (footerContainer) {
+                footerContainer.style.setProperty('color', newval, 'important');
+            }
+        });
+    });
+
+    wp.customize('footer_text', function(value) {
+        value.bind(function(newval) {
+            const footerContainer = document.querySelector('#footer .lsw-max-width-container');
+            if (footerContainer) {
+                footerContainer.innerHTML = newval;
             }
         });
     });
@@ -488,6 +1103,96 @@ function lightshadestudioworks_theme_customizer_live_preview()
             updateButtonPreview();
         });
     });
+
+    // Hover Effect Preview
+    function updateButtonHoverPreview() {
+        const styleId = 'navbar-btn-hover-style';
+        let styleEl = document.getElementById(styleId);
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = styleId;
+            document.head.appendChild(styleEl);
+        }
+        const enabled = wp.customize('navbar_btn_hover_enabled').get();
+        if (!enabled) {
+            styleEl.innerHTML = '';
+            return;
+        }
+        const x = wp.customize('navbar_btn_hover_shadow_x').get() || 0;
+        const y = wp.customize('navbar_btn_hover_shadow_y').get() || 0;
+        const blur = wp.customize('navbar_btn_hover_shadow_blur').get() || 15;
+        const color = wp.customize('navbar_btn_hover_shadow_color').get() || '#bfdbfe';
+        styleEl.innerHTML = `.lsw-navbar-button:hover { box-shadow: \${x}px \${y}px \${blur}px \${color} !important; }`;
+    }
+
+    wp.customize('navbar_btn_hover_enabled', function(value) {
+        value.bind(function(newval) {
+            updateButtonHoverPreview();
+        });
+    });
+    wp.customize('navbar_btn_hover_shadow_x', function(value) {
+        value.bind(function(newval) {
+            updateButtonHoverPreview();
+        });
+    });
+    wp.customize('navbar_btn_hover_shadow_y', function(value) {
+        value.bind(function(newval) {
+            updateButtonHoverPreview();
+        });
+    });
+    wp.customize('navbar_btn_hover_shadow_blur', function(value) {
+        value.bind(function(newval) {
+            updateButtonHoverPreview();
+        });
+    });
+    wp.customize('navbar_btn_hover_shadow_color', function(value) {
+        value.bind(function(newval) {
+            updateButtonHoverPreview();
+        });
+    });
+
+    // Ensure hover preview updates on initial load
+    updateButtonHoverPreview();
+
+    // Live Preview custom styles
+    function updateCustomizerStyles() {
+        const styleId = 'customizer-dynamic-navbar-styles';
+        let styleEl = document.getElementById(styleId);
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = styleId;
+            document.head.appendChild(styleEl);
+        }
+        
+        const sleekHoverColor = wp.customize('sleek_navbar_hover_color').get() || '#2563eb';
+        const sleekHoverLine = wp.customize('sleek_navbar_hover_line_color').get() || '#2563eb';
+        const modernHoverColor = wp.customize('modern_navbar_hover_color').get() || '#000000';
+        const modernHoverLine = wp.customize('modern_navbar_hover_line_color').get() || '#000000';
+        const globalActiveLink = wp.customize('global_active_link_color').get() || '#2563eb';
+        
+        styleEl.innerHTML = `
+            :root {
+                --sleek-nav-hover-color: \${sleekHoverColor};
+                --sleek-nav-hover-line-color: \${sleekHoverLine};
+                --modern-nav-hover-color: \${modernHoverColor};
+                --modern-nav-hover-line-color: \${modernHoverLine};
+                --global-active-link-color: \${globalActiveLink};
+            }
+            a:active,
+            .lsw-active-link {
+                color: \${globalActiveLink} !important;
+            }
+        `;
+    }
+    
+    wp.customize('sleek_navbar_hover_color', function(value) { value.bind(updateCustomizerStyles); });
+    wp.customize('sleek_navbar_hover_line_color', function(value) { value.bind(updateCustomizerStyles); });
+    wp.customize('modern_navbar_hover_color', function(value) { value.bind(updateCustomizerStyles); });
+    wp.customize('modern_navbar_hover_line_color', function(value) { value.bind(updateCustomizerStyles); });
+    wp.customize('global_active_link_color', function(value) { value.bind(updateCustomizerStyles); });
+    
+    updateCustomizerStyles();
+
 })();";
 
     wp_add_inline_script('customize-preview', $script);
@@ -498,9 +1203,10 @@ function lightshadestudioworks_theme_customizer_controls_preview()
     wp_enqueue_script('customize-controls');
 
     $schemes = [
-        'scheme_1' => ['#ffe9ec', '#f4f4f4', '#000000'],
-        'scheme_2' => ['#2d3436', '#636e72', '#ffffff'],
-        'scheme_3' => ['#0984e3', '#74b9ff', '#ffffff']
+        'scheme_1' => ['#f0f8ff', '#005a8c', '#ff4444', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_2' => ['#d2ebd0', '#3b6b3a', '#f1c40f', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_3' => ['#f3f6f6', '#36777d', '#33cca7', '#dcdcdc', '#454545', '#f2f2f7'],
+        'scheme_4' => ['#ffffff', '#000000', '#c5a059', '#dcdcdc', '#454545', '#f2f2f7']
     ];
     $json_schemes = json_encode($schemes);
 
@@ -515,7 +1221,7 @@ function lightshadestudioworks_theme_customizer_controls_preview()
             const colors = schemes[newval];
             if (!colors) return;
 
-            ['primary_60', 'secondary_30', 'accent_10'].forEach(function(id, index) {
+            ['primary_60', 'secondary_30', 'accent_10', 'neutral_white', 'neutral_black', 'neutral_grey'].forEach(function(id, index) {
                 const control = wp.customize.control(id);
                 if (!control) return;
 
@@ -528,6 +1234,53 @@ function lightshadestudioworks_theme_customizer_controls_preview()
                     control.container.find('input[type=text]').val(colors[index]);
                 }
             });
+        });
+    });
+
+    window.lswResetCustomizerSettings = function() {
+        if (confirm('Are you sure you want to reset all theme settings? This will delete all custom layout, color, and typography configurations and restore defaults.')) {
+            const btn = document.querySelector('.lsw-reset-customizer-btn');
+            if (btn) {
+                btn.disabled = true;
+                btn.style.color = '#94a3b8';
+                btn.style.borderColor = '#cbd5e1';
+                btn.style.backgroundColor = '#f1f5f9';
+                btn.innerText = 'Resetting...';
+            }
+            
+            jQuery.post(ajaxurl, {
+                action: 'lsw_reset_customizer_settings',
+                nonce: window.lsw_reset_obj ? window.lsw_reset_obj.nonce : ''
+            }, function(response) {
+                if (response.success) {
+                    window.location.reload();
+                } else {
+                    alert('Reset failed: ' + (response.data || 'Unknown error'));
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.style.color = '#ef4444';
+                        btn.style.borderColor = '#ef4444';
+                        btn.style.backgroundColor = '#fef2f2';
+                        btn.innerText = 'Reset Theme Settings';
+                    }
+                }
+            }).fail(function() {
+                alert('Reset failed. Please try again.');
+                if (btn) {
+                    btn.disabled = false;
+                    btn.style.color = '#ef4444';
+                    btn.style.borderColor = '#ef4444';
+                    btn.style.backgroundColor = '#fef2f2';
+                    btn.innerText = 'Reset Theme Settings';
+                }
+            });
+        }
+    };
+    
+    jQuery(document).ready(function($) {
+        $(document).on('click', '.lsw-reset-customizer-btn', function(e) {
+            e.preventDefault();
+            window.lswResetCustomizerSettings();
         });
     });
 })();";
@@ -561,6 +1314,33 @@ function lightshadestudioworks_customizer_settings($wp_customize)
         }
     }
 
+    if (! class_exists('LSW_Reset_Customizer_Control') && class_exists('WP_Customize_Control')) {
+        class LSW_Reset_Customizer_Control extends WP_Customize_Control
+        {
+            public $type = 'lsw_reset_button';
+            public function render_content()
+            {
+                $nonce = wp_create_nonce('lsw_reset_customizer_nonce');
+    ?>
+                <script>
+                    window.lsw_reset_obj = {
+                        nonce: '<?php echo esc_js($nonce); ?>'
+                    };
+                </script>
+                <div style="margin-top: 15px; padding: 12px; border: 1px dashed #e2e8f0; border-radius: 8px; background: #f8fafc; box-shadow: inset 0 1px 2px rgba(0,0,0,0.025);">
+                    <span class="customize-control-title" style="margin-bottom: 6px; font-weight: 600; color: #1e293b; font-size: 13px;"><?php echo esc_html($this->label); ?></span>
+                    <?php if (! empty($this->description)) : ?>
+                        <span class="description customize-control-description" style="margin-bottom: 12px; display: block; font-size: 12px; line-height: 1.4; color: #64748b;"><?php echo esc_html($this->description); ?></span>
+                    <?php endif; ?>
+                    <button type="button" class="button button-link lsw-reset-customizer-btn" style="width: 100%; border: 1px solid #ef4444; border-radius: 6px; background-color: #fef2f2; color: #ef4444; font-weight: 600; height: 34px; line-height: 32px; text-decoration: none; text-align: center; display: block; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='#fee2e2'" onmouseout="this.style.backgroundColor='#fef2f2'">
+                        <?php esc_html_e('Reset Theme Settings', 'lightshadestudioworks'); ?>
+                    </button>
+                </div>
+<?php
+            }
+        }
+    }
+
     $wp_customize->add_section('navbar_layout_section', array(
         'title'    => 'Header Navbar Layouts',
         'priority' => 30,
@@ -577,8 +1357,9 @@ function lightshadestudioworks_customizer_settings($wp_customize)
         'choices'  => array(
             'lsw_menu_layout_1' => 'Standard Minimalist',
             'lsw_menu_layout_2' => 'Sleek Minimalist Navbar',
-            'lsw_menu_layout_3' => 'Vertical Sidebar',
-            'lsw_menu_layout_4' => 'Floating Capsule',
+            'lsw_menu_layout_3' => 'Classic Inline Right',
+            'lsw_menu_layout_4' => 'Modern Bold Minimalist',
+            'lsw_menu_layout_5' => 'Tabed Overlap',
         ),
     ));
 
@@ -633,6 +1414,16 @@ function lightshadestudioworks_customizer_settings($wp_customize)
     $wp_customize->add_setting('navbar_menu_gap', array('default' => 32, 'sanitize_callback' => 'absint'));
     $wp_customize->add_control('navbar_menu_gap', array('label' => 'Menu Item Gap (px)', 'section' => 'navbar_layout_section', 'type' => 'number'));
 
+    // --- BUTTON STYLES HEADING ---
+    if (class_exists('LSW_Customize_Heading_Control')) {
+        $wp_customize->add_setting('button_styles_heading', array('sanitize_callback' => 'sanitize_text_field'));
+        $wp_customize->add_control(new LSW_Customize_Heading_Control($wp_customize, 'button_styles_header_label', array(
+            'label'    => 'Button Styles',
+            'section'  => 'navbar_layout_section',
+            'settings' => 'button_styles_heading',
+        )));
+    }
+
     // 1. The Switcher (Checkbox)
     $wp_customize->add_setting('navbar_show_button', array(
         'default'           => 1,
@@ -668,7 +1459,7 @@ function lightshadestudioworks_customizer_settings($wp_customize)
 
     // Background Color
     $wp_customize->add_setting('navbar_btn_bg', array(
-        'default'           => '#000000',
+        'default'           => '#2563eb',
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage'
     ));
@@ -733,16 +1524,84 @@ function lightshadestudioworks_customizer_settings($wp_customize)
     ));
 
     // Button Border Radius
+    // Button Border Radius
     $wp_customize->add_setting('navbar_btn_radius', array(
         'default'           => 9999,
         'sanitize_callback' => 'absint',
-        'transport'         => 'postMessage'
+        'transport'         => 'postMessage',
     ));
     $wp_customize->add_control('navbar_btn_radius', array(
         'label'   => 'Button Border Radius (px)',
         'section' => 'navbar_layout_section',
         'type'    => 'number'
     ));
+
+    // --- HOVER STYLE HEADING ---
+    if (class_exists('LSW_Customize_Heading_Control')) {
+        $wp_customize->add_setting('hover_style_heading', array('sanitize_callback' => 'sanitize_text_field'));
+        $wp_customize->add_control(new LSW_Customize_Heading_Control($wp_customize, 'hover_style_header_label', array(
+            'label'    => 'Hover Style',
+            'section'  => 'navbar_layout_section',
+            'settings' => 'hover_style_heading',
+        )));
+    }
+
+    // Hover Effect Switcher
+    $wp_customize->add_setting('navbar_btn_hover_enabled', array(
+        'default'           => 1,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('navbar_btn_hover_enabled', array(
+        'label'    => 'Enable Hover Effect',
+        'section'  => 'navbar_layout_section',
+        'type'     => 'checkbox',
+    ));
+
+    // Hover Box Shadow Settings
+    $wp_customize->add_setting('navbar_btn_hover_shadow_x', array(
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('navbar_btn_hover_shadow_x', array(
+        'label'   => 'Hover Shadow X Position (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number',
+    ));
+
+    $wp_customize->add_setting('navbar_btn_hover_shadow_y', array(
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('navbar_btn_hover_shadow_y', array(
+        'label'   => 'Hover Shadow Y Position (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number',
+    ));
+
+    $wp_customize->add_setting('navbar_btn_hover_shadow_blur', array(
+        'default'           => 15,
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('navbar_btn_hover_shadow_blur', array(
+        'label'   => 'Hover Shadow Blur (px)',
+        'section' => 'navbar_layout_section',
+        'type'    => 'number',
+    ));
+
+    $wp_customize->add_setting('navbar_btn_hover_shadow_color', array(
+        'default'           => '#bfdbfe',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'navbar_btn_hover_shadow_color', array(
+        'label'   => 'Hover Shadow Color',
+        'section' => 'navbar_layout_section',
+    )));
+
 
 
     // --- FOOTER SETTINGS ---
@@ -762,6 +1621,17 @@ function lightshadestudioworks_customizer_settings($wp_customize)
         'section'  => 'footer_style_section',
     )));
 
+    // 2b. Footer Text Color Setting
+    $wp_customize->add_setting('footer_text_color', array(
+        'default'           => '#111827',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'footer_text_color', array(
+        'label'    => __('Footer Text Color', 'lightshadestudioworks'),
+        'section'  => 'footer_style_section',
+    )));
+
     // 3. ADD PADDING CONTROLS (Top, Right, Bottom, Left)
     $padding_sides = ['top', 'right', 'bottom', 'left'];
     foreach ($padding_sides as $side) {
@@ -776,6 +1646,144 @@ function lightshadestudioworks_customizer_settings($wp_customize)
             'type'    => 'number'
         ));
     }
+
+    // 4. Display Footer Text Setting
+    $wp_customize->add_setting('display_footer_text', array(
+        'default'           => 'left',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('display_footer_text', array(
+        'label'    => __('Display Footer Text', 'lightshadestudioworks'),
+        'section'  => 'footer_style_section',
+        'type'     => 'radio',
+        'choices'  => array(
+            'left'   => __('Left', 'lightshadestudioworks'),
+            'center' => __('Center', 'lightshadestudioworks'),
+            'right'  => __('Right', 'lightshadestudioworks'),
+        ),
+    ));
+
+    // 5. Footer Text Content Setting
+    $wp_customize->add_setting('footer_text', array(
+        'default'           => '© 2026 Light Shade Studio Works',
+        'sanitize_callback' => 'wp_kses_post',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('footer_text', array(
+        'label'       => __('Footer Text', 'lightshadestudioworks'),
+        'section'     => 'footer_style_section',
+        'type'        => 'text',
+        'description' => __('Enter the footer text (supports simple HTML)', 'lightshadestudioworks'),
+    ));
+
+    // General Section
+    $wp_customize->add_section('lsw_general_section', array(
+        'title'    => 'General',
+        'priority' => 15,
+    ));
+
+    $wp_customize->add_setting('global_active_link_color', array(
+        'default'           => '#2563eb',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'global_active_link_color', array(
+        'label'    => 'Global Active Link Color',
+        'section'  => 'lsw_general_section',
+    )));
+
+    // Reset Settings Control
+    $wp_customize->add_setting('lsw_reset_settings', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    if (class_exists('LSW_Reset_Customizer_Control')) {
+        $wp_customize->add_control(new LSW_Reset_Customizer_Control($wp_customize, 'lsw_reset_settings', array(
+            'label'       => 'Reset Theme Settings',
+            'description' => 'Restore all layout, typography, colors, and other customizer settings back to their factory default values.',
+            'section'     => 'lsw_general_section',
+            'settings'    => 'lsw_reset_settings',
+        )));
+    }
+
+    // Sleek Minimalist Navbar Styles (placed in navbar_layout_section)
+    if (class_exists('LSW_Customize_Heading_Control')) {
+        $wp_customize->add_setting('sleek_navbar_heading', array('sanitize_callback' => 'sanitize_text_field'));
+        $wp_customize->add_control(new LSW_Customize_Heading_Control($wp_customize, 'sleek_navbar_heading_ctrl', array(
+            'label'           => 'Sleek Minimalist Navbar styles',
+            'section'         => 'navbar_layout_section',
+            'settings'        => 'sleek_navbar_heading',
+            'active_callback' => function ($control) {
+                return $control->manager->get_setting('navbar_layout_choice')->value() === 'lsw_menu_layout_2';
+            }
+        )));
+    }
+
+    $wp_customize->add_setting('sleek_navbar_hover_color', array(
+        'default'           => '#2563eb',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'sleek_navbar_hover_color', array(
+        'label'           => 'Hover Color',
+        'section'         => 'navbar_layout_section',
+        'active_callback' => function ($control) {
+            return $control->manager->get_setting('navbar_layout_choice')->value() === 'lsw_menu_layout_2';
+        }
+    )));
+
+    $wp_customize->add_setting('sleek_navbar_hover_line_color', array(
+        'default'           => '#2563eb',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'sleek_navbar_hover_line_color', array(
+        'label'           => 'Hover Bottom Line Color',
+        'section'         => 'navbar_layout_section',
+        'active_callback' => function ($control) {
+            return $control->manager->get_setting('navbar_layout_choice')->value() === 'lsw_menu_layout_2';
+        }
+    )));
+
+    // Modern Bold Minimalist Styles (placed in navbar_layout_section)
+    if (class_exists('LSW_Customize_Heading_Control')) {
+        $wp_customize->add_setting('modern_navbar_heading', array('sanitize_callback' => 'sanitize_text_field'));
+        $wp_customize->add_control(new LSW_Customize_Heading_Control($wp_customize, 'modern_navbar_heading_ctrl', array(
+            'label'           => 'Modern Bold Minimalist styles',
+            'section'         => 'navbar_layout_section',
+            'settings'        => 'modern_navbar_heading',
+            'active_callback' => function ($control) {
+                return $control->manager->get_setting('navbar_layout_choice')->value() === 'lsw_menu_layout_4';
+            }
+        )));
+    }
+
+    $wp_customize->add_setting('modern_navbar_hover_color', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'modern_navbar_hover_color', array(
+        'label'           => 'Hover Color',
+        'section'         => 'navbar_layout_section',
+        'active_callback' => function ($control) {
+            return $control->manager->get_setting('navbar_layout_choice')->value() === 'lsw_menu_layout_4';
+        }
+    )));
+
+    $wp_customize->add_setting('modern_navbar_hover_line_color', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'modern_navbar_hover_line_color', array(
+        'label'           => 'Hover Bottom Line Color',
+        'section'         => 'navbar_layout_section',
+        'active_callback' => function ($control) {
+            return $control->manager->get_setting('navbar_layout_choice')->value() === 'lsw_menu_layout_4';
+        }
+    )));
 }
 // Sanitization helper
 function my_sanitize_checkbox($checked)
@@ -799,10 +1807,10 @@ function lsw_site_layout_customizer($wp_customize)
     $wp_customize->add_setting('site_container_width', array('default' => 1200, 'sanitize_callback' => 'absint'));
     $wp_customize->add_control('site_container_width', array('label' => 'Max Container Width (px)', 'section' => 'site_layout_section', 'type' => 'number'));
 
-    // 3. Font Family Control
+    // 3. Body Font Family Control
     $wp_customize->add_setting('site_font_family', array('default' => 'Inter', 'sanitize_callback' => 'sanitize_text_field'));
     $wp_customize->add_control('site_font_family', array(
-        'label'    => 'Global Font Family',
+        'label'    => 'Body Font Family',
         'section'  => 'site_layout_section',
         'type'     => 'select',
         'choices'  => array(
@@ -827,6 +1835,63 @@ function lsw_site_layout_customizer($wp_customize)
             'Palatino Linotype, serif'             => 'Palatino'
         )
     ));
+
+    // 3b. Heading Font Family Control
+    $wp_customize->add_setting('site_heading_font_family', array('default' => 'Inter', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('site_heading_font_family', array(
+        'label'    => 'Heading Font Family',
+        'section'  => 'site_layout_section',
+        'type'     => 'select',
+        'choices'  => array(
+            // System Stacks
+            'system-ui, -apple-system, sans-serif' => 'System Default (Optimized)',
+            'sans-serif'                           => 'Sans Serif (Generic)',
+            'serif'                                => 'Serif (Generic)',
+            'monospace'                            => 'Monospace (Generic)',
+
+            // Popular Web-Safe/System Stacks
+            'Arial, Helvetica, sans-serif'         => 'Arial',
+            'Verdana, Geneva, sans-serif'          => 'Verdana',
+            'Trebuchet MS, sans-serif'             => 'Trebuchet MS',
+            'Georgia, serif'                       => 'Georgia',
+            'Times New Roman, serif'               => 'Times New Roman',
+            'Courier New, monospace'               => 'Courier New',
+
+            // Modern Professional Stacks
+            'Inter, system-ui, sans-serif'         => 'Inter (Modern)',
+            'Segoe UI, Tahoma, sans-serif'         => 'Segoe UI',
+            'Helvetica Neue, Helvetica, Arial, sans-serif' => 'Helvetica Neue',
+            'Palatino Linotype, serif'             => 'Palatino'
+        )
+    ));
+
+    // 4. Typography Size Controls
+    $typography_defaults = array(
+        'body_font_size' => '16px',
+        'h1_font_size'   => '36px',
+        'h2_font_size'   => '30px',
+        'h3_font_size'   => '24px',
+        'h4_font_size'   => '20px',
+        'h5_font_size'   => '18px',
+        'h6_font_size'   => '16px',
+    );
+
+    foreach ($typography_defaults as $setting_id => $default_size) {
+        $wp_customize->add_setting($setting_id, array(
+            'default'           => $default_size,
+            'sanitize_callback' => 'sanitize_text_field',
+            'transport'         => 'postMessage',
+        ));
+
+        $label_text = ($setting_id === 'body_font_size') ? 'Body Font Size' : strtoupper(str_replace('_font_size', '', $setting_id)) . ' Font Size';
+
+        $wp_customize->add_control($setting_id, array(
+            'label'       => __($label_text, 'lightshadestudioworks'),
+            'description' => __('Enter value with unit (e.g., 16px, 1rem, 2.5rem)', 'lightshadestudioworks'),
+            'section'     => 'site_layout_section',
+            'type'        => 'text',
+        ));
+    }
 }
 add_action('customize_register', 'lsw_site_layout_customizer');
 
@@ -844,13 +1909,16 @@ function lsw_generate_dynamic_css()
 {
     $width = get_theme_mod('site_container_width', 1200);
     $font  = get_theme_mod('site_font_family', 'Inter');
+    $heading_font = get_theme_mod('site_heading_font_family', 'Inter');
+    $footer_bg = get_theme_mod('footer_bg_color', '#ffffff');
+    $footer_text_color = get_theme_mod('footer_text_color', '#111827');
 
     $css = "
-        .site-container { 
-            max-width: {$width}px !important; 
-            margin-left: auto; 
-            margin-right: auto; 
-        }
+        // .site-container { 
+        //     max-width: {$width}px !important; 
+        //     margin-left: auto; 
+        //     margin-right: auto; 
+        // }
         /* Changed from ID to Class for better reusability */
         .lsw-max-width-container { 
             max-width: {$width}px !important; 
@@ -858,6 +1926,46 @@ function lsw_generate_dynamic_css()
             margin-right: auto; 
         }
         body { font-family: {$font}; }
+        h1, h2, h3, h4, h5, h6, .wp-block-heading { font-family: {$heading_font}; }
+        #footer {
+            background-color: {$footer_bg} !important;
+        }
+        #footer .lsw-max-width-container {
+            color: {$footer_text_color} !important;
+        }
+    ";
+
+    $hover_enabled = get_theme_mod('navbar_btn_hover_enabled', 1);
+    if ($hover_enabled) {
+        $hx = get_theme_mod('navbar_btn_hover_shadow_x', 0);
+        $hy = get_theme_mod('navbar_btn_hover_shadow_y', 0);
+        $hblur = get_theme_mod('navbar_btn_hover_shadow_blur', 15);
+        $hcolor = get_theme_mod('navbar_btn_hover_shadow_color', '#bfdbfe');
+        $css .= "
+            .lsw-navbar-button:hover {
+                box-shadow: {$hx}px {$hy}px {$hblur}px {$hcolor} !important;
+            }
+        ";
+    }
+
+    $sleek_hover_color = get_theme_mod('sleek_navbar_hover_color', '#2563eb');
+    $sleek_hover_line_color = get_theme_mod('sleek_navbar_hover_line_color', '#2563eb');
+    $modern_hover_color = get_theme_mod('modern_navbar_hover_color', '#000000');
+    $modern_hover_line_color = get_theme_mod('modern_navbar_hover_line_color', '#000000');
+    $global_active_link_color = get_theme_mod('global_active_link_color', '#2563eb');
+
+    $css .= "
+        :root {
+            --sleek-nav-hover-color: {$sleek_hover_color};
+            --sleek-nav-hover-line-color: {$sleek_hover_line_color};
+            --modern-nav-hover-color: {$modern_hover_color};
+            --modern-nav-hover-line-color: {$modern_hover_line_color};
+            --global-active-link-color: {$global_active_link_color};
+        }
+        a:active,
+        .lsw-active-link {
+            color: var(--global-active-link-color, #2563eb) !important;
+        }
     ";
 
     // THE HANDLE HERE MUST MATCH THE HANDLE IN WP_ENQUEUE_STYLE
@@ -887,4 +1995,17 @@ function lsw_footer_customizer_settings($wp_customize)
         'label'    => __('Footer Background Color', 'lightshadestudioworks'),
         'section'  => 'footer_style_section',
     )));
+}
+
+add_action('wp_ajax_lsw_reset_customizer_settings', 'lsw_reset_customizer_settings_handler');
+function lsw_reset_customizer_settings_handler()
+{
+    if (! isset($_POST['nonce']) || ! wp_verify_nonce($_POST['nonce'], 'lsw_reset_customizer_nonce')) {
+        wp_send_json_error('Security check failed.');
+    }
+    if (! current_user_can('edit_theme_options')) {
+        wp_send_json_error('Permission denied.');
+    }
+    remove_theme_mods();
+    wp_send_json_success('Settings successfully reset.');
 }

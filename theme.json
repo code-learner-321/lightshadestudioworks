@@ -6,7 +6,10 @@
       "palette": [
         { "slug": "base-60", "color": "var(--color-60)", "name": "Primary (60%)" },
         { "slug": "base-30", "color": "var(--color-30)", "name": "Secondary (30%)" },
-        { "slug": "base-10", "color": "var(--color-10)", "name": "Accent (10%)" }
+        { "slug": "base-10", "color": "var(--color-10)", "name": "Accent (10%)" },
+        { "slug": "neutral-white", "color": "var(--color-neutral-white)", "name": "Neutral White" },
+        { "slug": "neutral-black", "color": "var(--color-neutral-black)", "name": "Neutral Black" },
+        { "slug": "neutral-grey", "color": "var(--color-neutral-grey)", "name": "Neutral Grey" }
       ]
     }
   }

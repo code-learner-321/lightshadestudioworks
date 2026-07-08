@@ -3,12 +3,15 @@
 @layer base {
   /* Custom base styles can be added here */
   body {
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--color-neutral-grey, #f2f2f7);
+    color: var(--color-neutral-black, #454545);
   }
 }
 @theme {
     --color-bg-60: var(--color-60);
     --color-bg-30: var(--color-30);
     --color-accent-10: var(--color-10);
+    --color-neutral-white: var(--lsw-color-neutral-white, #dcdcdc);
+    --color-neutral-black: var(--lsw-color-neutral-black, #454545);
+    --color-neutral-grey: var(--lsw-color-neutral-grey, #f2f2f7);
 }
