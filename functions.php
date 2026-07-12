@@ -18,6 +18,11 @@ function lssd_install_plugins()
             'slug'      => 'b-carousel-block', // Ensure this matches the folder name exactly
             'required'  => true,
         ),
+        array(
+            'name'      => 'Contact Form 7',
+            'slug'      => 'contact-form-7',
+            'required'  => true,
+        ),
     );
 
     $config = array(
@@ -228,6 +233,7 @@ function lsw_default_pages_content()
 
 require_once get_template_directory() . '/inc/page-templates.php';
 require_once get_template_directory() . '/inc/post-templates.php';
+require_once get_template_directory() . '/inc/sub-page-templates.php';
 function lsw_import_image_from_url($url, $title = '')
 {
     if (empty($url)) return null;
@@ -276,18 +282,87 @@ function lsw_import_image_from_url($url, $title = '')
 
     return $attachment_id;
 }
+function lightshadestudioworks_force_portfolio_content($content)
+{
+    global $post;
+
+    if (!is_singular('page') || !$post || $post->post_name !== 'portfolio') {
+        return $content;
+    }
+
+    $new_content = lightshadestudioworks_render_portfolio();
+    $portfolio_page = get_page_by_path('portfolio', OBJECT, 'page');
+
+    if ($portfolio_page && $portfolio_page->post_content !== $new_content) {
+        wp_update_post(array(
+            'ID'           => $portfolio_page->ID,
+            'post_content' => $new_content,
+        ));
+    }
+
+    return do_blocks($new_content);
+}
+add_filter('the_content', 'lightshadestudioworks_force_portfolio_content', 9999);
+
 function lightshadestudioworks_create_default_pages()
 {
     // 1. Prepare HTML Content directly
     $home_content = lightshadestudioworks_render_home();
+    $about = lightshadestudioworks_render_about();
+    $portfolio = lightshadestudioworks_render_portfolio();
+    $portfolio_gallery = lightshadestudioworks_render_portfolio_gallery();
+    $blog = lightshadestudioworks_render_blog();
+    $contact = lightshadestudioworks_render_contact();
+
+    $wedding_celebrations = lightshadestudioworks_render_wedding_celebration();
+    $portrait_sessions = lightshadestudioworks_render_portrait_sessions();
+    $candid_moments = lightshadestudioworks_render_candid_moments();
+    $real_estate_spaces = lightshadestudioworks_render_real_estate_spaces();
 
     // 2. Define Pages
     $pages = [
         'Home' => [
             'slug'    => 'home',
             'content' => $home_content
+        ],
+        'About' => [
+            'slug'    => 'about',
+            'content' => $about
+        ],
+        'Portfolio' => [
+            'slug'    => 'portfolio',
+            'content' => $portfolio
+        ],
+        'Portfolio Gallery' => [
+            'slug'    => 'portfolio-gallery',
+            'content' => $portfolio_gallery
+        ],
+        'Blog' => [
+            'slug'    => 'blog',
+            'content' => $blog
+        ],
+        'Contact' => [
+            'slug'    => 'contact',
+            'content' => $contact
+        ],
+        'Wedding Celebrations' => [
+            'slug'    => 'wedding-celebrations',
+            'content' => $wedding_celebrations
+        ],
+        'Portrait Sessions' => [
+            'slug'    => 'portrait-sessions',
+            'content' => $portrait_sessions
+        ],
+        'Candid Moments' => [
+            'slug'    => 'candid-moments',
+            'content' => $candid_moments
+        ],
+        'Real Estate Spaces' => [
+            'slug'    => 'real-estate-spaces',
+            'content' => $real_estate_spaces
         ]
     ];
+           
 
     // 3. Insert/Update Pages
     foreach ($pages as $title => $data) {
@@ -306,7 +381,13 @@ function lightshadestudioworks_create_default_pages()
             $page_id = wp_update_post($post_data);
         } else {
             $page_id = wp_insert_post($post_data);
-            if ($page_id) {
+        }
+
+        if ($page_id && !is_wp_error($page_id)) {
+            $created_page_ids[$title] = $page_id;
+
+            // If this is the "Home" page, set it as the front page
+            if ($title === 'Home') {
                 update_option('show_on_front', 'page');
                 update_option('page_on_front', $page_id);
             }
@@ -420,16 +501,16 @@ function lsw_handle_form_submissions()
 {
     if (isset($_POST['lsw_run_setup']) || isset($_POST['lsw_run_manual_setup'])) {
         // ... (Keep your nonce check here) ...
-        
+
         lightshadestudioworks_create_default_pages();
-        
+
         // CRITICAL: Clear the flag so redirect loop stops
         delete_transient('lsw_theme_just_activated');
-        
+
         $redirect_url = isset($_POST['lsw_run_setup'])
             ? admin_url('admin.php?page=lsw-setup-wizard&status=created')
             : admin_url('tools.php?page=lsw-default-pages&status=created');
-            
+
         lsw_safe_redirect_fallback($redirect_url);
     }
 }
@@ -2009,3 +2090,56 @@ function lsw_reset_customizer_settings_handler()
     remove_theme_mods();
     wp_send_json_success('Settings successfully reset.');
 }
+
+// CONTACT FORM7 ................
+function lssw_setup_auto_contact_form() {
+    if (!class_exists('WPCF7_ContactForm')) return;
+
+    $title = 'Lighst Shade Studio Works Contact Form';
+    $existing = get_posts(['post_type' => 'wpcf7_contact_form', 'title' => $title, 'posts_per_page' => 1]);
+
+    if (empty($existing)) {
+        // 1. Define fields
+        $template = '<p>Name:<br />[text* your-name]</p>' .
+                    '<p>Email:<br />[email* your-email]</p>' .
+                    '<p>Message:<br />[textarea your-message]</p>' .
+                    '<p>[submit "Send"]</p>';
+
+        // 2. Create the post
+        $post_id = wp_insert_post([
+            'post_title'   => $title,
+            'post_status'  => 'publish',
+            'post_type'    => 'wpcf7_contact_form',
+        ]);
+
+        // 3. Instantiate the CF7 object for this post
+        $cf7 = WPCF7_ContactForm::get_instance($post_id);
+        
+        // 4. Set the properties (this triggers the CF7 internal parser)
+        $cf7->set_properties(['form' => $template]);
+        $cf7->set_properties(['mail' => [
+            'subject'   => 'New Message',
+            'sender'    => '[your-email]',
+            'recipient' => get_option('admin_email'),
+            'body'      => "Name: [your-name]\nEmail: [your-email]\n\nMessage: [your-message]",
+            'additional_headers' => 'Reply-To: [your-email]',
+        ]]);
+        $cf7->set_properties(['messages' => [
+            'mail_sent_ok' => 'Thank you for your message.'
+        ]]);
+
+        // 5. CRITICAL: Save the object
+        // This is what removes the "Configuration Errors" warning
+        $cf7->save();
+    }
+}
+add_action('init', 'lssw_setup_auto_contact_form');
+
+/**
+ * Custom shortcode
+ */
+function lssw_render_auto_contact_form() {
+    $form = get_posts(['post_type' => 'wpcf7_contact_form', 'title' => 'Lighst Shade Studio Works Contact Form', 'posts_per_page' => 1]);
+    return !empty($form) ? do_shortcode('[contact-form-7 id="' . $form[0]->ID . '"]') : '';
+}
+add_shortcode('my_contact_form', 'lssw_render_auto_contact_form');

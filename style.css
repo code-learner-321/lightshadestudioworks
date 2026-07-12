@@ -270,3 +270,43 @@ lightshadestudioworks is distributed under the terms of the GNU GPL
 .post-comments-wrapper #commentform .submit:hover {
     background-color: #4338ca;
 }
+
+/* contact form7 styles... */
+/* Style all text, email, and textarea fields */
+.wpcf7 input[type="text"],
+.wpcf7 input[type="email"],
+.wpcf7 textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0; /* Light gray border */
+    border-radius: 8px;        /* Rounded corners */
+    background-color: #f9f9f9;
+    transition: all 0.3s ease; /* Smooth hover/focus effect */
+    font-size: 16px;           /* Prevents iOS zoom */
+}
+
+/* Add an aesthetic glow/color when the user clicks a field */
+.wpcf7 input:focus,
+.wpcf7 textarea:focus {
+    border-color: #0073e6;     /* Change to your brand color */
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+}
+
+/* Style the Submit button to pop */
+.wpcf7 input[type="submit"] {
+    background-color: #0073e6;
+    color: #ffffff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.wpcf7 input[type="submit"]:hover {
+    background-color: #005bb5;
+}

@@ -6,11 +6,7 @@ function lightshadestudioworks_render_posts1_home() {
     $html = <<<'EOD'
 <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
-<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:image {"id":743,"sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2147607770.jpg" alt="" class="wp-image-743"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:paragraph -->
 <p>Looking back at my first year behind the lens feels like looking at a different lifetime. A decade ago, I was thrilled just to get a sharp focus or a properly exposed frame. Today, photography is no longer just about capturing what is in front of me—it is about how I choose to see it.</p>
 <!-- /wp:paragraph -->
 
@@ -62,11 +58,7 @@ function lightshadestudioworks_render_posts2_home() {
     $html = <<<'EOD'
     <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
-<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2149887737.jpg" alt=""/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:paragraph -->
 <p>There is a distinct magic in the moments we don’t plan. In a world full of perfectly curated feeds, meticulously staged portraits, and rigid poses, the eye naturally craves something real. That is where the true art of photography lives—not in directing the scene, but in observing it.</p>
 <!-- /wp:paragraph -->
 
@@ -128,11 +120,7 @@ EOD;
 }
 function lightshadestudioworks_render_posts3_home() {
     $html = <<<'EOD'
-    <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/61.jpg" alt=""/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+    <!-- wp:paragraph -->
 <p>First impressions are everything in real estate, and in the digital age, that first impression happens online. Long before a potential buyer steps through the front door, they have already toured your property through a screen.</p>
 <!-- /wp:paragraph -->
 
@@ -242,11 +230,7 @@ function lightshadestudioworks_render_posts4_home() {
     $html = <<<'EOD'
     <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
-<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2149438606.jpg" alt=""/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:paragraph -->
 <p>Light is the lifeblood of photography, but in portraiture, it is something much deeper. Light is your brushstroke. It dictates the mood, shapes the narrative, and can entirely transform how a person’s character is portrayed on camera.</p>
 <!-- /wp:paragraph -->
 
@@ -354,11 +338,7 @@ function lightshadestudioworks_render_posts5_home() {
     $html = <<<'EOD'
     <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
-<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2150506094.jpg" alt=""/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:paragraph -->
 <p>We live in a world of instant gratification. In modern digital photography, we shoot a frame, look at the LCD screen, tweak a setting, and shoot fifty more copies of the exact same scene just to be safe. It is efficient, flawless, and completely predictable.</p>
 <!-- /wp:paragraph -->
 
