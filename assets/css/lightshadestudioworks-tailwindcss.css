@@ -301,6 +301,9 @@
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
+  .my-8 {
+    margin-block: calc(var(--spacing) * 8);
+  }
   .my-12 {
     margin-block: calc(var(--spacing) * 12);
   }
@@ -416,11 +419,23 @@
   .h-full {
     height: 100%;
   }
+  .min-h-\[600px\] {
+    min-height: 600px;
+  }
   .min-h-screen {
     min-height: 100vh;
   }
   .w-1 {
     width: calc(var(--spacing) * 1);
+  }
+  .w-1\/2 {
+    width: calc(1 / 2 * 100%);
+  }
+  .w-1\/4 {
+    width: calc(1 / 4 * 100%);
+  }
+  .w-2\/3 {
+    width: calc(2 / 3 * 100%);
   }
   .w-3\.5 {
     width: calc(var(--spacing) * 3.5);
@@ -596,6 +611,10 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-0 {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
   }
   .border-t {
     border-top-style: var(--tw-border-style);
@@ -1140,6 +1159,11 @@
       height: 550px;
     }
   }
+  .md\:min-h-\[700px\] {
+    @media (width >= 48rem) {
+      min-height: 700px;
+    }
+  }
   .md\:w-28 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 28);
@@ -1232,9 +1256,44 @@
       display: none;
     }
   }
+  .lg\:h-\[50px\] {
+    @media (width >= 64rem) {
+      height: 50px;
+    }
+  }
+  .lg\:h-\[350px\] {
+    @media (width >= 64rem) {
+      height: 350px;
+    }
+  }
+  .lg\:h-\[450px\] {
+    @media (width >= 64rem) {
+      height: 450px;
+    }
+  }
+  .lg\:h-\[460px\] {
+    @media (width >= 64rem) {
+      height: 460px;
+    }
+  }
+  .lg\:h-\[480px\] {
+    @media (width >= 64rem) {
+      height: 480px;
+    }
+  }
+  .lg\:h-\[600px\] {
+    @media (width >= 64rem) {
+      height: 600px;
+    }
+  }
   .lg\:h-\[650px\] {
     @media (width >= 64rem) {
       height: 650px;
+    }
+  }
+  .lg\:min-h-\[800px\] {
+    @media (width >= 64rem) {
+      min-height: 800px;
     }
   }
   .lg\:grid-cols-3 {
@@ -1250,6 +1309,11 @@
   .lg\:px-8 {
     @media (width >= 64rem) {
       padding-inline: calc(var(--spacing) * 8);
+    }
+  }
+  .lg\:px-12 {
+    @media (width >= 64rem) {
+      padding-inline: calc(var(--spacing) * 12);
     }
   }
 }

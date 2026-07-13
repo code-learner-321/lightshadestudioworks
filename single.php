@@ -55,8 +55,8 @@
             </header>
 
             <?php if ( has_post_thumbnail() ) : ?>
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6">
-                    <div class="w-full h-80 sm:h-[450px] md:h-[550px] lg:h-[650px] overflow-hidden rounded-2xl shadow-sm border border-slate-200 bg-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 my-6">
+                    <div class="w-2/3 h-80 sm:h-[450px] md:h-[550px] lg:h-[480px] overflow-hidden rounded-2xl shadow-sm border border-slate-200 bg-slate-200">
                         <?php 
                         the_post_thumbnail('full', array(
                             'class' => 'w-full h-full object-cover'
