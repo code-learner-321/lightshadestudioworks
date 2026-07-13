@@ -393,7 +393,7 @@ EOD;
 
 function lightshadestudioworks_render_about() {
     $html = <<<'EOD'
-    <!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
+        <!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/about-hero.png","id":563,"dimRatio":20,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.5,"y":0.5},"minHeightUnit":"vh","sizeSlug":"full","style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"24px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
 <div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--50);padding-bottom:0px;padding-left:var(--wp--preset--spacing--50)"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/about-hero.png" style="object-position:50% 50%" data-object-fit="cover" data-object-position="50% 50%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim-20 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"typography":{"textAlign":"center"}}} -->
 <h1 class="wp-block-heading has-text-align-center">A decade of light</h1>
@@ -471,8 +471,8 @@ function lightshadestudioworks_render_about() {
 <p class="has-text-align-center has-medium-font-size" style="font-style:normal;font-weight:700">"They didn't just capture our wedding day. They captured who we are together."</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"sizeSlug":"large","align":"center","style":{"border":{"width":"5px","color":"var(\u002d\u002dcolor-10)","radius":{"topLeft":"180px","topRight":"180px","bottomLeft":"180px","bottomRight":"180px"}},"spacing":{"margin":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
-<figure class="wp-block-image aligncenter size-large has-custom-border" style="margin-top:var(--wp--preset--spacing--60);margin-bottom:var(--wp--preset--spacing--60)"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/testiminial-client.png?tr=w-200" alt="" class="has-border-color" style="border-color:var(--color-10);border-width:5px;border-top-left-radius:180px;border-top-right-radius:180px;border-bottom-left-radius:180px;border-bottom-right-radius:180px"/></figure>
+<!-- wp:image {"sizeSlug":"large","align":"center","style":{"border":{"radius":{"topLeft":"150px","topRight":"150px","bottomLeft":"150px","bottomRight":"150px"},"width":"6px"}},"borderColor":"base-10"} -->
+<figure class="wp-block-image aligncenter size-large has-custom-border"><img src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/tr:w-200/testiminial-client.png?updatedAt=1783004158349" alt="" class="has-border-color has-base-10-border-color" style="border-width:6px;border-top-left-radius:150px;border-top-right-radius:150px;border-bottom-left-radius:150px;border-bottom-right-radius:150px"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center","lineHeight":"0","fontStyle":"normal","fontWeight":"900"},"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}}} -->
