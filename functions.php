@@ -304,6 +304,76 @@ function lightshadestudioworks_force_portfolio_content($content)
 }
 add_filter('the_content', 'lightshadestudioworks_force_portfolio_content', 9999);
 
+function lsw_create_or_update_main_menu()
+{
+    if (!function_exists('wp_get_nav_menu_object') || !function_exists('wp_create_nav_menu') || !function_exists('wp_update_nav_menu_item')) {
+        return;
+    }
+
+    $menu_name = 'lssw_menu';
+    $pages = array(
+        'Home' => 'home',
+        'About' => 'about',
+        'Portfolio' => 'portfolio',
+        'Portfolio Gallery' => 'portfolio-gallery',
+        'Blog' => 'blog',
+        'Contact' => 'contact',
+    );
+
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+
+    if (!$menu_exists) {
+        $menu_id = wp_create_nav_menu($menu_name);
+        if (is_wp_error($menu_id)) {
+            return;
+        }
+    } else {
+        $menu_id = $menu_exists->term_id;
+    }
+
+    $existing_items = wp_get_nav_menu_items($menu_id, array('post_status' => 'publish'));
+    $existing_object_ids = array();
+
+    if (!empty($existing_items) && !is_wp_error($existing_items)) {
+        foreach ($existing_items as $item) {
+            if (!empty($item->object_id)) {
+                $existing_object_ids[(int) $item->object_id] = (int) $item->ID;
+            }
+        }
+    }
+
+    foreach ($pages as $title => $slug) {
+        $page = get_page_by_path($slug, OBJECT, 'page');
+        if (!$page) {
+            continue;
+        }
+
+        $object_id = (int) $page->ID;
+        if (isset($existing_object_ids[$object_id])) {
+            continue;
+        }
+
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title'     => $title,
+            'menu-item-object-id' => $object_id,
+            'menu-item-object'    => 'page',
+            'menu-item-type'      => 'post_type',
+            'menu-item-status'    => 'publish',
+        ));
+    }
+
+    $locations = get_theme_mod('nav_menu_locations');
+    if (!is_array($locations)) {
+        $locations = array();
+    }
+
+    $locations['main-menu'] = $menu_id;
+    set_theme_mod('nav_menu_locations', $locations);
+}
+
+add_action('after_setup_theme', 'lsw_create_or_update_main_menu');
+add_action('after_switch_theme', 'lsw_create_or_update_main_menu');
+
 function lightshadestudioworks_create_default_pages()
 {
     // 1. Prepare HTML Content directly
@@ -462,34 +532,7 @@ function lightshadestudioworks_create_default_pages()
     }
 
     // 5. Generate 'lssw_menu' Navigation and Bind to Theme Main Menu Location
-    // Generate 'lssw_menu' Navigation and Bind to Theme Location
-    $menu_name = 'lssw_menu';
-    $menu_exists = wp_get_nav_menu_object($menu_name);
-
-    if (!$menu_exists) {
-        $menu_id = wp_create_nav_menu($menu_name);
-
-        if (!is_wp_error($menu_id)) {
-            if (isset($created_page_ids['Home'])) {
-                wp_update_nav_menu_item($menu_id, 0, array(
-                    'menu-item-title'     => __('Home', 'lightshadestudioworks'),
-                    'menu-item-object-id' => $created_page_ids['Home'],
-                    'menu-item-object'    => 'page',
-                    'menu-item-type'      => 'post_type',
-                    'menu-item-status'    => 'publish',
-                ));
-            }
-
-            $locations = get_theme_mod('nav_menu_locations');
-            $locations['main-menu'] = $menu_id;
-            set_theme_mod('nav_menu_locations', $locations);
-        }
-    } else {
-        $locations = get_theme_mod('nav_menu_locations');
-        $locations['main-menu'] = $menu_exists->term_id;
-        set_theme_mod('nav_menu_locations', $locations);
-    }
-
+    lsw_create_or_update_main_menu();
 
     update_option('lsw_pages_created', true);
 
