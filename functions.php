@@ -383,6 +383,7 @@ function lightshadestudioworks_create_default_pages()
     $portfolio_gallery = lightshadestudioworks_render_portfolio_gallery();
     $blog = lightshadestudioworks_render_blog();
     $contact = lightshadestudioworks_render_contact();
+    $philosophy = lightshadestudioworks_render_philosophy();
 
     $wedding_celebrations = lightshadestudioworks_render_wedding_celebration();
     $portrait_sessions = lightshadestudioworks_render_portrait_sessions();
@@ -410,6 +411,10 @@ function lightshadestudioworks_create_default_pages()
         'Blog' => [
             'slug'    => 'blog',
             'content' => $blog
+        ],
+        'The Philosophy / Our Journey' => [
+            'slug'    => 'the-philosophy-our-journey',
+            'content' => $philosophy
         ],
         'Contact' => [
             'slug'    => 'contact',
