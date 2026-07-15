@@ -13,8 +13,12 @@ $custom_logo_id = get_theme_mod('navbar_custom_logo');
 $logo_width = get_theme_mod('navbar_logo_width', 150); // Optional: add this setting to your customizer
 
 $cta_text   = get_theme_mod('navbar_btn_text', 'Book Now');
+$cta_url    = get_theme_mod('navbar_btn_url', home_url('/'));
 $cta_bg     = get_theme_mod('navbar_btn_bg', '#2563eb');
 $cta_radius = get_theme_mod('navbar_btn_radius', 9999);
+$cta_target = get_theme_mod('navbar_btn_link_target', '_self');
+$cta_target = in_array($cta_target, array('_self', '_blank'), true) ? $cta_target : '_self';
+$cta_rel    = '_blank' === $cta_target ? 'noopener noreferrer' : '';
 
 $s_x     = get_theme_mod('navbar_btn_shadow_x', 0);
 $s_y     = get_theme_mod('navbar_btn_shadow_y', 10);
@@ -59,7 +63,9 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
 
             <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
                 <div class="hidden md:block">
-                    <a href="#"
+                    <a href="<?php echo esc_url($cta_url); ?>"
+                        target="<?php echo esc_attr($cta_target); ?>"
+                        rel="<?php echo esc_attr($cta_rel); ?>"
                         class="lsw-navbar-button text-white px-6 py-2 font-semibold transition duration-300"
                         style="background-color: <?php echo esc_attr($cta_bg); ?>; 
                   border-radius: <?php echo esc_attr($cta_radius); ?>px;
@@ -95,7 +101,9 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
         ?>
         <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
                 <div class="block lg:hidden">
-                    <a href="#"
+                    <a href="<?php echo esc_url($cta_url); ?>"
+                        target="<?php echo esc_attr($cta_target); ?>"
+                        rel="<?php echo esc_attr($cta_rel); ?>"
                         class="lsw-navbar-button text-white px-6 py-2 font-semibold transition duration-300"
                         style="background-color: <?php echo esc_attr($cta_bg); ?>; 
                   border-radius: <?php echo esc_attr($cta_radius); ?>px;

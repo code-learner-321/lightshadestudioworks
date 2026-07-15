@@ -198,14 +198,18 @@ function lsw_setup_wizard_content()
         lsw_safe_redirect_fallback(admin_url('index.php?lsw_skip_setup=1'));
     }
 ?>
-    <div class="wrap" style="max-width: 600px; margin-top: 50px; text-align: center; background: #fff; padding: 40px; border: 1px solid #ccd0d4; border-radius: 5px;">
-        <h1>Ready to finalize?</h1>
-        <p>Click below to automatically create your <strong>Home</strong> and <strong>Services</strong> pages.</p>
-        <form method="post">
-            <?php wp_nonce_field('lsw_setup_action', 'lsw_nonce'); ?>
-            <input type="submit" name="lsw_run_setup" class="button button-primary button-hero" value="Create Pages & Finish">
-            <a href="<?php echo esc_url(admin_url('index.php?lsw_skip_setup=1')); ?>" class="button button-hero">Skip to Dashboard</a>
-        </form>
+    <div style="display: flex; justify-content: center; align-items: flex-start; min-height: 80vh; padding-top: 50px;">
+        <div class="wrap" style="max-width: 600px; width: 100%; text-align: center; background: #fff; padding: 40px; border: 1px solid #ccd0d4; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <h1>Ready to finalize?</h1>
+            <p>Click below to automatically create prebuilt pages for this theme.</p>
+            <form method="post" style="margin-top: 20px;">
+                <?php wp_nonce_field('lsw_setup_action', 'lsw_nonce'); ?>
+                <p>
+                    <input type="submit" name="lsw_run_setup" class="button button-primary button-hero" value="Create Pages & Finish">
+                    <a href="<?php echo esc_url(admin_url('index.php?lsw_skip_setup=1')); ?>" class="button button-hero" style="margin-left: 10px;">Skip to Dashboard</a>
+                </p>
+            </form>
+        </div>
     </div>
 <?php
 }
@@ -214,7 +218,7 @@ function lsw_default_pages_content()
     $created = (isset($_GET['status']) && $_GET['status'] == 'created');
 ?>
     <div class="wrap">
-        <h1>Default Pages Setup</h1>
+        <h1>Default Pre-built Pages Setup</h1>
         <?php if ($created) : ?>
             <div class="updated">
                 <p>Pages created successfully! <a href="<?php echo admin_url('edit.php?post_type=page'); ?>">View your pages</a></p>
@@ -223,7 +227,7 @@ function lsw_default_pages_content()
             <p>If you missed creating the default pages during theme setup, you can do so here.</p>
             <form method="post">
                 <?php wp_nonce_field('lsw_setup_action', 'lsw_nonce'); ?>
-                <input type="submit" name="lsw_run_manual_setup" class="button button-primary" value="Create Default Pages">
+                <input type="submit" name="lsw_run_manual_setup" class="button button-primary" value="Create Default Pre-built Pages">
             </form>
         <?php endif; ?>
     </div>
@@ -1584,6 +1588,32 @@ function lightshadestudioworks_customizer_settings($wp_customize)
         'label'   => 'Button Text',
         'section' => 'navbar_layout_section',
         'type'    => 'text'
+    ));
+
+    $wp_customize->add_setting('navbar_btn_url', array(
+        'default'           => home_url('/'),
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_url', array(
+        'label'   => 'Button URL',
+        'section' => 'navbar_layout_section',
+        'type'    => 'url'
+    ));
+
+    $wp_customize->add_setting('navbar_btn_link_target', array(
+        'default'           => '_self',
+        'sanitize_callback' => 'sanitize_key',
+        'transport'         => 'postMessage'
+    ));
+    $wp_customize->add_control('navbar_btn_link_target', array(
+        'label'   => 'Open Button Link In',
+        'section' => 'navbar_layout_section',
+        'type'    => 'select',
+        'choices' => array(
+            '_self'  => 'Same Tab',
+            '_blank' => 'New Tab',
+        ),
     ));
 
     // Background Color
