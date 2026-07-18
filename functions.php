@@ -89,7 +89,11 @@ function lsw_default_pages_exist()
 {
     $page_slugs = array(
         'home',
-        'services',
+        'about',
+        'portfolio',
+        'portfolio-gallery',
+        'blog',
+        'contact',
     );
 
     foreach ($page_slugs as $slug) {
@@ -120,16 +124,18 @@ add_action('after_switch_theme', 'lsw_set_activation_flag');
 function lsw_set_activation_flag()
 {
     set_transient('lsw_theme_just_activated', true, 60);
+    delete_option('lsw_setup_skipped');
 }
 add_action('admin_init', 'lsw_redirect_after_activation');
 function lsw_redirect_after_activation()
 {
-    if (!get_transient('lsw_theme_just_activated') || !current_user_can('manage_options')) {
+    if (isset($_GET['lsw_skip_setup']) && current_user_can('manage_options')) {
+        update_option('lsw_setup_skipped', true);
+        delete_transient('lsw_theme_just_activated');
         return;
     }
 
-    if (isset($_GET['lsw_skip_setup'])) {
-        delete_transient('lsw_theme_just_activated');
+    if (!get_transient('lsw_theme_just_activated') || !current_user_can('manage_options')) {
         return;
     }
 
@@ -162,22 +168,20 @@ function lsw_inject_setup_button_into_tgm()
         return;
     }
 
-    // If default pages already exist, do not prompt to create them
-    if (function_exists('lsw_default_pages_exist') && lsw_default_pages_exist()) {
+    // If default pages already exist or setup was skipped, do not prompt
+    if (get_option('lsw_setup_skipped') || (function_exists('lsw_default_pages_exist') && lsw_default_pages_exist())) {
         return;
     }
 
     $current_page = sanitize_key($_REQUEST['page'] ?? '');
 
-    if ($current_page !== 'tgmpa-install-plugins') {
+    // Don't show notice on setup wizard pages
+    if (in_array($current_page, array('lsw-setup-wizard', 'lsw-default-pages'), true)) {
         return;
     }
 
-    $is_activate_result = isset($_REQUEST['plugin_status']) && sanitize_key($_REQUEST['plugin_status']) === 'activate';
-    $is_activation_request = isset($_REQUEST['tgmpa-activate']) && sanitize_key($_REQUEST['tgmpa-activate']) === 'activate-plugin';
-    $is_plugins_ready = lsw_required_plugins_ready();
-
-    if (! $is_plugins_ready && ! $is_activate_result && ! $is_activation_request) {
+    // Only show if required plugins are ready
+    if (!lsw_required_plugins_ready()) {
         return;
     }
 
@@ -194,6 +198,10 @@ function lsw_register_all_menu_pages()
 }
 function lsw_setup_wizard_content()
 {
+    if (!lsw_required_plugins_ready()) {
+        lsw_safe_redirect_fallback(admin_url('themes.php?page=tgmpa-install-plugins'));
+    }
+
     if (lsw_default_pages_exist()) {
         lsw_safe_redirect_fallback(admin_url('index.php?lsw_skip_setup=1'));
     }

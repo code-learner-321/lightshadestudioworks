@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/what-snap-app",
+	"version": "0.1.0",
+	"title": "What Snap App",
+	"category": "widgets",
+	"icon": "format-status",
+	"description": "A high-performance hybrid WhatsApp button plugin for WordPress, offering seamless, one-click communication for Gutenberg and Elementor users.",
+	"attributes": {
+		"message": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "what-snap-app",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}
