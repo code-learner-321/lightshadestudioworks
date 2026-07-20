@@ -40,14 +40,14 @@
             </a>
         </div>
         
-        <nav style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden lg:flex space-x-8 text-sm font-semibold text-gray-500">
+        <nav style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden lg:flex space-x-4 text-sm font-semibold text-gray-500">
             <?php
             if (has_nav_menu('main-menu')) {
                 wp_nav_menu(array(
                     'theme_location'    => 'main-menu',
                     'container'         => false,
                     'items_wrap'        => '%3$s',
-                    'link_class'        => 'hover-underline text-sm font-bold uppercase tracking-widest text-black',
+                    'link_class'        => 'hover-underline text-sm font-bold uppercase tracking-widest text-black lsw-nav-menu-link',
                     'active_link_class' => 'text-indigo-600',
                     'walker'            => new Tailwind_Nav_Walker()
                 ));
@@ -55,7 +55,7 @@
             ?>
         </nav>
 
-        <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+        <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
             <div class="hidden lg:block">
                 <a href="<?php echo esc_url($cta_url); ?>"
                     target="<?php echo esc_attr($cta_target); ?>"
@@ -73,7 +73,7 @@
     </div>
 </header>
 
-<div class="pt-24 md:pt-28">
+<div class="pt-20 md:pt-20">
     <div id="container" class="site-container"></div>
 </div>
 
@@ -87,7 +87,7 @@
                 'theme_location'    => 'main-menu',
                 'container'         => false,
                 'items_wrap'        => '%3$s',
-                'link_class'        => 'text-lg font-bold uppercase tracking-widest text-black',
+                'link_class'        => 'text-lg font-bold uppercase tracking-widest text-black lsw-nav-menu-link',
                 'active_link_class' => 'text-indigo-600',
                 'walker'            => new Tailwind_Nav_Walker()
             ));
@@ -95,7 +95,7 @@
         ?>
     </nav>
 
-    <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+    <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
         <div class="block lg:hidden">
             <a href="<?php echo esc_url($cta_url); ?>"
                 target="<?php echo esc_attr($cta_target); ?>"

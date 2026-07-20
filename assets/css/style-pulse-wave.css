@@ -1,0 +1,57 @@
+.btn-class {
+    position: relative;
+    background-color: #2d3436;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Contains the pulse effect */
+}
+
+.btn-class a {
+    position: relative;
+    z-index: 2;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: letter-spacing 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    display: block;
+}
+
+/* The Animated Pulse Wave */
+.btn-class::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.664);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 1;
+    transition: transform 0.6s ease-out;
+}
+
+/* HOVER INTERACTIONS */
+
+.btn-class:hover {
+    transform: scale(1.05);
+    background-color: #0984e3;
+    box-shadow: 0 10px 25px rgba(9, 132, 227, 0.3);
+}
+
+.btn-class:hover a {
+    letter-spacing: 4px;
+}
+
+/* Triggering the wave animation */
+.btn-class:hover::after {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+}

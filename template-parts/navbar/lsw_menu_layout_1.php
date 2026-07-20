@@ -56,7 +56,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                         'items_wrap'        => '%3$s',
 
                         // Custom arguments handled directly by our updated Walker:
-                        'link_class'        => 'nav-link text-gray-600 font-medium hover:text-blue-600 transition-colors',
+                        'link_class'        => 'nav-link text-gray-600 font-medium hover:text-blue-600 transition-colors lsw-nav-menu-link',
                         'active_link_class' => 'text-blue-600',
 
                         'walker'            => new Tailwind_Nav_Walker()
@@ -66,7 +66,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             </div>
 
 
-            <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+            <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
                 <div class="hidden md:block">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"
@@ -98,7 +98,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                     'theme_location'    => 'main-menu',
                     'container'         => false,
                     'items_wrap'        => '%3$s',
-                    'link_class'        => 'block px-3 py-2 text-gray-600 hover:bg-blue-50 rounded-md',
+                    'link_class'        => 'block px-3 py-2 text-gray-600 hover:bg-blue-50 rounded-md lsw-nav-menu-link',
                     'active_link_class' => 'text-blue-600',
 
                     'walker'            => new Tailwind_Nav_Walker()
@@ -106,7 +106,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             }
             ?>
             <div class="pt-4">
-                <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+                <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
                 <div class="block lg:hidden">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"

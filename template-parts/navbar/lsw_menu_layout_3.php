@@ -53,7 +53,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                         'theme_location'    => 'main-menu',
                         'container'         => false,
                         'items_wrap'        => '%3$s',
-                        'link_class'        => 'hover:text-indigo-600 transition',
+                        'link_class'        => 'hover:text-indigo-600 transition lsw-nav-menu-link',
                         'active_link_class' => 'text-indigo-600',
                         'walker'            => new Tailwind_Nav_Walker()
                     ));
@@ -61,7 +61,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                 ?>
             </nav>
 
-            <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+            <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
                 <div class="hidden md:block">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"
@@ -94,12 +94,12 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                 'theme_location'    => 'main-menu',
                 'container'         => false,
                 'items_wrap'        => '%3$s',
-                '' => '',
+                'link_class'        => 'lsw-nav-menu-link',
                 'walker'            => new Tailwind_Nav_Walker()
             ));
         }
         ?>
-        <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+        <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
                 <div class="block lg:hidden">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"

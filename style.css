@@ -310,3 +310,15 @@ lightshadestudioworks is distributed under the terms of the GNU GPL
 .wpcf7 input[type="submit"]:hover {
     background-color: #005bb5;
 }
+
+/* Only apply transparency if the 'none' effect is explicitly selected */
+.btn-effect-none .wp-block-button__link {
+    background-color: transparent !important;
+    background-image: none !important;
+    border:none !important;
+}
+
+.btn-effect-none .wp-block-button__link:hover {
+    background-color: transparent !important;
+    border: none !important;
+}

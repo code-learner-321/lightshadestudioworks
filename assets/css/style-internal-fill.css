@@ -1,0 +1,48 @@
+
+.btn-class {
+            position: relative;
+            background-color: #333; 
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            transition: 0.5s ease;
+        }
+
+        /* The Internal Fill (The hidden "Door" that replaces the color) */
+        .btn-class::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: #ff3e3e; /* The color that sweeps in */
+            transition: left 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: 1;
+        }
+
+        /* The Link */
+        .btn-class a {
+            position: relative;
+            z-index: 2;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: letter-spacing 0.5s ease;
+        }
+
+        /* HOVER INTERACTIONS */
+        
+        /* 1. The sweep effect */
+        .btn-class:hover::before {
+            left: 0;
+        }
+
+        /* 2. Text "breathes" by expanding spacing */
+        .btn-class:hover a {
+            letter-spacing: 4px;
+        }

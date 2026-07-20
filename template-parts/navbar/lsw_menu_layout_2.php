@@ -126,7 +126,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                 ?>
             </div>
 
-            <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+            <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
                 <div class="hidden md:block">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"
@@ -166,7 +166,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             }
             ?>
             <div class="pt-4">
-                <?php if (get_theme_mod('navbar_show_button', 1)) : ?>
+                <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
                 <div class="block lg:hidden">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"
