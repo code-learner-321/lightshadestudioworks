@@ -10,7 +10,7 @@ function lightshadestudioworks_render_home() {
 
     $html = <<<EOD
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"},"border":{"width":"0px","style":"none"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group" style="border-style:none;border-width:0px;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.57,"y":0.53},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"tablet":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
+<div class="wp-block-group" style="border-style:none;border-width:0px;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.56999999999999995,"y":0.53000000000000003},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"tablet":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
 <div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--50);padding-bottom:0px;padding-left:var(--wp--preset--spacing--50);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:57% 53%" data-object-fit="cover" data-object-position="57% 53%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"top left","isDark":false,"layout":{"type":"constrained"}} -->
@@ -31,12 +31,12 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:group -->
 
 <!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}},"fontSize":"small"} -->
-<div class="wp-block-button is-style-fill"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color has-small-font-size has-custom-font-size wp-element-button" href="$about_url" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px" target="_blank" rel="noreferrer noopener">Explore</a></div>
+<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","width":25,"className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}},"fontSize":"small"} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-25 is-style-fill"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color has-small-font-size has-custom-font-size wp-element-button" href="$about_url" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px" target="_blank" rel="noreferrer noopener">Explore</a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"textColor":"base-10","className":"is-style-outline","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"},"width":"1px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"fontSize":"small"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-base-10-color has-text-color has-link-color has-small-font-size has-custom-font-size wp-element-button" href="$contact_url" style="border-width:1px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px" target="_blank" rel="noreferrer noopener">Contact</a></div>
+<!-- wp:button {"backgroundColor":"base-10","width":25,"className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"},"width":"0px","style":"none"}},"fontSize":"small"} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-25 is-style-fill"><a class="wp-block-button__link has-base-10-background-color has-background has-small-font-size has-custom-font-size wp-element-button" href="$contact_url" style="border-style:none;border-width:0px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px" target="_blank" rel="noreferrer noopener">Contact</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
 <!-- /wp:cover --></div>
@@ -44,7 +44,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:columns --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.43,"y":0.51},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
+<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.42999999999999999,"y":0.51000000000000001},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
 <div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--40);padding-bottom:0px;padding-left:var(--wp--preset--spacing--40);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:43% 51%" data-object-fit="cover" data-object-position="43% 51%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":1,"minHeightUnit":"vw","contentPosition":"center center","isDark":false,"layout":{"type":"constrained"}} -->
@@ -74,7 +74,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:columns --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.49,"y":0.49},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"tablet":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
+<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.48999999999999999,"y":0.48999999999999999},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"tablet":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
 <div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--30);padding-bottom:0px;padding-left:var(--wp--preset--spacing--30);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:49% 49%" data-object-fit="cover" data-object-position="49% 49%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":1,"minHeightUnit":"vh","contentPosition":"center center","isDark":false,"layout":{"type":"constrained"}} -->
@@ -145,11 +145,9 @@ function lightshadestudioworks_render_home() {
 <p>What began ten years ago as a fascination with how light dances across a scene has grown into Light-Shade-Studio-Works.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":{"top":"0px","left":"0px"}}}} -->
-<div class="wp-block-buttons" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"0px","style":"none"},"spacing":{"padding":{"left":"0px","right":"0px","top":"0px","bottom":"0px"}}}} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" style="border-style:none;border-width:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px">Learn ›</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} -->
+<p class="has-text-align-left has-base-10-color has-text-color has-link-color"><a href="#"><strong>Learn ⇢</strong></a></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
@@ -169,11 +167,9 @@ function lightshadestudioworks_render_home() {
 <p>At Light-Shade-Studio-Works, we believe that photography is more than just a documentation of events; it is a language.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":{"top":"0px","left":"0px"}}}} -->
-<div class="wp-block-buttons" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"0px","style":"none"},"spacing":{"padding":{"left":"0px","right":"0px","top":"0px","bottom":"0px"}}}} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" style="border-style:none;border-width:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px">Discover ›</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} -->
+<p class="has-text-align-left has-base-10-color has-text-color has-link-color"><a href="#"><strong>Discover ⇢</strong></a></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
@@ -193,11 +189,9 @@ function lightshadestudioworks_render_home() {
 <p>We believe the best results are born from partnership. Photography is an inherently personal process, and we prioritize a collaborative approach to ensure that your vision is realized.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":{"top":"0px","left":"0px"}}}} -->
-<div class="wp-block-buttons" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"0px","style":"none"},"spacing":{"padding":{"left":"0px","right":"0px","top":"0px","bottom":"0px"}}}} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" style="border-style:none;border-width:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px">Explore ›</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} -->
+<p class="has-text-align-left has-base-10-color has-text-color has-link-color"><a href="#"><strong>Explore ⇢</strong></a></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
@@ -225,7 +219,7 @@ function lightshadestudioworks_render_home() {
 <h3 class="wp-block-heading has-text-align-center" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--80);font-style:italic;font-weight:500">Collections</h3>
 <!-- /wp:heading -->
 
-<!-- wp:create-block/axis-folio {"uniqueId":"af-66cb5f4f","items":[{"iconType":"arrow-right-alt2","iconList":"","title":"Wedding photography","description":"Weddings that capture the raw emotion of two lives becoming one.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/Placeholder_Image_1_.png","tags":"Emotion,Tradition,Love","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Eternal Love","description":"Capturing timeless, emotional moments and beautiful celebrations of couples embarking on their lifelong journey together.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/wedding2.png","tags":"Wedding,Romance,Bridal,Celebration,Candid","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Unscripted Moments","description":"Catching genuine raw emotions and fleeting authentic interactions entirely naturally without anyone ever noticing the camera.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit1.png","tags":"Candid,StreetPhotography,Documentary,,RawEmotion,LifeUnfiltered","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Honest Frames","description":"Preserving beautiful spontaneous laughter and real life stories through perfectly timed unposed photographic art pieces.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit2.png","tags":"Spontaneous,Photojournalism,Authentic,Portraits,RealMoments","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Soulful Expressions","description":"Revealing human character and striking inner beauty through carefully crafted lighting and intimate expressive closeups.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait1.png","tags":"Portraiture,Headshots,FineArt,StudioLighting,Faces,","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Defining Faces","description":"Capturing deep personal stories and unique individual identities beautifully written within every single compelling gaze.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait2.png","tags":"ModelPortfolio,MoodPortrait,BlackAndWhite,VisualStory,HumanNature","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Elite Spaces","description":"Showcasing stunning architectural layouts and beautiful modern interiors that perfectly elevate property listings for buyers.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate1.png","tags":"RealEstate,Interiors,Architecture,PropertyTour,LuxuryHomes","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Urban Dwellings","description":"Transforming ordinary rooms into inviting spectacular spaces through meticulous staging and masterfully controlled ambient lighting.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate2.png","tags":"HomeStaging,CommercialProperty,InteriorDesign,DroneView,RealEstateMarketing","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"True Essence","description":"Preserving beautiful intimate connections and raw joy as they naturally unfold completely unaware of the lens.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/true-essence.png","tags":"Candid,Unscripted,RealLife,Storytelling,NaturalBeauty","linkUrl":"#","openInNewTab":true}],"enableLoadMore":true,"loadMoreText":"See All Work","btnBgColor":"var(u002du002dcolor-10)","btnTextColor":"var(u002du002dcolor-60)"} /--></div>
+<!-- wp:create-block/axis-folio {"uniqueId":"af-66cb5f4f","items":[{"iconType":"arrow-right-alt2","iconList":"","title":"Wedding photography","description":"Weddings that capture the raw emotion of two lives becoming one.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/Placeholder_Image_1_.png","tags":"Emotion,Tradition,Love","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Eternal Love","description":"Capturing timeless, emotional moments and beautiful celebrations of couples embarking on their lifelong journey together.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/wedding2.png","tags":"Wedding,Romance,Bridal,Celebration,Candid","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Unscripted Moments","description":"Catching genuine raw emotions and fleeting authentic interactions entirely naturally without anyone ever noticing the camera.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit1.png","tags":"Candid,StreetPhotography,Documentary,,RawEmotion,LifeUnfiltered","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Honest Frames","description":"Preserving beautiful spontaneous laughter and real life stories through perfectly timed unposed photographic art pieces.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit2.png","tags":"Spontaneous,Photojournalism,Authentic,Portraits,RealMoments","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Soulful Expressions","description":"Revealing human character and striking inner beauty through carefully crafted lighting and intimate expressive closeups.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait1.png","tags":"Portraiture,Headshots,FineArt,StudioLighting,Faces,","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Defining Faces","description":"Capturing deep personal stories and unique individual identities beautifully written within every single compelling gaze.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait2.png","tags":"ModelPortfolio,MoodPortrait,BlackAndWhite,VisualStory,HumanNature","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Elite Spaces","description":"Showcasing stunning architectural layouts and beautiful modern interiors that perfectly elevate property listings for buyers.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate1.png","tags":"RealEstate,Interiors,Architecture,PropertyTour,LuxuryHomes","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Urban Dwellings","description":"Transforming ordinary rooms into inviting spectacular spaces through meticulous staging and masterfully controlled ambient lighting.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate2.png","tags":"HomeStaging,CommercialProperty,InteriorDesign,DroneView,RealEstateMarketing","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"True Essence","description":"Preserving beautiful intimate connections and raw joy as they naturally unfold completely unaware of the lens.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/true-essence.png","tags":"Candid,Unscripted,RealLife,Storytelling,NaturalBeauty","linkUrl":"#","openInNewTab":true}],"enableLoadMore":true,"loadMoreText":"See All Work","btnBgColor":"var(\u002d\u002dcolor-10)","btnTextColor":"var(u002du002dcolor-60)"} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -264,7 +258,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:group -->
 <!-- /wp:post-template -->
 
-<!-- wp:query-pagination {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+<!-- wp:query-pagination {"paginationArrow":"chevron","showLabel":false,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}},"typography":{"lineHeight":"2.8"}},"textColor":"base-10","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
 <!-- wp:query-pagination-previous /-->
 
 <!-- wp:query-pagination-numbers /-->
@@ -292,8 +286,8 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"0"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:0"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}}} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color wp-element-button" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Book Now</a></div>
+<div class="wp-block-buttons" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:0"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","width":25,"style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-25"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color wp-element-button" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Book Now</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
@@ -325,7 +319,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>connect@light-shade-studio-works.com</p>
+<p><strong>connect@light-shade-studio-works.com</strong></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
@@ -343,7 +337,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>+91 98765 43210</p>
+<p><strong>+91 98765 43210</strong></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
@@ -361,7 +355,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>+91 98765 43210</p>
+<p><strong>+91 98765 43210</strong></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
@@ -375,7 +369,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Monday through Saturday, ten in the morning until seven at night.</p>
+<p><strong>Monday through Saturday, ten in the morning until seven at night.</strong></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -755,8 +749,8 @@ function lightshadestudioworks_render_portfolio() {
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"base-60","textColor":"base-30","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}}} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-base-30-color has-base-60-background-color has-text-color has-background has-link-color wp-element-button" href="$contact_url" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px" target="_blank" rel="noreferrer noopener">Contact</a></div>
+<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"base-60","textColor":"base-30","width":25,"style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}},"spacing":{"padding":{"left":"0","right":"0","top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-25"><a class="wp-block-button__link has-base-30-color has-base-60-background-color has-text-color has-background has-link-color wp-element-button" href="$contact_url" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;padding-top:var(--wp--preset--spacing--20);padding-right:0;padding-bottom:var(--wp--preset--spacing--20);padding-left:0" target="_blank" rel="noreferrer noopener">Contact</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
 <!-- /wp:cover --></div>
@@ -1152,7 +1146,7 @@ function lightshadestudioworks_render_blog() {
 <!-- /wp:group -->
 <!-- /wp:post-template -->
 
-<!-- wp:query-pagination {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+<!-- wp:query-pagination {"paginationArrow":"chevron","showLabel":false,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
 <!-- wp:query-pagination-previous /-->
 
 <!-- wp:query-pagination-numbers /-->
