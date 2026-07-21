@@ -126,7 +126,7 @@ function lsw_generate_dynamic_css() {
 	$font              = get_theme_mod( 'site_font_family', 'Inter' );
 	$heading_font      = get_theme_mod( 'site_heading_font_family', 'Inter' );
 	$footer_bg         = get_theme_mod( 'footer_bg_color', '#ffffff' );
-	$footer_text_color = get_theme_mod( 'footer_text_color', '#111827' );
+	$footer_text_color = get_theme_mod( 'footer_text_color', '#ffffff' );
 
 	$css = "
 		.lsw-max-width-container { 
