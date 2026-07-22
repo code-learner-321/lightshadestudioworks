@@ -29,6 +29,12 @@ function lssd_install_plugins() {
 			'required' => true,
 		),
 		array(
+			'name'     => 'What Snap App',
+			'slug'     => 'what-snap-app',
+			'source'   => 'what-snap-app.zip',
+			'required' => true,
+		),
+		array(
 			'name'     => 'Carousel Block',
 			'slug'     => 'b-carousel-block',
 			'required' => true,
