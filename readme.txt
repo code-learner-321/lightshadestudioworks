@@ -32,4 +32,4 @@ This theme has successfully completed its active development phase. It brings to
 To use this theme in your project, clone the repository and follow the setup instructions:
 
 ```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+git clone [https://github.com/code-learner-321/lightshadestudioworks.git]
