@@ -43,9 +43,12 @@ $padding_css = "{$pt}px {$pr}px {$pb}px {$pl}px";
 $gap_value = get_theme_mod('navbar_menu_gap', 32);
 $nav_bg = get_theme_mod('navbar_bg_color', '#ffffff'); // Get the new color
 
-// Retrieve logo ID from Customizer
+// Retrieve brand display settings from Customizer
+$brand_type     = get_theme_mod('navbar_brand_type', 'custom_logo');
 $custom_logo_id = get_theme_mod('navbar_custom_logo');
-$logo_width = get_theme_mod('navbar_logo_width', 150); // Optional: add this setting to your customizer
+$logo_width     = get_theme_mod('navbar_logo_width', 80);
+$site_title     = get_theme_mod('navbar_site_title', get_bloginfo('name'));
+$site_title_style = function_exists('lsw_get_navbar_site_title_style') ? lsw_get_navbar_site_title_style() : '';
 
 $cta_text   = get_theme_mod('navbar_btn_text', 'Book Now');
 $cta_url    = get_theme_mod('navbar_btn_url', home_url('/'));
@@ -68,13 +71,15 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
         <div class="flex items-center space-x-12">
             <div class="flex-shrink-0">
                 <a href="<?php echo esc_url(home_url('/')); ?>">
-                    <?php if ($custom_logo_id) : ?>
+                    <?php if ('site_title' === $brand_type) : ?>
+                        <span style="<?php echo esc_attr($site_title_style); ?>"><?php echo esc_html($site_title); ?></span>
+                    <?php elseif ($custom_logo_id) : ?>
                         <?php echo wp_get_attachment_image($custom_logo_id, 'full', false, array(
                             'style' => 'width: ' . esc_attr($logo_width) . 'px; height: auto;',
                             'class' => 'h-auto'
                         )); ?>
                     <?php else : ?>
-                        <span class="text-3xl font-black tracking-tighter uppercase">Brand</span>
+                        <span style="<?php echo esc_attr($site_title_style); ?>"><?php echo esc_html($site_title ? $site_title : get_bloginfo('name')); ?></span>
                     <?php endif; ?>
                 </a>
             </div>

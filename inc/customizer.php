@@ -1137,7 +1137,28 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 		);
 	}
 
-	// Logo Upload
+	// Brand type choice: Custom Logo or Site Title
+	$wp_customize->add_setting(
+		'navbar_brand_type',
+		array(
+			'default'           => 'custom_logo',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_brand_type',
+		array(
+			'label'   => 'Brand Display',
+			'section' => 'navbar_layout_section',
+			'type'    => 'radio',
+			'choices' => array(
+				'custom_logo' => 'Navbar Custom Logo',
+				'site_title'  => 'Site Title',
+			),
+		)
+	);
+
+	// Logo Upload (shown when Custom Logo is selected)
 	$wp_customize->add_setting( 'navbar_custom_logo', array( 'sanitize_callback' => 'absint' ) );
 	if ( class_exists( 'WP_Customize_Cropped_Image_Control' ) ) {
 		$wp_customize->add_control(
@@ -1145,10 +1166,11 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 				$wp_customize,
 				'navbar_custom_logo',
 				array(
-					'label'   => 'Navbar Custom Logo',
-					'section' => 'navbar_layout_section',
-					'width'   => 400,
-					'height'  => 200,
+					'label'           => 'Navbar Custom Logo',
+					'section'         => 'navbar_layout_section',
+					'width'           => 400,
+					'height'          => 200,
+					'active_callback' => 'is_navbar_custom_logo_enabled',
 				)
 			)
 		);
@@ -1158,9 +1180,232 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 	$wp_customize->add_control(
 		'navbar_logo_width',
 		array(
-			'label'   => 'Logo Width (px)',
-			'section' => 'navbar_layout_section',
-			'type'    => 'number',
+			'label'           => 'Logo Width (px)',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'number',
+			'active_callback' => 'is_navbar_custom_logo_enabled',
+		)
+	);
+
+	// Site title text (shown when Site Title is selected)
+	$wp_customize->add_setting(
+		'navbar_site_title',
+		array(
+			'default'           => get_bloginfo( 'name' ),
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title',
+		array(
+			'label'           => 'Site Title',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'text',
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	// Site Title Typography (shown when Site Title is selected)
+	$navbar_font_choices = array(
+		'system-ui, -apple-system, sans-serif'         => 'System Default (Optimized)',
+		'sans-serif'                                   => 'Sans Serif (Generic)',
+		'serif'                                        => 'Serif (Generic)',
+		'monospace'                                    => 'Monospace (Generic)',
+		'Arial, Helvetica, sans-serif'                 => 'Arial',
+		'Verdana, Geneva, sans-serif'                  => 'Verdana',
+		'Trebuchet MS, sans-serif'                     => 'Trebuchet MS',
+		'Georgia, serif'                               => 'Georgia',
+		'Times New Roman, serif'                       => 'Times New Roman',
+		'Courier New, monospace'                       => 'Courier New',
+		'Inter, system-ui, sans-serif'                 => 'Inter (Modern)',
+		'Segoe UI, Tahoma, sans-serif'                 => 'Segoe UI',
+		'Helvetica Neue, Helvetica, Arial, sans-serif' => 'Helvetica Neue',
+		'Palatino Linotype, serif'                     => 'Palatino',
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_font_family',
+		array(
+			'default'           => 'Inter, system-ui, sans-serif',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_font_family',
+		array(
+			'label'           => 'Font Family',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'select',
+			'choices'         => $navbar_font_choices,
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_font_size',
+		array(
+			'default'           => 24,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_font_size',
+		array(
+			'label'           => 'Font Size (px)',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'number',
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_font_weight',
+		array(
+			'default'           => '700',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_font_weight',
+		array(
+			'label'           => 'Font Weight',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'select',
+			'choices'         => array(
+				'300' => 'Light (300)',
+				'400' => 'Normal (400)',
+				'500' => 'Medium (500)',
+				'600' => 'Semi Bold (600)',
+				'700' => 'Bold (700)',
+				'800' => 'Extra Bold (800)',
+				'900' => 'Black (900)',
+			),
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_font_style',
+		array(
+			'default'           => 'normal',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_font_style',
+		array(
+			'label'           => 'Font Style',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'select',
+			'choices'         => array(
+				'normal' => 'Normal',
+				'italic' => 'Italic',
+			),
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_letter_spacing',
+		array(
+			'default'           => '0',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_letter_spacing',
+		array(
+			'label'           => 'Letter Spacing (px)',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'number',
+			'input_attrs'     => array(
+				'step' => '0.1',
+			),
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_word_spacing',
+		array(
+			'default'           => '0',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_word_spacing',
+		array(
+			'label'           => 'Word Spacing (px)',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'number',
+			'input_attrs'     => array(
+				'step' => '0.1',
+			),
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_line_height',
+		array(
+			'default'           => '1.2',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_line_height',
+		array(
+			'label'           => 'Line Height',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'number',
+			'input_attrs'     => array(
+				'step' => '0.1',
+				'min'  => '0.5',
+				'max'  => '3',
+			),
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_text_transform',
+		array(
+			'default'           => 'none',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'navbar_site_title_text_transform',
+		array(
+			'label'           => 'Text Transform',
+			'section'         => 'navbar_layout_section',
+			'type'            => 'select',
+			'choices'         => array(
+				'none'       => 'None',
+				'uppercase'  => 'Uppercase',
+				'lowercase'  => 'Lowercase',
+				'capitalize' => 'Capitalize',
+			),
+			'active_callback' => 'is_navbar_site_title_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'navbar_site_title_color',
+		array(
+			'default'           => '#111827',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'navbar_site_title_color',
+			array(
+				'label'           => 'Site Title Color',
+				'section'         => 'navbar_layout_section',
+				'active_callback' => 'is_navbar_site_title_enabled',
+			)
 		)
 	);
 
@@ -1845,6 +2090,20 @@ add_action( 'customize_register', 'lightshadestudioworks_register_full_customize
  */
 function is_button_enabled( $control ) {
 	return $control->manager->get_setting( 'navbar_show_button' )->value() == true;
+}
+
+/**
+ * Check if Navbar Custom Logo brand type is selected
+ */
+function is_navbar_custom_logo_enabled( $control ) {
+	return $control->manager->get_setting( 'navbar_brand_type' )->value() === 'custom_logo';
+}
+
+/**
+ * Check if Site Title brand type is selected
+ */
+function is_navbar_site_title_enabled( $control ) {
+	return $control->manager->get_setting( 'navbar_brand_type' )->value() === 'site_title';
 }
 
 /**

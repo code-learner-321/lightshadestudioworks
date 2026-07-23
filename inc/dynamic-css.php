@@ -293,3 +293,47 @@ function lssw_enqueue_button_effect_css() {
 add_action( 'wp_enqueue_scripts', 'lssw_enqueue_button_effect_css' );
 add_action( 'admin_enqueue_scripts', 'lssw_enqueue_button_effect_css' );
 add_action( 'enqueue_block_editor_assets', 'lssw_enqueue_button_effect_css' );
+
+/**
+ * Build inline CSS for the navbar site title typography controls.
+ *
+ * @return string
+ */
+function lsw_get_navbar_site_title_style() {
+	$font_family    = get_theme_mod( 'navbar_site_title_font_family', 'Inter, system-ui, sans-serif' );
+	$font_size      = absint( get_theme_mod( 'navbar_site_title_font_size', 24 ) );
+	$font_weight    = get_theme_mod( 'navbar_site_title_font_weight', '700' );
+	$font_style     = get_theme_mod( 'navbar_site_title_font_style', 'normal' );
+	$letter_spacing = get_theme_mod( 'navbar_site_title_letter_spacing', '0' );
+	$word_spacing   = get_theme_mod( 'navbar_site_title_word_spacing', '0' );
+	$line_height    = get_theme_mod( 'navbar_site_title_line_height', '1.2' );
+	$text_transform = get_theme_mod( 'navbar_site_title_text_transform', 'none' );
+	$color          = get_theme_mod( 'navbar_site_title_color', '#111827' );
+
+	$allowed_weights    = array( '300', '400', '500', '600', '700', '800', '900' );
+	$allowed_styles     = array( 'normal', 'italic' );
+	$allowed_transforms = array( 'none', 'uppercase', 'lowercase', 'capitalize' );
+
+	if ( ! in_array( $font_weight, $allowed_weights, true ) ) {
+		$font_weight = '700';
+	}
+	if ( ! in_array( $font_style, $allowed_styles, true ) ) {
+		$font_style = 'normal';
+	}
+	if ( ! in_array( $text_transform, $allowed_transforms, true ) ) {
+		$text_transform = 'none';
+	}
+
+	return sprintf(
+		'font-family: %1$s; font-size: %2$dpx; font-weight: %3$s; font-style: %4$s; letter-spacing: %5$spx; word-spacing: %6$spx; line-height: %7$s; text-transform: %8$s; color: %9$s;',
+		esc_attr( $font_family ),
+		$font_size,
+		esc_attr( $font_weight ),
+		esc_attr( $font_style ),
+		esc_attr( $letter_spacing ),
+		esc_attr( $word_spacing ),
+		esc_attr( $line_height ),
+		esc_attr( $text_transform ),
+		esc_attr( $color )
+	);
+}
