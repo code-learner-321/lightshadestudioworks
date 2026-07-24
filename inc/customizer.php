@@ -1936,7 +1936,7 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 	$wp_customize->add_setting(
 		'global_active_link_color',
 		array(
-			'default'           => '#2563eb',
+			'default'           => '#c5a059',
 			'sanitize_callback' => 'sanitize_hex_color',
 			'transport'         => 'refresh',
 		)
@@ -2436,7 +2436,7 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 		const modernHoverColor = wp.customize('modern_navbar_hover_color').get() || '#000000';
 		const modernHoverLine = wp.customize('modern_navbar_hover_line_color').get() || '#000000';
 		const commonHoverColor = wp.customize('common_navbar_hover_color').get() || '#2563eb';
-		const globalActiveLink = wp.customize('global_active_link_color').get() || '#2563eb';
+		const globalActiveLink = wp.customize('global_active_link_color').get() || '#c5a059';
 		
 		styleEl.innerHTML = `
 			:root {

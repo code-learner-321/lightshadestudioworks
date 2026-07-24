@@ -164,7 +164,7 @@ function lsw_generate_dynamic_css() {
 	$modern_hover_color       = get_theme_mod( 'modern_navbar_hover_color', '#000000' );
 	$modern_hover_line_color  = get_theme_mod( 'modern_navbar_hover_line_color', '#000000' );
 	$common_hover_color       = get_theme_mod( 'common_navbar_hover_color', '#2563eb' );
-	$global_active_link_color = get_theme_mod( 'global_active_link_color', '#2563eb' );
+	$global_active_link_color = get_theme_mod( 'global_active_link_color', '#c5a059' );
 
 	$css .= "
 		:root {
@@ -177,7 +177,7 @@ function lsw_generate_dynamic_css() {
 		}
 		a:active,
 		.lsw-active-link {
-			color: var(--global-active-link-color, #2563eb) !important;
+			color: var(--global-active-link-color, #c5a059) !important;
 		}
 		.lsw-nav-menu-link:hover {
 			color: var(--common-nav-hover-color, #2563eb) !important;
