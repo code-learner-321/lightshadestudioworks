@@ -1995,6 +1995,32 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 		)
 	);
 
+	// 2b. Container Padding Controls (Top, Right, Bottom, Left)
+	$container_padding_defaults = array(
+		'top'    => 0,
+		'right'  => 20,
+		'bottom' => 0,
+		'left'   => 20,
+	);
+	foreach ( $container_padding_defaults as $side => $default ) {
+		$id = 'site_container_padding_' . $side;
+		$wp_customize->add_setting(
+			$id,
+			array(
+				'default'           => $default,
+				'sanitize_callback' => 'absint',
+			)
+		);
+		$wp_customize->add_control(
+			$id,
+			array(
+				'label'   => 'Container Padding ' . ucfirst( $side ) . ' (px)',
+				'section' => 'site_layout_section',
+				'type'    => 'number',
+			)
+		);
+	}
+
 	// 3. Body Font Family Control
 	$wp_customize->add_setting( 'site_font_family', array( 'default' => 'Inter', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control(

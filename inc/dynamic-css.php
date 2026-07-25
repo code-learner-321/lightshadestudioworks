@@ -123,6 +123,10 @@ add_action( 'enqueue_block_editor_assets', 'lightshadestudioworks_enqueue_dynami
  */
 function lsw_generate_dynamic_css() {
 	$width             = get_theme_mod( 'site_container_width', 1200 );
+	$container_pt      = get_theme_mod( 'site_container_padding_top', 0 );
+	$container_pr      = get_theme_mod( 'site_container_padding_right', 20 );
+	$container_pb      = get_theme_mod( 'site_container_padding_bottom', 0 );
+	$container_pl      = get_theme_mod( 'site_container_padding_left', 20 );
 	$font              = get_theme_mod( 'site_font_family', 'Inter' );
 	$heading_font      = get_theme_mod( 'site_heading_font_family', 'Inter' );
 	$footer_bg         = get_theme_mod( 'footer_bg_color', '#ffffff' );
@@ -132,7 +136,8 @@ function lsw_generate_dynamic_css() {
 		.lsw-max-width-container { 
 			max-width: {$width}px !important; 
 			margin-left: auto; 
-			margin-right: auto; 
+			margin-right: auto;
+			padding: {$container_pt}px {$container_pr}px {$container_pb}px {$container_pl}px;
 		}
 		body { font-family: {$font}; }
 		h1, h2, h3, h4, h5, h6, .wp-block-heading { font-family: {$heading_font}; }
