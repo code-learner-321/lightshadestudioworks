@@ -1141,7 +1141,7 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 	$wp_customize->add_setting(
 		'navbar_brand_type',
 		array(
-			'default'           => 'custom_logo',
+			'default'           => 'site_title',
 			'sanitize_callback' => 'sanitize_text_field',
 		)
 	);
