@@ -39,64 +39,64 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:cover -->
 
 <!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.43,"y":0.51},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--40);padding-bottom:0px;padding-left:var(--wp--preset--spacing--40);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:43% 51%" data-object-fit="cover" data-object-position="43% 51%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":1,"minHeightUnit":"vw","contentPosition":"center center","isDark":false,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light" style="min-height:1vw"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"white","fontSize":"large"} -->
-<h1 class="wp-block-heading has-white-color has-text-color has-link-color has-large-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">Capturing timeless moments with precision</h1>
+<div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--40);padding-bottom:0px;padding-left:var(--wp--preset--spacing--40);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:43% 51%" data-object-fit="cover" data-object-position="43% 51%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center"} -->
+<div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-column is-vertically-aligned-center" style="padding-top:0;padding-bottom:0"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"bottom center","isDark":false,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light has-custom-content-position is-position-bottom-center" style="padding-top:0;padding-bottom:0"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-10","fontSize":"large"} -->
+<h1 class="wp-block-heading has-base-10-color has-text-color has-link-color has-large-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">Capturing timeless moments with precision</h1>
 <!-- /wp:heading --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"center","layout":{"type":"default"}} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":50,"contentPosition":"bottom center","isDark":false,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light has-custom-content-position is-position-bottom-center" style="min-height:50px"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"white","fontSize":"small"} -->
-<p class="has-white-color has-text-color has-link-color has-small-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">A decade of dedicated experience behind the lens. We specialize in transforming fleeting moments into everlasting memories through the art of light and shadow.</p>
+<!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-column is-vertically-aligned-center" style="padding-top:0;padding-bottom:0"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"top center","isDark":false,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light has-custom-content-position is-position-top-center" style="padding-top:0;padding-bottom:0"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"},"spacing":{"padding":{"top":"0","bottom":"0"}}},"textColor":"base-60","fontSize":"small"} -->
+<p class="has-base-60-color has-text-color has-link-color has-small-font-size" style="padding-top:0;padding-bottom:0;letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">A decade of dedicated experience behind the lens. We specialize in transforming fleeting moments into everlasting memories through the art of light and shadow.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"white","textColor":"base-10","className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"fontSize":"small"} -->
-<div class="wp-block-button is-style-fill"><a class="wp-block-button__link has-base-10-color has-white-background-color has-text-color has-background has-link-color has-small-font-size has-custom-font-size wp-element-button" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Explore</a></div>
-<!-- /wp:button -->
+<!-- wp:group {"style":{"spacing":{"padding":{"right":"0","left":"0"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group" style="padding-right:0;padding-left:0"><!-- wp:create-block/what-snap-app /-->
 
-<!-- wp:button {"textColor":"white","className":"is-style-outline","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"},"width":"1px"},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"fontSize":"small"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-white-color has-text-color has-link-color has-small-font-size has-custom-font-size wp-element-button" style="border-width:1px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Contact</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div></div>
+<!-- wp:social-links {"className":"is-style-default","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|30"}},"layout":{"selfStretch":"fit","flexSize":null}}} -->
+<ul class="wp-block-social-links is-style-default"><!-- wp:social-link {"url":"#","service":"instagram","label":"Instagram"} /-->
+
+<!-- wp:social-link {"url":"#","service":"facebook","label":"Facebook"} /-->
+
+<!-- wp:social-link {"url":"#","service":"youtube","label":"YouTube"} /--></ul>
+<!-- /wp:social-links --></div>
+<!-- /wp:group --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.49,"y":0.49},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"tablet":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--30);padding-bottom:0px;padding-left:var(--wp--preset--spacing--30);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:49% 49%" data-object-fit="cover" data-object-position="49% 49%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":1,"minHeightUnit":"vh","contentPosition":"center center","isDark":false,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light" style="min-height:1vh"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"white","fontSize":"large"} -->
-<h1 class="wp-block-heading has-white-color has-text-color has-link-color has-large-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">Capturing timeless moments with precision</h1>
+<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.49,"y":0.49},"minHeight":30,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"tablet":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--30);padding-bottom:0px;padding-left:var(--wp--preset--spacing--30);min-height:30vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:49% 49%" data-object-fit="cover" data-object-position="49% 49%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":null,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}}} -->
+<div class="wp-block-columns" style="padding-top:0;padding-bottom:0"><!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-column is-vertically-aligned-top" style="padding-top:0;padding-bottom:0"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":40,"minHeightUnit":"vh","contentPosition":"bottom center","isDark":false,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light has-custom-content-position is-position-bottom-center" style="padding-top:0;padding-bottom:0;min-height:40vh"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-10","fontSize":"large"} -->
+<h1 class="wp-block-heading has-base-10-color has-text-color has-link-color has-large-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">Capturing timeless moments with precision</h1>
 <!-- /wp:heading --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"stretch","layout":{"type":"default"}} -->
-<div class="wp-block-column is-vertically-aligned-stretch"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":50,"contentPosition":"bottom center","isDark":false,"style":{"spacing":{"padding":{"bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light has-custom-content-position is-position-bottom-center" style="padding-bottom:var(--wp--preset--spacing--70);min-height:50px"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"white","fontSize":"small"} -->
-<p class="has-white-color has-text-color has-link-color has-small-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">A decade of dedicated experience behind the lens. We specialize in transforming fleeting moments into everlasting memories through the art of light and shadow.</p>
+<!-- wp:column {"layout":{"type":"default"}} -->
+<div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":50,"minHeightUnit":"vh","contentPosition":"top center","isDark":false,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light has-custom-content-position is-position-top-center" style="padding-top:0;padding-bottom:0;min-height:50vh"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-60","fontSize":"small"} -->
+<p class="has-base-60-color has-text-color has-link-color has-small-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">A decade of dedicated experience behind the lens. We specialize in transforming fleeting moments into everlasting memories through the art of light and shadow.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group"></div>
-<!-- /wp:group -->
+<!-- wp:group {"style":{"spacing":{"padding":{"right":"0","left":"0"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
+<div class="wp-block-group" style="padding-right:0;padding-left:0"><!-- wp:create-block/what-snap-app /-->
 
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"white","textColor":"base-10","className":"is-style-fill","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"fontSize":"small"} -->
-<div class="wp-block-button is-style-fill"><a class="wp-block-button__link has-base-10-color has-white-background-color has-text-color has-background has-link-color has-small-font-size has-custom-font-size wp-element-button" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Explore</a></div>
-<!-- /wp:button -->
+<!-- wp:social-links {"className":"is-style-default","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|30"}},"layout":{"selfStretch":"fit","flexSize":null}}} -->
+<ul class="wp-block-social-links is-style-default"><!-- wp:social-link {"url":"#","service":"instagram","label":"Instagram"} /-->
 
-<!-- wp:button {"textColor":"white","className":"is-style-outline","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"},"width":"1px"},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"fontSize":"small"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-white-color has-text-color has-link-color has-small-font-size has-custom-font-size wp-element-button" style="border-width:1px;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Contact</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div></div>
+<!-- wp:social-link {"url":"#","service":"facebook","label":"Facebook"} /-->
+
+<!-- wp:social-link {"url":"#","service":"youtube","label":"YouTube"} /--></ul>
+<!-- /wp:social-links --></div>
+<!-- /wp:group --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div></div>
@@ -279,9 +279,9 @@ function lightshadestudioworks_render_home() {
 <p class="has-text-align-center">From the initial concept to the final frame, we’re ready to bring your vision to life.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"0"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:0"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","width":25,"style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}}} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-25"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color wp-element-button" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Book Now</a></div>
+<!-- wp:buttons {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"0","right":"0"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons" style="padding-top:var(--wp--preset--spacing--60);padding-right:0;padding-bottom:0"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}}} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color wp-element-button" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px">Book Now</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
@@ -743,8 +743,8 @@ function lightshadestudioworks_render_portfolio() {
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"base-60","textColor":"base-30","width":25,"style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}},"spacing":{"padding":{"left":"0","right":"0","top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-25"><a class="wp-block-button__link has-base-30-color has-base-60-background-color has-text-color has-background has-link-color wp-element-button" href="$contact_url" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;padding-top:var(--wp--preset--spacing--20);padding-right:0;padding-bottom:var(--wp--preset--spacing--20);padding-left:0" target="_blank" rel="noreferrer noopener">Contact</a></div>
+<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"base-10","textColor":"base-60","style":{"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}}}} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-base-60-color has-base-10-background-color has-text-color has-background has-link-color wp-element-button" href="$contact_url" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px" target="_blank" rel="noreferrer noopener">Contact</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
 <!-- /wp:cover --></div>
@@ -1197,7 +1197,7 @@ function lightshadestudioworks_render_contact() {
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:html -->
-<div class="w-full h-auto min-h-[600px] md:min-h-[700px] lg:min-h-[800px] block">
+<div class="w-full h-auto min-h-[500px] md:min-h-[600px] lg:min-h-[700px] block">
     <iframe class="w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11115.746850482125!2d78.11688773000537!3d9.933125641243699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c582b1189633%3A0xdc955b7264f63933!2sMadurai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1783866464125!5m2!1sen!2sin" allowfullscreen="" style="min-height: 600px;" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 <!-- /wp:html --></div>
