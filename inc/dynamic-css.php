@@ -189,6 +189,66 @@ function lsw_generate_dynamic_css() {
 		}
 	";
 
+	if ( get_theme_mod( 'lsw_scroll_to_top_enabled', 1 ) ) {
+		$stt_bg           = get_theme_mod( 'lsw_scroll_to_top_bg_color', '#c5a059' );
+		$stt_text         = get_theme_mod( 'lsw_scroll_to_top_text_color', '#ffffff' );
+		$stt_hover_bg     = get_theme_mod( 'lsw_scroll_to_top_hover_bg_color', '#b08d4a' );
+		$stt_pt           = get_theme_mod( 'lsw_scroll_to_top_padding_top', 12 );
+		$stt_pr           = get_theme_mod( 'lsw_scroll_to_top_padding_right', 12 );
+		$stt_pb           = get_theme_mod( 'lsw_scroll_to_top_padding_bottom', 12 );
+		$stt_pl           = get_theme_mod( 'lsw_scroll_to_top_padding_left', 12 );
+		$stt_size         = get_theme_mod( 'lsw_scroll_to_top_size', 48 );
+		$stt_radius       = get_theme_mod( 'lsw_scroll_to_top_border_radius', 50 );
+		$stt_bottom       = get_theme_mod( 'lsw_scroll_to_top_bottom_offset', 24 );
+		$stt_right        = get_theme_mod( 'lsw_scroll_to_top_right_offset', 24 );
+		$stt_padding      = "{$stt_pt}px {$stt_pr}px {$stt_pb}px {$stt_pl}px";
+
+		$css .= "
+			#lsw-scroll-to-top {
+				position: fixed;
+				bottom: {$stt_bottom}px;
+				right: {$stt_right}px;
+				z-index: 9999;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: {$stt_size}px;
+				height: {$stt_size}px;
+				padding: {$stt_padding};
+				border: none;
+				border-radius: {$stt_radius}px;
+				background-color: {$stt_bg};
+				color: {$stt_text};
+				cursor: pointer;
+				opacity: 0;
+				visibility: hidden;
+				transform: translateY(12px);
+				transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			}
+			#lsw-scroll-to-top.is-visible {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+			}
+			#lsw-scroll-to-top:hover,
+			#lsw-scroll-to-top:focus {
+				background-color: {$stt_hover_bg};
+				outline: none;
+			}
+			#lsw-scroll-to-top:focus-visible {
+				outline: 2px solid {$stt_text};
+				outline-offset: 2px;
+			}
+			#lsw-scroll-to-top svg {
+				width: 20px;
+				height: 20px;
+				fill: currentColor;
+				pointer-events: none;
+			}
+		";
+	}
+
 	wp_add_inline_style( 'lsw-style', $css );
 }
 add_action( 'wp_enqueue_scripts', 'lsw_generate_dynamic_css', 20 );

@@ -1952,6 +1952,215 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 		)
 	);
 
+	// Scroll to Top Button
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_enabled',
+		array(
+			'default'           => 1,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'lsw_scroll_to_top_enabled',
+		array(
+			'label'   => __( 'Enable Scroll to Top Button', 'lightshadestudioworks' ),
+			'section' => 'lsw_general_section',
+			'type'    => 'checkbox',
+		)
+	);
+
+	$wp_customize->add_setting( 'lsw_scroll_to_top_heading', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control(
+		new LSW_Customize_Heading_Control(
+			$wp_customize,
+			'lsw_scroll_to_top_heading_ctrl',
+			array(
+				'label'           => __( 'Scroll to Top Button', 'lightshadestudioworks' ),
+				'section'         => 'lsw_general_section',
+				'settings'        => 'lsw_scroll_to_top_heading',
+				'active_callback' => 'is_scroll_to_top_enabled',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_bg_color',
+		array(
+			'default'           => '#c5a059',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'lsw_scroll_to_top_bg_color',
+			array(
+				'label'           => __( 'Background Color', 'lightshadestudioworks' ),
+				'section'         => 'lsw_general_section',
+				'active_callback' => 'is_scroll_to_top_enabled',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_text_color',
+		array(
+			'default'           => '#ffffff',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'lsw_scroll_to_top_text_color',
+			array(
+				'label'           => __( 'Icon Color', 'lightshadestudioworks' ),
+				'section'         => 'lsw_general_section',
+				'active_callback' => 'is_scroll_to_top_enabled',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_hover_bg_color',
+		array(
+			'default'           => '#b08d4a',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'lsw_scroll_to_top_hover_bg_color',
+			array(
+				'label'           => __( 'Hover Background Color', 'lightshadestudioworks' ),
+				'section'         => 'lsw_general_section',
+				'active_callback' => 'is_scroll_to_top_enabled',
+			)
+		)
+	);
+
+	$scroll_to_top_padding_defaults = array(
+		'top'    => 12,
+		'right'  => 12,
+		'bottom' => 12,
+		'left'   => 12,
+	);
+	foreach ( $scroll_to_top_padding_defaults as $side => $default ) {
+		$id = 'lsw_scroll_to_top_padding_' . $side;
+		$wp_customize->add_setting(
+			$id,
+			array(
+				'default'           => $default,
+				'sanitize_callback' => 'absint',
+			)
+		);
+		$wp_customize->add_control(
+			$id,
+			array(
+				'label'           => sprintf(
+					/* translators: %s: padding side (Top, Right, Bottom, Left) */
+					__( 'Padding %s (px)', 'lightshadestudioworks' ),
+					ucfirst( $side )
+				),
+				'section'         => 'lsw_general_section',
+				'type'            => 'number',
+				'active_callback' => 'is_scroll_to_top_enabled',
+			)
+		);
+	}
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_size',
+		array(
+			'default'           => 48,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'lsw_scroll_to_top_size',
+		array(
+			'label'           => __( 'Button Size (px)', 'lightshadestudioworks' ),
+			'section'         => 'lsw_general_section',
+			'type'            => 'number',
+			'description'     => __( 'Width and height of the button.', 'lightshadestudioworks' ),
+			'active_callback' => 'is_scroll_to_top_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_border_radius',
+		array(
+			'default'           => 50,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'lsw_scroll_to_top_border_radius',
+		array(
+			'label'           => __( 'Border Radius (px)', 'lightshadestudioworks' ),
+			'section'         => 'lsw_general_section',
+			'type'            => 'number',
+			'description'     => __( 'Use 50 or higher for a circular button.', 'lightshadestudioworks' ),
+			'active_callback' => 'is_scroll_to_top_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_bottom_offset',
+		array(
+			'default'           => 24,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'lsw_scroll_to_top_bottom_offset',
+		array(
+			'label'           => __( 'Distance from Bottom (px)', 'lightshadestudioworks' ),
+			'section'         => 'lsw_general_section',
+			'type'            => 'number',
+			'active_callback' => 'is_scroll_to_top_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_right_offset',
+		array(
+			'default'           => 24,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'lsw_scroll_to_top_right_offset',
+		array(
+			'label'           => __( 'Distance from Right (px)', 'lightshadestudioworks' ),
+			'section'         => 'lsw_general_section',
+			'type'            => 'number',
+			'active_callback' => 'is_scroll_to_top_enabled',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'lsw_scroll_to_top_scroll_offset',
+		array(
+			'default'           => 300,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'lsw_scroll_to_top_scroll_offset',
+		array(
+			'label'           => __( 'Show After Scroll (px)', 'lightshadestudioworks' ),
+			'section'         => 'lsw_general_section',
+			'type'            => 'number',
+			'description'     => __( 'How far the page must be scrolled before the button appears.', 'lightshadestudioworks' ),
+			'active_callback' => 'is_scroll_to_top_enabled',
+		)
+	);
+
 	// Reset Settings Control
 	$wp_customize->add_setting(
 		'lsw_reset_settings',
@@ -2110,6 +2319,13 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 	}
 }
 add_action( 'customize_register', 'lightshadestudioworks_register_full_customizer' );
+
+/**
+ * Check if scroll-to-top button is enabled callback helper
+ */
+function is_scroll_to_top_enabled( $control ) {
+	return $control->manager->get_setting( 'lsw_scroll_to_top_enabled' )->value() == true;
+}
 
 /**
  * Check if CTA button is enabled callback helper

@@ -18,6 +18,11 @@ $footer_text = get_theme_mod('footer_text', '© 2026 Light Shade Studio Works');
         <?php echo wp_kses_post($footer_text); ?>
     </div>
 </footer>
+<?php
+if ( get_theme_mod( 'lsw_scroll_to_top_enabled', 1 ) ) {
+	get_template_part( 'template-parts/scroll-to-top' );
+}
+?>
 <?php wp_footer(); ?>
 </body>
 

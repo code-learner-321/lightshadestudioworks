@@ -80,6 +80,25 @@ function lightshadestudioworks_resources() {
 add_action( 'wp_enqueue_scripts', 'lightshadestudioworks_resources' );
 
 /**
+ * Enqueue scroll-to-top button script when enabled
+ */
+function lsw_enqueue_scroll_to_top_script() {
+	if ( ! get_theme_mod( 'lsw_scroll_to_top_enabled', 1 ) ) {
+		return;
+	}
+
+	$script_path = get_template_directory() . '/assets/js/scroll-to-top.js';
+	wp_enqueue_script(
+		'lsw-scroll-to-top',
+		get_template_directory_uri() . '/assets/js/scroll-to-top.js',
+		array(),
+		file_exists( $script_path ) ? filemtime( $script_path ) : null,
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'lsw_enqueue_scroll_to_top_script' );
+
+/**
  * Display a thank you notice in dashboard for admin users
  */
 function lightshadestudioworks_notice() {
