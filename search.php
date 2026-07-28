@@ -1,21 +1,78 @@
 <?php get_header(); ?>
-<?php if ( have_posts() ) : ?>
-<header class="header">
-<h1 class="entry-title" itemprop="name"><?php printf( esc_html__( 'Search Results for: %s', 'lightshadestudioworks' ), esc_html( get_search_query() ) ); ?></h1>
-</header>
-<?php while ( have_posts() ) : the_post(); ?>
-<?php get_template_part( 'entry' ); ?>
-<?php endwhile; ?>
-<?php get_template_part( 'nav', 'below' ); ?>
-<?php else : ?>
-<article id="post-0" class="post no-results not-found">
-<header class="header">
-<h1 class="entry-title" itemprop="name"><?php esc_html_e( 'Nothing Found', 'lightshadestudioworks' ); ?></h1>
-</header>
-<div class="entry-content" itemprop="mainContentOfPage">
-<p><?php esc_html_e( 'Sorry, nothing matched your search. Please try again.', 'lightshadestudioworks' ); ?></p>
-<?php get_search_form(); ?>
+
+<div id="primary" class="px-4 pt-20 pb-20 min-h-screen 
+    bg-gradient-to-b from-[#ffffff] to-[#f9f9f9] dark:from-[#000000] dark:to-[#111111]">
+
+    <div class="max-w-5xl mx-auto">
+
+        <!-- Search Header -->
+        <header class="mb-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-5 
+                text-xs font-bold tracking-widest text-[#C5A059] uppercase 
+                bg-[#C5A059]/10 rounded-full shadow-sm">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#C5A059] animate-pulse"></span>
+                <?php esc_html_e( 'Search', 'lightshadestudioworks' ); ?>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-extrabold 
+                text-[#000000] dark:text-[#ffffff] tracking-tight">
+                <?php printf( esc_html__( 'Results for: %s', 'lightshadestudioworks' ), esc_html( get_search_query() ) ); ?>
+            </h1>
+        </header>
+
+        <!-- Search Results -->
+        <?php if ( have_posts() ) : ?>
+            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <?php while ( have_posts() ) : the_post(); ?>
+                    <div class="bg-[#ffffff] dark:bg-[#111111] rounded-2xl shadow-md 
+                        hover:shadow-[0_10px_30px_-5px_rgba(197,160,89,0.3)] transition-all p-6">
+                        
+                        <h2 class="text-xl font-bold mb-3 
+                            text-[#000000] dark:text-[#ffffff]">
+                            <a href="<?php the_permalink(); ?>" 
+                               class="hover:text-[#C5A059] transition-colors">
+                                <?php the_title(); ?>
+                            </a>
+                        </h2>
+
+                        <div class="text-sm text-[#000000]/70 dark:text-[#ffffff]/70 mb-4">
+                            <?php the_excerpt(); ?>
+                        </div>
+
+                        <a href="<?php the_permalink(); ?>" 
+                           class="inline-flex items-center px-4 py-2 text-xs font-bold uppercase 
+                           text-[#ffffff] bg-[#000000] dark:bg-[#ffffff] dark:text-[#000000] 
+                           rounded-lg hover:bg-[#C5A059] hover:scale-105 active:scale-95 
+                           transition-transform shadow-md">
+                            <?php esc_html_e( 'Read More', 'lightshadestudioworks' ); ?>
+                        </a>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-10">
+                <?php get_template_part( 'nav', 'below' ); ?>
+            </div>
+
+        <?php else : ?>
+            <!-- No Results -->
+            <article id="post-0" class="text-center">
+                <h2 class="text-2xl font-bold mb-4 
+                    text-[#000000] dark:text-[#ffffff]">
+                    <?php esc_html_e( 'Nothing Found', 'lightshadestudioworks' ); ?>
+                </h2>
+                <p class="text-base text-[#000000]/70 dark:text-[#ffffff]/70 mb-6">
+                    <?php esc_html_e( 'Sorry, nothing matched your search. Please try again.', 'lightshadestudioworks' ); ?>
+                </p>
+                <div class="max-w-md mx-auto">
+                    <?php get_search_form(); ?>
+                </div>
+            </article>
+        <?php endif; ?>
+
+    </div>
 </div>
-</article>
-<?php endif; ?>
+
 <?php get_footer(); ?>
+            
