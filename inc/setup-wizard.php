@@ -25,13 +25,13 @@ function lssd_install_plugins() {
 		array(
 			'name'     => 'Axis Folio',
 			'slug'     => 'axis-folio',
-			'source'   => get_template_directory() . '/inc/plugins/axis-folio.zip',
+			'source'   => 'axis-folio.zip',
 			'required' => true,
 		),
 		array(
 			'name'     => 'What Snap App',
 			'slug'     => 'what-snap-app',
-			'source'   => get_template_directory() . '/inc/plugins/what-snap-app.zip',
+			'source'   => 'what-snap-app.zip',
 			'required' => true,
 		),
 		array(
