@@ -99,25 +99,6 @@ function lsw_enqueue_scroll_to_top_script() {
 add_action( 'wp_enqueue_scripts', 'lsw_enqueue_scroll_to_top_script' );
 
 /**
- * Display a thank you notice in dashboard for admin users
- */
-function lightshadestudioworks_notice() {
-	$user_id = get_current_user_id();
-	if ( ! $user_id || ! current_user_can( 'manage_options' ) || get_user_meta( $user_id, 'lightshadestudioworks_notice_dismissed_2026', true ) ) {
-		return;
-	}
-	$dismiss_url = add_query_arg(
-		array(
-			'lightshadestudioworks_dismiss' => '1',
-			'lightshadestudioworks_nonce'   => wp_create_nonce( 'lightshadestudioworks_dismiss_notice' ),
-		),
-		admin_url()
-	);
-	echo '<div class="notice notice-info"><p><a href="' . esc_url( $dismiss_url ) . '" class="alignright" style="text-decoration:none"><big>' . esc_html__( '×', 'lightshadestudioworks' ) . '</big></a><big><strong>' . esc_html__( '📝 Thank you for using lightshadestudioworks!', 'lightshadestudioworks' ) . '</strong></big><p>' . esc_html__( 'Powering over 10k websites! Buy me a sandwich! 🥪', 'lightshadestudioworks' ) . '</p><a href="https://github.com/webguyio/lightshadestudioworks/issues/57" class="button-primary" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'How do you use lightshadestudioworks?', 'lightshadestudioworks' ) . '</strong></a> <a href="https://opencollective.com/lightshadestudioworks" class="button-primary" style="background-color:green;border-color:green" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Donate', 'lightshadestudioworks' ) . '</strong></a> <a href="https://wordpress.org/support/theme/lightshadestudioworks/reviews/#new-post" class="button-primary" style="background-color:purple;border-color:purple" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Review', 'lightshadestudioworks' ) . '</strong></a> <a href="https://github.com/webguyio/lightshadestudioworks/issues" class="button-primary" style="background-color:orange;border-color:orange" target="_blank" rel="noopener noreferrer"><strong>' . esc_html__( 'Support', 'lightshadestudioworks' ) . '</strong></a></p></div>';
-}
-add_action( 'admin_notices', 'lightshadestudioworks_notice' );
-
-/**
  * Handle notice dismissal ajax/GET action
  */
 function lightshadestudioworks_notice_dismissed() {
