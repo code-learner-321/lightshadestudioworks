@@ -25,13 +25,13 @@ function lssd_install_plugins() {
 		array(
 			'name'     => 'Axis Folio',
 			'slug'     => 'axis-folio',
-			'source'   => 'axis-folio.zip',
+			'source'   => get_template_directory() . '/inc/plugins/axis-folio.zip',
 			'required' => true,
 		),
 		array(
 			'name'     => 'What Snap App',
 			'slug'     => 'what-snap-app',
-			'source'   => 'what-snap-app.zip',
+			'source'   => get_template_directory() . '/inc/plugins/what-snap-app.zip',
 			'required' => true,
 		),
 		array(
@@ -51,8 +51,10 @@ function lssd_install_plugins() {
 		'default_path' => get_template_directory() . '/inc/plugins/',
 		'menu'         => 'tgmpa-install-plugins',
 		'parent_slug'  => 'themes.php',
-		'has_notices'  => false,
-		'is_automatic' => false,
+		'has_notices'  => true,
+		'is_automatic' => true,
+		'dismiss_msg'  => '',
+    	'message'      => '' 
 	);
 
 	tgmpa( $plugins, $config );
