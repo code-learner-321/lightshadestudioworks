@@ -166,6 +166,43 @@ function lightshadestudioworks_title( $title ) {
 add_filter( 'the_title', 'lightshadestudioworks_title' );
 
 /**
+ * Add a dynamic meta description to the document head.
+ */
+function lightshadestudioworks_meta_description() {
+	$description = '';
+
+	if ( is_singular() ) {
+		global $post;
+		if ( has_excerpt( $post ) ) {
+			$description = get_the_excerpt( $post );
+		} else {
+			$description = wp_strip_all_tags( strip_shortcodes( $post->post_content ) );
+			$description = wp_trim_words( $description, 30, '...' );
+		}
+	} elseif ( is_front_page() || is_home() ) {
+		$description = get_bloginfo( 'description' );
+	} elseif ( is_archive() ) {
+		$description = get_the_archive_description();
+	} elseif ( is_search() ) {
+		$description = sprintf( esc_html__( 'Search results for %s on %s.', 'lightshadestudioworks' ), get_search_query(), get_bloginfo( 'name' ) );
+	} elseif ( is_404() ) {
+		$description = esc_html__( 'The requested page could not be found.', 'lightshadestudioworks' );
+	}
+
+	if ( empty( $description ) ) {
+		$description = get_bloginfo( 'description' );
+	}
+
+	$description = trim( wp_kses( $description, array() ) );
+	$description = wp_trim_words( $description, 30, '...' );
+
+	if ( $description ) {
+		echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'lightshadestudioworks_meta_description', 1 );
+
+/**
  * Output dynamic body schema type tags
  */
 function lightshadestudioworks_schema_type() {
