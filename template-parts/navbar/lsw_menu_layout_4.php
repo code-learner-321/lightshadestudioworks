@@ -84,7 +84,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                 </a>
             </div>
 
-            <nav style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden md:flex">
+            <nav style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden lg:flex">
                 <?php
                 if (has_nav_menu('main-menu')) {
                     wp_nav_menu(array(
@@ -101,7 +101,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
         </div>
 
         <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
-            <div class="hidden md:block">
+            <div class="hidden lg:block">
                 <a href="<?php echo esc_url($cta_url); ?>"
                     target="<?php echo esc_attr($cta_target); ?>"
                     rel="<?php echo esc_attr($cta_rel); ?>"
@@ -114,54 +114,67 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             </div>
         <?php endif; ?>
 
-        <button id="hamburger" class="md:hidden flex flex-col space-y-1.5 focus:outline-none">
-            <span class="block w-8 h-0.5 bg-black"></span>
-            <span class="block w-8 h-0.5 bg-black"></span>
-            <span class="block w-8 h-0.5 bg-black"></span>
+        <button
+            type="button"
+            id="mobile-menu-button"
+            class="lg:hidden text-gray-900 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 rounded-md p-1"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu">
+            <!-- Completely hidden visually via inline styles, but readable by bots & screen readers -->
+            <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Open navigation menu</span>
+
+            <!-- Only the hamburger icon will display on your mobile screen -->
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
         </button>
     </div>
 
-    
+
 </header>
-<div id="mobile-menu" class="hidden-menu md:hidden border-t border-black bg-white px-6 py-8 flex-col space-y-6">
-        <?php
-        if (has_nav_menu('main-menu')) {
-            wp_nav_menu(array(
-                'theme_location'    => 'main-menu',
-                'container'         => false,
-                'items_wrap'        => '%3$s',
-                'link_class'        => 'text-lg font-bold uppercase tracking-widest text-black',
-                'active_link_class' => 'text-indigo-600',
-                'walker'            => new Tailwind_Nav_Walker()
-            ));
-        }
-        ?>
-        <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
-            <div class="block lg:hidden">
-                <a href="<?php echo esc_url($cta_url); ?>"
-                    target="<?php echo esc_attr($cta_target); ?>"
-                    rel="<?php echo esc_attr($cta_rel); ?>"
-                    class="lsw-navbar-button text-white px-6 py-2 font-semibold transition duration-300"
-                    style="background-color: <?php echo esc_attr($cta_bg); ?>; 
+<div id="mobile-menu" class="hidden-menu lg:hidden border-t border-black bg-white px-6 py-8 flex-col space-y-6">
+    <?php
+    if (has_nav_menu('main-menu')) {
+        wp_nav_menu(array(
+            'theme_location'    => 'main-menu',
+            'container'         => false,
+            'items_wrap'        => '%3$s',
+            'link_class'        => 'text-lg font-bold uppercase tracking-widest text-black',
+            'active_link_class' => 'text-indigo-600',
+            'walker'            => new Tailwind_Nav_Walker()
+        ));
+    }
+    ?>
+    <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
+        <div class="block lg:hidden">
+            <a href="<?php echo esc_url($cta_url); ?>"
+                target="<?php echo esc_attr($cta_target); ?>"
+                rel="<?php echo esc_attr($cta_rel); ?>"
+                class="lsw-navbar-button text-white px-6 py-2 font-semibold transition duration-300"
+                style="background-color: <?php echo esc_attr($cta_bg); ?>; 
                   border-radius: <?php echo esc_attr($cta_radius); ?>px;
                   box-shadow: <?php echo esc_attr($shadow_css); ?>;">
-                    <?php echo esc_html($cta_text); ?>
-                </a>
-            </div>
-        <?php endif; ?>
-    </div>
+                <?php echo esc_html($cta_text); ?>
+            </a>
+        </div>
+    <?php endif; ?>
+</div>
 <script>
-    const btn = document.getElementById('hamburger');
+    const mobileToggleBtn = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
 
-    btn.addEventListener('click', () => {
-        // Toggle the visibility
-        if (menu.classList.contains('hidden-menu')) {
-            menu.classList.remove('hidden-menu');
-            menu.classList.add('flex');
-        } else {
-            menu.classList.add('hidden-menu');
-            menu.classList.remove('flex');
-        }
-    });
+    if (mobileToggleBtn && menu) {
+        mobileToggleBtn.addEventListener('click', () => {
+            if (menu.classList.contains('hidden-menu')) {
+                menu.classList.remove('hidden-menu');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.add('hidden-menu');
+                menu.classList.remove('flex');
+            }
+            const expanded = mobileToggleBtn.getAttribute('aria-expanded') === 'true';
+            mobileToggleBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        });
+    }
 </script>

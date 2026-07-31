@@ -51,7 +51,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
         <!-- Navigation + CTA (Right) -->
         <div class="flex items-center space-x-10">
             <!-- FIXED: Added 'flex items-center' to the nav element -->
-            <nav style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden md:flex items-center font-medium text-gray-700">
+            <nav style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden lg:flex items-center font-medium text-gray-700">
                 <?php
                 if (has_nav_menu('main-menu')) {
                     wp_nav_menu(array(
@@ -67,7 +67,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             </nav>
 
             <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
-                <div class="hidden md:block">
+                <div class="hidden lg:block">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"
                         rel="<?php echo esc_attr($cta_rel); ?>"
@@ -81,17 +81,27 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             <?php endif; ?>
 
             <!-- Mobile Trigger -->
-            <button id="menu-trigger" class="md:hidden text-gray-900 focus:outline-none">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
+            <button
+                    type="button"
+                    id="mobile-menu-button"
+                    class="lg:hidden text-gray-900 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 rounded-md p-1"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-nav">
+                    <!-- Completely hidden visually via inline styles, but readable by bots & screen readers -->
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Open navigation menu</span>
+
+                    <!-- Only the hamburger icon will display on your mobile screen -->
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    </button>
         </div>
     </div>
 </header>
 
 <!-- Mobile Menu -->
-<div id="mobile-nav" class="hidden md:hidden bg-white p-8 border-b border-gray-100">
+<div id="mobile-nav" class="hidden lg:hidden bg-white p-8 border-b border-gray-100">
     <nav class="flex flex-col space-y-6 text-xl font-medium text-gray-800 text-center">
         <?php
         if (has_nav_menu('main-menu')) {
@@ -121,7 +131,14 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
 </div>
 
 <script>
-    document.getElementById('menu-trigger').addEventListener('click', () => {
-        document.getElementById('mobile-nav').classList.toggle('hidden');
-    });
+    const mobileToggleBtn = document.getElementById('mobile-menu-button');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (mobileToggleBtn && mobileNav) {
+        mobileToggleBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+            const expanded = mobileToggleBtn.getAttribute('aria-expanded') === 'true';
+            mobileToggleBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        });
+    }
 </script>

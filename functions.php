@@ -281,3 +281,55 @@ function lightshadestudioworks_comment_count( $count ) {
 	}
 }
 add_filter( 'get_comments_number', 'lightshadestudioworks_comment_count', 0 );
+
+
+// SPEED OPTIMIZATION CODE...........
+// 1. Defer JavaScript Files
+function add_defer_attribute_to_scripts( $tag, $handle, $src ) {
+    // DO NOT defer jquery-core or jquery-migrate because plugins depend on them instantly.
+    // List custom non-core scripts here if you want to defer them safely:
+    $scripts_to_defer = array( 'custom-non-jquery-script' );
+
+    if ( in_array( $handle, $scripts_to_defer, true ) ) {
+        return '<script src="' . esc_url( $src ) . '" defer></script>' . "\n";
+    }
+    return $tag;
+}	
+add_filter( 'script_loader_tag', 'add_defer_attribute_to_scripts', 10, 3 );
+
+/**
+ * 4. Performance Optimization: Asynchronously Load Render-Blocking CSS Files
+ * (Keeps your high PageSpeed score by optimizing Tailwind and core blocks)
+ */
+function optimize_block_render_css( $tag, $handle, $href, $media ) {
+    $css_to_optimize = array(
+        'lightshadestudioworks-tailwindcss', 
+        'lightshadestudioworks-style',         
+        'styles',                            
+        'styles-css',                        
+        'wp-block-cover',                    
+        'wp-block-cover-css'                 
+    );
+
+    if ( in_array( $handle, $css_to_optimize, true ) ) {
+        return '<link rel="preload" href="' . esc_url( $href ) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' .
+               '<noscript><link rel="stylesheet" href="' . esc_url( $href ) . '"></noscript>' . "\n";
+    }
+
+    return $tag;
+}
+add_filter( 'style_loader_tag', 'optimize_block_render_css', 10, 4 );
+
+/**
+ * 5. Global jQuery Alias Safety Net
+ */
+function force_jquery_global_alias() {
+    ?>
+    <script>
+        window.jQuery = window.jQuery || {};
+        window.$ = window.jQuery;
+    </script>
+    <?php
+}
+add_action( 'wp_head', 'force_jquery_global_alias', 1 );
+

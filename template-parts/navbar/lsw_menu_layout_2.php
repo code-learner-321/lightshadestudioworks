@@ -115,7 +115,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                 </a>
             </div>
 
-            <div style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden md:flex items-center">
+            <div style="gap: <?php echo esc_attr($gap_value); ?>px;" class="hidden lg:flex items-center">
                 <?php
                 if (has_nav_menu('main-menu')) {
                     wp_nav_menu(array(
@@ -132,7 +132,7 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
             </div>
 
             <?php if (get_theme_mod('navbar_show_button', 0)) : ?>
-                <div class="hidden md:block">
+                <div class="hidden lg:block">
                     <a href="<?php echo esc_url($cta_url); ?>"
                         target="<?php echo esc_attr($cta_target); ?>"
                         rel="<?php echo esc_attr($cta_rel); ?>"
@@ -145,17 +145,27 @@ $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
                 </div>
             <?php endif; ?>
 
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="lg:hidden flex items-center">
+                <button
+                    type="button"
+                    id="mobile-menu-button"
+                    class="text-gray-900 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 rounded-md p-1"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <!-- Completely hidden visually via inline styles, but readable by bots & screen readers -->
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Open navigation menu</span>
+
+                    <!-- Only the hamburger icon will display on your mobile screen -->
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                </button>
+                    </button>
             </div>
         </div>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100">
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-gray-100">
         <div class="px-4 pt-2 pb-6 space-y-2">
             <?php
             if (has_nav_menu('main-menu')) {
