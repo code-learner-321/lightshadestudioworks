@@ -79,9 +79,13 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
-    --color-neutral-white: var(--lsw-color-neutral-white, #dcdcdc);
-    --color-neutral-black: var(--lsw-color-neutral-black, #454545);
-    --color-neutral-grey: var(--lsw-color-neutral-grey, #f2f2f7);
+    --color-secondary-light-1: var(--lsw-color-secondary-light-1, #ECECEB);
+    --color-secondary-light-2: var(--lsw-color-secondary-light-2, #FFFFFF);
+    --color-text-heading: var(--lsw-color-text-heading, #1E1E1E);
+    --color-text-body: var(--lsw-color-text-body, #57534E);
+    --color-neutral-white: var(--lsw-color-neutral-white, #FFFFFF);
+    --color-neutral-black: var(--lsw-color-neutral-black, #1E1E1E);
+    --color-neutral-grey: var(--lsw-color-neutral-grey, #57534E);
   }
 }
 @layer base {

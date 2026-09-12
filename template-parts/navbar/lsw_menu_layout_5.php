@@ -27,7 +27,7 @@
     $shadow_css = "{$s_x}px {$s_y}px {$s_blur}px {$s_color}";
 ?>
 
-<header class="absolute top-0 left-0 right-0 z-30 pt-6">
+<header class="fixed top-0 left-0 right-0 z-30 pt-6">
     <div class="max-w-6xl mx-auto px-6 bg-white rounded-2xl shadow-lg flex items-center justify-between py-4 border border-gray-100">
         
         <div class="font-bold text-2xl text-gray-900">

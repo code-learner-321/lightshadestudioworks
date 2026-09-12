@@ -75,39 +75,55 @@ add_action( 'enqueue_block_editor_assets', 'lightshadestudioworks_enqueue_typogr
  * Retrieve active color scheme values
  */
 function lightshadestudioworks_get_color_scheme_values() {
-	$scheme  = get_theme_mod( 'color_scheme_select', 'scheme_4' );
+	$scheme  = get_theme_mod( 'color_scheme_select', 'scheme_1' );
 	$schemes = array(
-		'scheme_1' => array( '#f0f8ff', '#005a8c', '#ff4444', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_2' => array( '#d2ebd0', '#3b6b3a', '#f1c40f', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_3' => array( '#f3f6f6', '#36777d', '#33cca7', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_4' => array( '#ffffff', '#000000', '#c5a059', '#dcdcdc', '#454545', '#f2f2f7' ),
+		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#1E1E1E', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
+		'scheme_2' => array( '#F4F4F4', '#EDD28B', '#1B87EA', '#FAF9F5', '#ECE8E1', '#1E1E1E', '#57534E', '#FAF9F5', '#1E1E1E', '#57534E' ),
+		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#282A3A', '#2E3043', '#FFFFFF', '#D1D3E0', '#2E3043', '#FFFFFF', '#D1D3E0' ),
+		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#D4BA9C', '#EFE3D3', '#1F1914', '#332A22', '#EFE3D3', '#1F1914', '#332A22' ),
+		'scheme_5' => array( '#FFFFFF', '#F79A1F', '#EB4F47', '#FFF4E5', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#57534E' ),
 	);
 
-	$defaults = isset( $schemes[ $scheme ] ) ? $schemes[ $scheme ] : $schemes['scheme_4'];
+	$defaults = isset( $schemes[ $scheme ] ) ? $schemes[ $scheme ] : $schemes['scheme_1'];
 
 	$c60           = get_theme_mod( 'primary_60', $defaults[0] );
 	$c30           = get_theme_mod( 'secondary_30', $defaults[1] );
 	$c10           = get_theme_mod( 'accent_10', $defaults[2] );
-	$neutral_white = get_theme_mod( 'neutral_white', $defaults[3] );
-	$neutral_black = get_theme_mod( 'neutral_black', $defaults[4] );
-	$neutral_grey  = get_theme_mod( 'neutral_grey', $defaults[5] );
+	$sec_l1        = get_theme_mod( 'secondary_light_1', $defaults[3] );
+	$sec_l2        = get_theme_mod( 'secondary_light_2', $defaults[4] );
+	$text_heading  = get_theme_mod( 'text_heading', $defaults[5] );
+	$text_body     = get_theme_mod( 'text_body', $defaults[6] );
+	$neutral_white = get_theme_mod( 'neutral_white', $defaults[7] );
+	$neutral_black = get_theme_mod( 'neutral_black', $defaults[8] );
+	$neutral_grey  = get_theme_mod( 'neutral_grey', $defaults[9] );
 
-	return array( $c60, $c30, $c10, $neutral_white, $neutral_black, $neutral_grey );
+	return array( $c60, $c30, $c10, $sec_l1, $sec_l2, $text_heading, $text_body, $neutral_white, $neutral_black, $neutral_grey );
 }
 
 /**
  * Enqueue dynamic color variable styles
  */
 function lightshadestudioworks_enqueue_dynamic_css() {
-	list( $c60, $c30, $c10, $neutral_white, $neutral_black, $neutral_grey ) = lightshadestudioworks_get_color_scheme_values();
+	list( $c60, $c30, $c10, $sec_l1, $sec_l2, $text_heading, $text_body, $neutral_white, $neutral_black, $neutral_grey ) = lightshadestudioworks_get_color_scheme_values();
 
 	$css = ":root, html, body, .editor-styles-wrapper, .block-editor-iframe__body, .block-editor__container, .widgets-editor, .widgets-editor .editor-styles-wrapper, .edit-widgets, .edit-widgets .block-editor-wrapper, .wp-block-widgets { 
 		--color-60: {$c60}; 
 		--color-30: {$c30}; 
 		--color-10: {$c10};
+		--color-secondary-light-1: {$sec_l1};
+		--color-secondary-light-2: {$sec_l2};
+		--color-text-heading: {$text_heading};
+		--color-text-body: {$text_body};
+		--lsw-color-secondary-light-1: {$sec_l1};
+		--lsw-color-secondary-light-2: {$sec_l2};
+		--lsw-color-text-heading: {$text_heading};
+		--lsw-color-text-body: {$text_body};
 		--lsw-color-neutral-white: {$neutral_white};
 		--lsw-color-neutral-black: {$neutral_black};
 		--lsw-color-neutral-grey: {$neutral_grey};
+		--color-neutral-white: {$neutral_white};
+		--color-neutral-black: {$neutral_black};
+		--color-neutral-grey: {$neutral_grey};
 	}";
 
 	wp_register_style( 'lightshadestudioworks-dynamic-vars', false );

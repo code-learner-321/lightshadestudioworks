@@ -3,15 +3,22 @@
 @layer base {
   /* Custom base styles can be added here */
   body {
-    background-color: var(--color-neutral-grey, #f2f2f7);
-    color: var(--color-neutral-black, #454545);
+    background-color: var(--color-60, #F4F4F4);
+    color: var(--color-text-body, #57534E);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-heading, #1E1E1E);
   }
 }
 @theme {
     --color-bg-60: var(--color-60);
     --color-bg-30: var(--color-30);
     --color-accent-10: var(--color-10);
-    --color-neutral-white: var(--lsw-color-neutral-white, #dcdcdc);
-    --color-neutral-black: var(--lsw-color-neutral-black, #454545);
-    --color-neutral-grey: var(--lsw-color-neutral-grey, #f2f2f7);
+    --color-secondary-light-1: var(--lsw-color-secondary-light-1, #ECECEB);
+    --color-secondary-light-2: var(--lsw-color-secondary-light-2, #FFFFFF);
+    --color-text-heading: var(--lsw-color-text-heading, #1E1E1E);
+    --color-text-body: var(--lsw-color-text-body, #57534E);
+    --color-neutral-white: var(--lsw-color-neutral-white, #FFFFFF);
+    --color-neutral-black: var(--lsw-color-neutral-black, #1E1E1E);
+    --color-neutral-grey: var(--lsw-color-neutral-grey, #57534E);
 }

@@ -34,7 +34,7 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 	$wp_customize->add_setting(
 		'color_scheme_select',
 		array(
-			'default'           => 'scheme_4',
+			'default'           => 'scheme_1',
 			'transport'         => 'refresh',
 			'sanitize_callback' => 'sanitize_text_field',
 		)
@@ -46,26 +46,33 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 			'section'  => 'lightshadestudioworks_theme_colors',
 			'type'     => 'select',
 			'choices'  => array(
-				'scheme_1' => 'Scheme 1 (Pastel)',
-				'scheme_2' => 'Scheme 2 (Dark)',
-				'scheme_3' => 'Scheme 3 (Ocean)',
-				'scheme_4' => 'Scheme 4 (Golden Ember)',
+				'scheme_1' => 'Color 1 (Warm Urban Minimal)',
+				'scheme_2' => 'Color 2 (Golden Hour Executive)',
+				'scheme_3' => 'Color 3 (Midnight Botanica)',
+				'scheme_4' => 'Color 4 (Terracotta Heritage)',
+				'scheme_5' => 'Color 5 (Vibrant Minimal)',
 			),
 		)
 	);
 
-	// 3. Add Primary / Secondary / Accent Controls
+	// 3. Add Color Controls
 	$colors = array(
-		'primary_60'   => 'Primary (60%)',
-		'secondary_30' => 'Secondary (30%)',
-		'accent_10'    => 'Accent (10%)',
+		'primary_60'        => array( 'label' => 'Primary (60%)', 'default' => '#F4F4F4' ),
+		'secondary_30'      => array( 'label' => 'Secondary (30%)', 'default' => '#8A6344' ),
+		'secondary_light_1' => array( 'label' => 'Secondary Light Variant 1', 'default' => '#ECECEB' ),
+		'secondary_light_2' => array( 'label' => 'Secondary Light Variant 2', 'default' => '#FFFFFF' ),
+		'accent_10'         => array( 'label' => 'Accent (10%)', 'default' => '#EEC537' ),
+		'text_heading'      => array( 'label' => 'Black Text Heading', 'default' => '#1E1E1E' ),
+		'text_body'         => array( 'label' => 'Black Text Body', 'default' => '#57534E' ),
+		'neutral_white'     => array( 'label' => 'Neutral White', 'default' => '#FFFFFF' ),
+		'neutral_black'     => array( 'label' => 'Neutral Black', 'default' => '#1E1E1E' ),
+		'neutral_grey'      => array( 'label' => 'Neutral Grey', 'default' => '#57534E' ),
 	);
-	foreach ( $colors as $id => $label ) {
-		$default_value = ( $id == 'primary_60' ) ? '#ffffff' : ( ( $id == 'secondary_30' ) ? '#000000' : '#c5a059' );
+	foreach ( $colors as $id => $data ) {
 		$wp_customize->add_setting(
 			$id,
 			array(
-				'default'           => $default_value,
+				'default'           => $data['default'],
 				'sanitize_callback' => 'sanitize_hex_color',
 				'transport'         => 'refresh',
 			)
@@ -75,36 +82,7 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 				$wp_customize,
 				$id,
 				array(
-					'label'    => $label,
-					'section'  => 'lightshadestudioworks_theme_colors',
-					'settings' => $id,
-				)
-			)
-		);
-	}
-
-	// 4. Add Neutral Color Controls
-	$neutral_colors = array(
-		'neutral_white' => 'Neutral White',
-		'neutral_black' => 'Neutral Black',
-		'neutral_grey'  => 'Neutral Grey',
-	);
-	foreach ( $neutral_colors as $id => $label ) {
-		$default_value = ( $id == 'neutral_white' ) ? '#dcdcdc' : ( ( $id == 'neutral_black' ) ? '#454545' : '#f2f2f7' );
-		$wp_customize->add_setting(
-			$id,
-			array(
-				'default'           => $default_value,
-				'sanitize_callback' => 'sanitize_hex_color',
-				'transport'         => 'refresh',
-			)
-		);
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$id,
-				array(
-					'label'    => $label,
+					'label'    => $data['label'],
 					'section'  => 'lightshadestudioworks_theme_colors',
 					'settings' => $id,
 				)
@@ -2367,10 +2345,11 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 	wp_enqueue_script( 'customize-preview' );
 
 	$schemes      = array(
-		'scheme_1' => array( '#f0f8ff', '#005a8c', '#ff4444', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_2' => array( '#d2ebd0', '#3b6b3a', '#f1c40f', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_3' => array( '#f3f6f6', '#36777d', '#33cca7', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_4' => array( '#ffffff', '#000000', '#c5a059', '#dcdcdc', '#454545', '#f2f2f7' ),
+		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#1E1E1E', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
+		'scheme_2' => array( '#F4F4F4', '#EDD28B', '#1B87EA', '#FAF9F5', '#ECE8E1', '#1E1E1E', '#57534E', '#FAF9F5', '#1E1E1E', '#57534E' ),
+		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#282A3A', '#2E3043', '#FFFFFF', '#D1D3E0', '#2E3043', '#FFFFFF', '#D1D3E0' ),
+		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#D4BA9C', '#EFE3D3', '#1F1914', '#332A22', '#EFE3D3', '#1F1914', '#332A22' ),
+		'scheme_5' => array( '#FFFFFF', '#F79A1F', '#EB4F47', '#FFF4E5', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#57534E' ),
 	);
 	$json_schemes = json_encode( $schemes );
 
@@ -2384,9 +2363,20 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 		document.documentElement.style.setProperty('--color-60', colors[0]);
 		document.documentElement.style.setProperty('--color-30', colors[1]);
 		document.documentElement.style.setProperty('--color-10', colors[2]);
-		document.documentElement.style.setProperty('--lsw-color-neutral-white', colors[3]);
-		document.documentElement.style.setProperty('--lsw-color-neutral-black', colors[4]);
-		document.documentElement.style.setProperty('--lsw-color-neutral-grey', colors[5]);
+		document.documentElement.style.setProperty('--color-secondary-light-1', colors[3]);
+		document.documentElement.style.setProperty('--color-secondary-light-2', colors[4]);
+		document.documentElement.style.setProperty('--color-text-heading', colors[5]);
+		document.documentElement.style.setProperty('--color-text-body', colors[6]);
+		document.documentElement.style.setProperty('--lsw-color-secondary-light-1', colors[3]);
+		document.documentElement.style.setProperty('--lsw-color-secondary-light-2', colors[4]);
+		document.documentElement.style.setProperty('--lsw-color-text-heading', colors[5]);
+		document.documentElement.style.setProperty('--lsw-color-text-body', colors[6]);
+		document.documentElement.style.setProperty('--lsw-color-neutral-white', colors[7]);
+		document.documentElement.style.setProperty('--lsw-color-neutral-black', colors[8]);
+		document.documentElement.style.setProperty('--lsw-color-neutral-grey', colors[9]);
+		document.documentElement.style.setProperty('--color-neutral-white', colors[7]);
+		document.documentElement.style.setProperty('--color-neutral-black', colors[8]);
+		document.documentElement.style.setProperty('--color-neutral-grey', colors[9]);
 	}
 
 	wp.customize('color_scheme_select', function(value) {
@@ -2414,19 +2404,46 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 			document.documentElement.style.setProperty('--color-10', newval);
 		});
 	});
+	wp.customize('secondary_light_1', function(value) {
+		value.bind(function(newval) {
+			document.documentElement.style.setProperty('--color-secondary-light-1', newval);
+			document.documentElement.style.setProperty('--lsw-color-secondary-light-1', newval);
+		});
+	});
+	wp.customize('secondary_light_2', function(value) {
+		value.bind(function(newval) {
+			document.documentElement.style.setProperty('--color-secondary-light-2', newval);
+			document.documentElement.style.setProperty('--lsw-color-secondary-light-2', newval);
+		});
+	});
+	wp.customize('text_heading', function(value) {
+		value.bind(function(newval) {
+			document.documentElement.style.setProperty('--color-text-heading', newval);
+			document.documentElement.style.setProperty('--lsw-color-text-heading', newval);
+		});
+	});
+	wp.customize('text_body', function(value) {
+		value.bind(function(newval) {
+			document.documentElement.style.setProperty('--color-text-body', newval);
+			document.documentElement.style.setProperty('--lsw-color-text-body', newval);
+		});
+	});
 	wp.customize('neutral_white', function(value) {
 		value.bind(function(newval) {
 			document.documentElement.style.setProperty('--lsw-color-neutral-white', newval);
+			document.documentElement.style.setProperty('--color-neutral-white', newval);
 		});
 	});
 	wp.customize('neutral_black', function(value) {
 		value.bind(function(newval) {
 			document.documentElement.style.setProperty('--lsw-color-neutral-black', newval);
+			document.documentElement.style.setProperty('--color-neutral-black', newval);
 		});
 	});
 	wp.customize('neutral_grey', function(value) {
 		value.bind(function(newval) {
 			document.documentElement.style.setProperty('--lsw-color-neutral-grey', newval);
+			document.documentElement.style.setProperty('--color-neutral-grey', newval);
 		});
 	});
 
@@ -2722,10 +2739,11 @@ function lightshadestudioworks_theme_customizer_controls_preview() {
 	wp_enqueue_script( 'customize-controls' );
 
 	$schemes = array(
-		'scheme_1' => array( '#f0f8ff', '#005a8c', '#ff4444', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_2' => array( '#d2ebd0', '#3b6b3a', '#f1c40f', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_3' => array( '#f3f6f6', '#36777d', '#33cca7', '#dcdcdc', '#454545', '#f2f2f7' ),
-		'scheme_4' => array( '#ffffff', '#000000', '#c5a059', '#dcdcdc', '#454545', '#f2f2f7' ),
+		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#1E1E1E', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
+		'scheme_2' => array( '#F4F4F4', '#EDD28B', '#1B87EA', '#FAF9F5', '#ECE8E1', '#1E1E1E', '#57534E', '#FAF9F5', '#1E1E1E', '#57534E' ),
+		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#282A3A', '#2E3043', '#FFFFFF', '#D1D3E0', '#2E3043', '#FFFFFF', '#D1D3E0' ),
+		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#D4BA9C', '#EFE3D3', '#1F1914', '#332A22', '#EFE3D3', '#1F1914', '#332A22' ),
+		'scheme_5' => array( '#FFFFFF', '#F79A1F', '#EB4F47', '#FFF4E5', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#57534E' ),
 	);
 	$json_schemes = json_encode( $schemes );
 
@@ -2740,7 +2758,7 @@ function lightshadestudioworks_theme_customizer_controls_preview() {
 			const colors = schemes[newval];
 			if (!colors) return;
 
-			['primary_60', 'secondary_30', 'accent_10', 'neutral_white', 'neutral_black', 'neutral_grey'].forEach(function(id, index) {
+			['primary_60', 'secondary_30', 'accent_10', 'secondary_light_1', 'secondary_light_2', 'text_heading', 'text_body', 'neutral_white', 'neutral_black', 'neutral_grey'].forEach(function(id, index) {
 				const control = wp.customize.control(id);
 				if (!control) return;
 
