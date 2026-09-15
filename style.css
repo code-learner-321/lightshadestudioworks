@@ -311,6 +311,14 @@ lightshadestudioworks is distributed under the terms of the GNU GPL
     background-color: #005bb5;
 }
 
+/* Collapse the #header wrapper — its child navbar is position:fixed and out of normal flow */
+#header {
+    height: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
 /* Only apply transparency if the 'none' effect is explicitly selected */
 .btn-effect-none .wp-block-button__link {
     background-color: transparent !important;

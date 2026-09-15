@@ -78,10 +78,6 @@
     </div>
 </header>
 
-<div class="pt-20 md:pt-20">
-    <div id="container" class="site-container"></div>
-</div>
-
 <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden flex-col items-center justify-center gap-8 p-6 transition-opacity duration-300">
     <button id="close-btn" class="absolute top-8 right-8 text-4xl font-light text-gray-400 hover:text-black">&times;</button>
     

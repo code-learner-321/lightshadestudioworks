@@ -6,19 +6,21 @@
 function lightshadestudioworks_render_home() {
     $html = <<<'EOD'
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"},"border":{"width":"0px","style":"none"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group" style="border-style:none;border-width:0px;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.57,"y":0.53},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"tablet":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group" style="border-style:none;border-width:0px;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.56999999999999995,"y":0.53000000000000003},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"tablet":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
 <div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--50);padding-bottom:0px;padding-left:var(--wp--preset--spacing--50);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:57% 53%" data-object-fit="cover" data-object-position="57% 53%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"top left","isDark":false,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light has-custom-content-position is-position-top-left"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-10","fontSize":"large"} -->
-<h1 class="wp-block-heading has-base-10-color has-text-color has-link-color has-large-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">Capturing timeless moments with precision</h1>
-<!-- /wp:heading --></div></div>
+<div class="wp-block-cover is-light has-custom-content-position is-position-top-left"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group"><!-- wp:heading {"level":1,"style":{"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"},"elements":{"link":{"color":{"text":"var:preset|color|secondary-light-2"}}}},"textColor":"secondary-light-2","fontSize":"large"} -->
+<h1 class="wp-block-heading has-secondary-light-2-color has-text-color has-link-color has-large-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">Capturing timeless moments with Precision</h1>
+<!-- /wp:heading --></div>
+<!-- /wp:group --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"layout":{"type":"default"}} -->
-<div class="wp-block-column"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"bottom right","isDark":false,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light has-custom-content-position is-position-bottom-right"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-60","fontSize":"small"} -->
+<!-- wp:column {"verticalAlignment":"bottom","style":{"color":{"background":"#1f1f1f69"}},"layout":{"type":"default"}} -->
+<div class="wp-block-column is-vertically-aligned-bottom has-background" style="background-color:#1f1f1f69"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":200,"contentPosition":"bottom right","isDark":false,"style":{"border":{"width":"1px","radius":{"topLeft":"10px","topRight":"10px","bottomLeft":"10px","bottomRight":"10px"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light has-custom-content-position is-position-bottom-right" style="border-width:1px;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;min-height:200px"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-60"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-60","fontSize":"small"} -->
 <p class="has-base-60-color has-text-color has-link-color has-small-font-size" style="letter-spacing:0.5px;line-height:1.8;text-transform:capitalize">A decade of dedicated experience behind the lens. We specialize in transforming fleeting moments into everlasting memories through the art of light and shadow.</p>
 <!-- /wp:paragraph -->
 
@@ -38,7 +40,7 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:columns --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.43,"y":0.51},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.42999999999999999,"y":0.51000000000000001},"minHeight":84,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"mobile":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
 <div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--40);padding-bottom:0px;padding-left:var(--wp--preset--spacing--40);min-height:84vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:43% 51%" data-object-fit="cover" data-object-position="43% 51%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center"} -->
 <div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-column is-vertically-aligned-center" style="padding-top:0;padding-bottom:0"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"contentPosition":"bottom center","isDark":false,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
@@ -70,8 +72,8 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:columns --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.49,"y":0.49},"minHeight":30,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"tablet":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--30);padding-bottom:0px;padding-left:var(--wp--preset--spacing--30);min-height:30vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:49% 49%" data-object-fit="cover" data-object-position="49% 49%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":null,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}}} -->
+<!-- wp:cover {"url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png","id":563,"dimRatio":50,"overlayColor":"black","isUserOverlayColor":true,"focalPoint":{"x":0.48999999999999999,"y":0.48999999999999999},"minHeight":30,"minHeightUnit":"vh","sizeSlug":"full","metadata":{"blockVisibility":{"viewport":{"desktop":false,"tablet":false}}},"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-cover" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:var(--wp--preset--spacing--30);padding-bottom:0px;padding-left:var(--wp--preset--spacing--30);min-height:30vh"><img class="wp-block-cover__image-background wp-image-563 size-full" alt="" src="https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/banner.png" style="object-position:49% 49%" data-object-fit="cover" data-object-position="49% 49%"/><span aria-hidden="true" class="wp-block-cover__background has-black-background-color has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}}} -->
 <div class="wp-block-columns" style="padding-top:0;padding-bottom:0"><!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-column is-vertically-aligned-top" style="padding-top:0;padding-bottom:0"><!-- wp:cover {"dimRatio":0,"isUserOverlayColor":true,"minHeight":40,"minHeightUnit":"vh","contentPosition":"bottom center","isDark":false,"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-cover is-light has-custom-content-position is-position-bottom-center" style="padding-top:0;padding-bottom:0;min-height:40vh"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}},"typography":{"textTransform":"capitalize","lineHeight":"1.8","letterSpacing":"0.5px"}},"textColor":"base-10","fontSize":"large"} -->
@@ -103,43 +105,43 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:cover --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group"><!-- wp:cover {"overlayColor":"white","isUserOverlayColor":true,"minHeight":1,"minHeightUnit":"vw","isDark":false,"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"1200px","wideSize":"1200px"}} -->
-<div class="wp-block-cover is-light" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--50);min-height:1vw"><span aria-hidden="true" class="wp-block-cover__background has-white-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center"} -->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"margin":{"top":"0","bottom":"0"},"blockGap":"0"}},"backgroundColor":"secondary-light-1","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-secondary-light-1-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:cover {"overlayColor":"secondary-light-1","isUserOverlayColor":true,"minHeight":1,"minHeightUnit":"vw","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained","contentSize":"1200px","wideSize":"1200px"}} -->
+<div class="wp-block-cover" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--50);min-height:1vw"><span aria-hidden="true" class="wp-block-cover__background has-secondary-light-1-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center"} -->
 <div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","layout":{"type":"default"}} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"level":1,"fontSize":"x-large"} -->
-<h1 class="wp-block-heading has-x-large-font-size">A decade refined</h1>
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"x-large"} -->
+<h1 class="wp-block-heading has-base-30-color has-text-color has-link-color has-x-large-font-size">A decade refined</h1>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"center","layout":{"type":"default"}} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph {"style":{"typography":{"fontStyle":"italic","fontWeight":"300"}},"fontSize":"medium"} -->
-<p class="has-medium-font-size" style="font-style:italic;font-weight:300">Ten years of mastering light, shadow, and the stories they tell together.</p>
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph {"style":{"typography":{"fontStyle":"italic","fontWeight":"300"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<p class="has-base-30-color has-text-color has-link-color has-medium-font-size" style="font-style:italic;font-weight:300">Ten years of mastering light, shadow, and the stories they tell together.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0"},"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}}},"backgroundColor":"neutral-grey","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-neutral-grey-background-color has-background" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":{"top":"0px","left":"0px"}}}} -->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0","margin":{"top":"0","bottom":"0"}},"border":{"radius":{"topLeft":"0px","topRight":"0px","bottomLeft":"0px","bottomRight":"0px"}}},"backgroundColor":"secondary-light-1","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-secondary-light-1-background-color has-background" style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;margin-top:0;margin-bottom:0;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":{"top":"0px","left":"0px"}}}} -->
 <div class="wp-block-columns are-vertically-aligned-center" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:column {"verticalAlignment":"center","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|80"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-column is-vertically-aligned-center" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:columns {"isStackedOnMobile":false} -->
 <div class="wp-block-columns is-not-stacked-on-mobile"><!-- wp:column {"verticalAlignment":"top","width":"9%","layout":{"type":"constrained"}} -->
-<div class="wp-block-column is-vertically-aligned-top" style="flex-basis:9%"><!-- wp:icon {"icon":"core/gallery","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /--></div>
+<div class="wp-block-column is-vertically-aligned-top" style="flex-basis:9%"><!-- wp:icon {"icon":"core/gallery","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /--></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"0","left":"0px","right":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-column is-vertically-aligned-top" style="padding-top:var(--wp--preset--spacing--30);padding-right:0px;padding-bottom:0;padding-left:0px"><!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","orientation":"vertical","verticalAlignment":"top","justifyContent":"left"}} -->
-<div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:heading {"fontSize":"medium"} -->
-<h2 class="wp-block-heading has-medium-font-size">Our History: 10 Years in Focus</h2>
+<div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h2 class="wp-block-heading has-base-30-color has-text-color has-link-color has-medium-font-size">Our History: 10 Years in Focus</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>What began ten years ago as a fascination with how light dances across a scene has grown into Light-Shade-Studio-Works.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} -->
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-10"} -->
 <p class="has-text-align-left has-base-10-color has-text-color has-link-color"><a href="#"><strong>Learn ⇢</strong></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
@@ -148,20 +150,20 @@ function lightshadestudioworks_render_home() {
 
 <!-- wp:columns {"isStackedOnMobile":false} -->
 <div class="wp-block-columns is-not-stacked-on-mobile"><!-- wp:column {"width":"9%","layout":{"type":"constrained"}} -->
-<div class="wp-block-column" style="flex-basis:9%"><!-- wp:icon {"icon":"core/symbol-filled","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /--></div>
+<div class="wp-block-column" style="flex-basis:9%"><!-- wp:icon {"icon":"core/symbol-filled","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /--></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"0","left":"0px","right":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-column is-vertically-aligned-top" style="padding-top:var(--wp--preset--spacing--30);padding-right:0px;padding-bottom:0;padding-left:0px"><!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","orientation":"vertical","verticalAlignment":"top","justifyContent":"left"}} -->
-<div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:heading {"fontSize":"medium"} -->
-<h2 class="wp-block-heading has-medium-font-size">Our Philosophy: Light as Language</h2>
+<div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h2 class="wp-block-heading has-base-30-color has-text-color has-link-color has-medium-font-size">Our Philosophy: Light as Language</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>At Light-Shade-Studio-Works, we believe that photography is more than just a documentation of events; it is a language.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} -->
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-10"} -->
 <p class="has-text-align-left has-base-10-color has-text-color has-link-color"><a href="#"><strong>Discover ⇢</strong></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
@@ -170,20 +172,20 @@ function lightshadestudioworks_render_home() {
 
 <!-- wp:columns {"isStackedOnMobile":false} -->
 <div class="wp-block-columns is-not-stacked-on-mobile"><!-- wp:column {"width":"9%","layout":{"type":"constrained"}} -->
-<div class="wp-block-column" style="flex-basis:9%"><!-- wp:icon {"icon":"core/cover","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /--></div>
+<div class="wp-block-column" style="flex-basis:9%"><!-- wp:icon {"icon":"core/cover","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /--></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"0","left":"0px","right":"0px"},"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-column is-vertically-aligned-top" style="padding-top:var(--wp--preset--spacing--30);padding-right:0px;padding-bottom:0;padding-left:0px"><!-- wp:group {"style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","orientation":"vertical","verticalAlignment":"top","justifyContent":"left"}} -->
-<div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:heading {"fontSize":"medium"} -->
-<h2 class="wp-block-heading has-medium-font-size">Our Collaborative Approach</h2>
+<div class="wp-block-group" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h2 class="wp-block-heading has-base-30-color has-text-color has-link-color has-medium-font-size">Our Collaborative Approach</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>We believe the best results are born from partnership. Photography is an inherently personal process, and we prioritize a collaborative approach to ensure that your vision is realized.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} -->
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"left"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-10"} -->
 <p class="has-text-align-left has-base-10-color has-text-color has-link-color"><a href="#"><strong>Explore ⇢</strong></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
@@ -199,28 +201,28 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":3,"style":{"typography":{"textAlign":"center","fontStyle":"italic","fontWeight":"500"},"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}}} -->
-<h3 class="wp-block-heading has-text-align-center" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);font-style:italic;font-weight:500">Galleries</h3>
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"backgroundColor":"secondary-light-1","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-secondary-light-1-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":3,"style":{"typography":{"textAlign":"center","fontStyle":"italic","fontWeight":"500"},"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} -->
+<h3 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);font-style:italic;font-weight:500">Galleries</h3>
 <!-- /wp:heading -->
 
-<!-- wp:heading {"level":1,"style":{"typography":{"textAlign":"center","textTransform":"capitalize","fontStyle":"normal","fontWeight":"700"}},"fontSize":"large"} -->
-<h1 class="wp-block-heading has-text-align-center has-large-font-size" style="font-style:normal;font-weight:700;text-transform:capitalize">Our work speaks</h1>
+<!-- wp:heading {"level":1,"style":{"typography":{"textAlign":"center","textTransform":"capitalize","fontStyle":"normal","fontWeight":"700"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"large"} -->
+<h1 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-large-font-size" style="font-style:normal;font-weight:700;text-transform:capitalize">Our work speaks</h1>
 <!-- /wp:heading -->
 
-<!-- wp:heading {"level":3,"style":{"typography":{"textAlign":"center","fontStyle":"italic","fontWeight":"500"},"spacing":{"padding":{"bottom":"var:preset|spacing|80","top":"var:preset|spacing|50"}}}} -->
-<h3 class="wp-block-heading has-text-align-center" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--80);font-style:italic;font-weight:500">Collections</h3>
+<!-- wp:heading {"level":3,"style":{"typography":{"textAlign":"center","fontStyle":"italic","fontWeight":"500"},"spacing":{"padding":{"bottom":"var:preset|spacing|80","top":"var:preset|spacing|50"}},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} -->
+<h3 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--80);font-style:italic;font-weight:500">Collections</h3>
 <!-- /wp:heading -->
 
-<!-- wp:create-block/axis-folio {"uniqueId":"af-66cb5f4f","items":[{"iconType":"arrow-right-alt2","iconList":"","title":"Wedding photography","description":"Weddings that capture the raw emotion of two lives becoming one.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/Placeholder_Image_1_.png","tags":"Emotion,Tradition,Love","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Eternal Love","description":"Capturing timeless, emotional moments and beautiful celebrations of couples embarking on their lifelong journey together.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/wedding2.png","tags":"Wedding,Romance,Bridal,Celebration,Candid","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Unscripted Moments","description":"Catching genuine raw emotions and fleeting authentic interactions entirely naturally without anyone ever noticing the camera.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit1.png","tags":"Candid,StreetPhotography,Documentary,,RawEmotion,LifeUnfiltered","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Honest Frames","description":"Preserving beautiful spontaneous laughter and real life stories through perfectly timed unposed photographic art pieces.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit2.png","tags":"Spontaneous,Photojournalism,Authentic,Portraits,RealMoments","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Soulful Expressions","description":"Revealing human character and striking inner beauty through carefully crafted lighting and intimate expressive closeups.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait1.png","tags":"Portraiture,Headshots,FineArt,StudioLighting,Faces,","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Defining Faces","description":"Capturing deep personal stories and unique individual identities beautifully written within every single compelling gaze.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait2.png","tags":"ModelPortfolio,MoodPortrait,BlackAndWhite,VisualStory,HumanNature","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Elite Spaces","description":"Showcasing stunning architectural layouts and beautiful modern interiors that perfectly elevate property listings for buyers.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate1.png","tags":"RealEstate,Interiors,Architecture,PropertyTour,LuxuryHomes","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Urban Dwellings","description":"Transforming ordinary rooms into inviting spectacular spaces through meticulous staging and masterfully controlled ambient lighting.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate2.png","tags":"HomeStaging,CommercialProperty,InteriorDesign,DroneView,RealEstateMarketing","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"True Essence","description":"Preserving beautiful intimate connections and raw joy as they naturally unfold completely unaware of the lens.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/true-essence.png","tags":"Candid,Unscripted,RealLife,Storytelling,NaturalBeauty","linkUrl":"#","openInNewTab":true}],"enableLoadMore":true,"loadMoreText":"See All Work","btnBgColor":"var(u002du002dcolor-10)","btnTextColor":"var(u002du002dcolor-60)"} /--></div>
+<!-- wp:create-block/axis-folio {"uniqueId":"af-66cb5f4f","items":[{"iconType":"arrow-right-alt2","iconList":"","title":"Wedding photography","description":"Weddings that capture the raw emotion of two lives becoming one.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/Placeholder_Image_1_.png","tags":"Emotion,Tradition,Love","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Eternal Love","description":"Capturing timeless, emotional moments and beautiful celebrations of couples embarking on their lifelong journey together.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/wedding2.png","tags":"Wedding,Romance,Bridal,Celebration,Candid","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Unscripted Moments","description":"Catching genuine raw emotions and fleeting authentic interactions entirely naturally without anyone ever noticing the camera.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit1.png","tags":"Candid,StreetPhotography,Documentary,,RawEmotion,LifeUnfiltered","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Honest Frames","description":"Preserving beautiful spontaneous laughter and real life stories through perfectly timed unposed photographic art pieces.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/candit2.png","tags":"Spontaneous,Photojournalism,Authentic,Portraits,RealMoments","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Soulful Expressions","description":"Revealing human character and striking inner beauty through carefully crafted lighting and intimate expressive closeups.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait1.png","tags":"Portraiture,Headshots,FineArt,StudioLighting,Faces,","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Defining Faces","description":"Capturing deep personal stories and unique individual identities beautifully written within every single compelling gaze.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/portrait2.png","tags":"ModelPortfolio,MoodPortrait,BlackAndWhite,VisualStory,HumanNature","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Elite Spaces","description":"Showcasing stunning architectural layouts and beautiful modern interiors that perfectly elevate property listings for buyers.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate1.png","tags":"RealEstate,Interiors,Architecture,PropertyTour,LuxuryHomes","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"Urban Dwellings","description":"Transforming ordinary rooms into inviting spectacular spaces through meticulous staging and masterfully controlled ambient lighting.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/real-estate2.png","tags":"HomeStaging,CommercialProperty,InteriorDesign,DroneView,RealEstateMarketing","linkUrl":"#","openInNewTab":true},{"iconType":"arrow-right-alt2","iconList":"","title":"True Essence","description":"Preserving beautiful intimate connections and raw joy as they naturally unfold completely unaware of the lens.","url":"https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/true-essence.png","tags":"Candid,Unscripted,RealLife,Storytelling,NaturalBeauty","linkUrl":"#","openInNewTab":true}],"tagBgColor":"var(\u002d\u002dcolor-secondary-light-1)","tagTextColor":"var(\u002d\u002dcolor-30)","enableLoadMore":true,"loadMoreText":"See All Work","btnBgColor":"var(u002du002dcolor-10)","btnTextColor":"var(u002du002dcolor-60)"} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"neutral-grey","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-neutral-grey-background-color has-background" style="padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":1,"style":{"typography":{"textAlign":"center","textTransform":"capitalize","fontStyle":"normal","fontWeight":"700"},"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}},"fontSize":"large"} -->
-<h1 class="wp-block-heading has-text-align-center has-large-font-size" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);font-style:normal;font-weight:700;text-transform:capitalize">Stories from behind the lens</h1>
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"backgroundColor":"secondary-light-1","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-secondary-light-1-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":1,"style":{"typography":{"textAlign":"center","textTransform":"capitalize","fontStyle":"normal","fontWeight":"700"},"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"large"} -->
+<h1 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-large-font-size" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);font-style:normal;font-weight:700;text-transform:capitalize">Stories from behind the lens</h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center","fontStyle":"italic","fontWeight":"500"},"spacing":{"padding":{"bottom":"var:preset|spacing|80"}}}} -->
@@ -244,15 +246,15 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:post-title {"level":3,"isLink":true,"linkTarget":"_blank","style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"medium"} /-->
+<!-- wp:post-title {"level":3,"isLink":true,"linkTarget":"_blank","style":{"typography":{"fontStyle":"normal","fontWeight":"600"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} /-->
 
-<!-- wp:post-excerpt {"moreText":"Read More  →","excerptLength":13,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}}} /--></div>
+<!-- wp:post-excerpt {"moreText":"Read More  →","excerptLength":13,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}}} /--></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 <!-- /wp:post-template -->
 
-<!-- wp:query-pagination {"paginationArrow":"chevron","showLabel":false,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}},"typography":{"lineHeight":"2.8"}},"textColor":"base-10","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+<!-- wp:query-pagination {"paginationArrow":"chevron","showLabel":false,"style":{"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}},"typography":{"lineHeight":"2.8"}},"textColor":"base-30","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
 <!-- wp:query-pagination-previous /-->
 
 <!-- wp:query-pagination-numbers /-->
@@ -269,8 +271,8 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-white-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
 <div class="wp-block-group" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":1,"style":{"typography":{"textTransform":"capitalize","fontStyle":"normal","fontWeight":"700","textAlign":"center"}},"fontSize":"large"} -->
 <h1 class="wp-block-heading has-text-align-center has-large-font-size" style="font-style:normal;font-weight:700;text-transform:capitalize">Let’s build something beautiful together.</h1>
 <!-- /wp:heading -->
@@ -287,10 +289,10 @@ function lightshadestudioworks_render_home() {
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"neutral-grey","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-neutral-grey-background-color has-background" style="padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50","top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":1,"style":{"typography":{"textTransform":"capitalize","fontStyle":"normal","fontWeight":"700","textAlign":"center"}},"fontSize":"large"} -->
-<h1 class="wp-block-heading has-text-align-center has-large-font-size" style="font-style:normal;font-weight:700;text-transform:capitalize">Reach out</h1>
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"0","right":"0"},"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"backgroundColor":"secondary-light-1","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-secondary-light-1-background-color has-background" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--70);padding-right:0;padding-bottom:var(--wp--preset--spacing--70);padding-left:0"><!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|50","left":"var:preset|spacing|50","top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"},"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--50)"><!-- wp:heading {"level":1,"style":{"typography":{"textTransform":"capitalize","fontStyle":"normal","fontWeight":"700","textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"large"} -->
+<h1 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-large-font-size" style="font-style:normal;font-weight:700;text-transform:capitalize">Reach out</h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
@@ -302,68 +304,68 @@ function lightshadestudioworks_render_home() {
 <div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)"><!-- wp:columns {"style":{"spacing":{"padding":{"right":"0","left":"0"},"blockGap":{"left":"0"}}}} -->
 <div class="wp-block-columns" style="padding-right:0;padding-left:0"><!-- wp:column {"verticalAlignment":"top","style":{"spacing":{"blockGap":"0","padding":{"right":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-column is-vertically-aligned-top" style="padding-right:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:icon {"icon":"core/envelope","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /-->
+<div class="wp-block-group"><!-- wp:icon {"icon":"core/envelope","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /-->
 
-<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"}},"fontSize":"medium"} -->
-<h3 class="wp-block-heading has-text-align-center has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Email</h3>
+<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h3 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Email</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
 <p class="has-text-align-center">No. 88, Azure-Sky-Boulevard</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
-<p class="has-text-align-center"><strong>connect@light-shade-studio-works.com</strong></p>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} -->
+<p class="has-text-align-center has-base-30-color has-text-color has-link-color"><strong>connect@light-shade-studio-works.com</strong></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"style":{"spacing":{"padding":{"right":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-column" style="padding-right:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:icon {"icon":"core/mobile","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /-->
+<div class="wp-block-group"><!-- wp:icon {"icon":"core/mobile","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /-->
 
-<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"}},"fontSize":"medium"} -->
-<h3 class="wp-block-heading has-text-align-center has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Phone</h3>
+<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h3 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Phone</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
 <p class="has-text-align-center">Chennai, Tamil Nadu 600000</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
-<p class="has-text-align-center"><strong>+91 98765 43210</strong></p>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} -->
+<p class="has-text-align-center has-base-30-color has-text-color has-link-color"><strong>+91 98765 43210</strong></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"style":{"spacing":{"padding":{"right":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-column" style="padding-right:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:icon {"icon":"core/map-marker","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /-->
+<div class="wp-block-group"><!-- wp:icon {"icon":"core/map-marker","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /-->
 
-<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"}},"fontSize":"medium"} -->
-<h3 class="wp-block-heading has-text-align-center has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Studio</h3>
+<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h3 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Studio</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
 <p class="has-text-align-center">No. 88, Azure-Sky-Boulevard, Chennai, Tamil Nadu 600000</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
-<p class="has-text-align-center"><strong>+91 98765 43210</strong></p>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} -->
+<p class="has-text-align-center has-base-30-color has-text-color has-link-color"><strong>+91 98765 43210</strong></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"style":{"spacing":{"padding":{"right":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-column" style="padding-right:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
-<div class="wp-block-group"><!-- wp:icon {"icon":"core/scheduled","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-10"}}}},"textColor":"base-10"} /-->
+<div class="wp-block-group"><!-- wp:icon {"icon":"core/scheduled","style":{"dimensions":{"width":"48px"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} /-->
 
-<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"}},"fontSize":"medium"} -->
-<h3 class="wp-block-heading has-text-align-center has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Hours</h3>
+<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":"0.8","textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30","fontSize":"medium"} -->
+<h3 class="wp-block-heading has-text-align-center has-base-30-color has-text-color has-link-color has-medium-font-size" style="font-style:normal;font-weight:700;line-height:0.8">Hours</h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
-<p class="has-text-align-center"><strong>Monday through Saturday, ten in the morning until seven at night.</strong></p>
+<!-- wp:paragraph {"style":{"typography":{"textAlign":"center"},"elements":{"link":{"color":{"text":"var:preset|color|base-30"}}}},"textColor":"base-30"} -->
+<p class="has-text-align-center has-base-30-color has-text-color has-link-color"><strong>Monday through Saturday, ten in the morning until seven at night.</strong></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"textAlign":"center"}}} -->
