@@ -55,41 +55,6 @@ function lightshadestudioworks_register_full_customizer( $wp_customize ) {
 		)
 	);
 
-	// 3. Add Color Controls
-	$colors = array(
-		'primary_60'        => array( 'label' => 'Primary (60%)', 'default' => '#F4F4F4' ),
-		'secondary_30'      => array( 'label' => 'Secondary (30%)', 'default' => '#8A6344' ),
-		'secondary_light_1' => array( 'label' => 'Secondary Light Variant 1', 'default' => '#ECECEB' ),
-		'secondary_light_2' => array( 'label' => 'Secondary Light Variant 2', 'default' => '#FFFFFF' ),
-		'accent_10'         => array( 'label' => 'Accent (10%)', 'default' => '#EEC537' ),
-		'text_heading'      => array( 'label' => 'Black Text Heading', 'default' => '#1E1E1E' ),
-		'text_body'         => array( 'label' => 'Black Text Body', 'default' => '#57534E' ),
-		'neutral_white'     => array( 'label' => 'Neutral White', 'default' => '#FFFFFF' ),
-		'neutral_black'     => array( 'label' => 'Neutral Black', 'default' => '#1E1E1E' ),
-		'neutral_grey'      => array( 'label' => 'Neutral Grey', 'default' => '#57534E' ),
-	);
-	foreach ( $colors as $id => $data ) {
-		$wp_customize->add_setting(
-			$id,
-			array(
-				'default'           => $data['default'],
-				'sanitize_callback' => 'sanitize_hex_color',
-				'transport'         => 'refresh',
-			)
-		);
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				$id,
-				array(
-					'label'    => $data['label'],
-					'section'  => 'lightshadestudioworks_theme_colors',
-					'settings' => $id,
-				)
-			)
-		);
-	}
-
 	// BUTTON HOVER EFFECTS..................
 	$wp_customize->add_section(
 		'lssw_button_settings',
