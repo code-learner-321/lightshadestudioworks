@@ -49,6 +49,62 @@ function lightshadestudioworks_setup() {
 	add_theme_support( 'appearance-tools' );
 	add_theme_support( 'woocommerce' );
 
+	add_theme_support(
+		'editor-color-palette',
+		array(
+			array(
+				'name'  => esc_html__( 'Primary (60%)', 'lightshadestudioworks' ),
+				'slug'  => 'base-60',
+				'color' => '#F4F4F4',
+			),
+			array(
+				'name'  => esc_html__( 'Secondary (30%)', 'lightshadestudioworks' ),
+				'slug'  => 'base-30',
+				'color' => '#8A6344',
+			),
+			array(
+				'name'  => esc_html__( 'Secondary Light Variant 1', 'lightshadestudioworks' ),
+				'slug'  => 'secondary-light-1',
+				'color' => '#ECECEB',
+			),
+			array(
+				'name'  => esc_html__( 'Secondary Light Variant 2', 'lightshadestudioworks' ),
+				'slug'  => 'secondary-light-2',
+				'color' => '#FFFFFF',
+			),
+			array(
+				'name'  => esc_html__( 'Accent (10%)', 'lightshadestudioworks' ),
+				'slug'  => 'base-10',
+				'color' => '#EEC537',
+			),
+			array(
+				'name'  => esc_html__( 'Black Text Heading', 'lightshadestudioworks' ),
+				'slug'  => 'text-heading',
+				'color' => '#1E1E1E',
+			),
+			array(
+				'name'  => esc_html__( 'Black Text Body', 'lightshadestudioworks' ),
+				'slug'  => 'text-body',
+				'color' => '#57534E',
+			),
+			array(
+				'name'  => esc_html__( 'Neutral White', 'lightshadestudioworks' ),
+				'slug'  => 'neutral-white',
+				'color' => '#FFFFFF',
+			),
+			array(
+				'name'  => esc_html__( 'Neutral Black', 'lightshadestudioworks' ),
+				'slug'  => 'neutral-black',
+				'color' => '#1E1E1E',
+			),
+			array(
+				'name'  => esc_html__( 'Neutral Grey', 'lightshadestudioworks' ),
+				'slug'  => 'neutral-grey',
+				'color' => '#57534E',
+			),
+		)
+	);
+
 	global $content_width;
 	if ( ! isset( $content_width ) ) {
 		$content_width = 1920;
@@ -143,6 +199,29 @@ function lightshadestudioworks_footer() {
 	<?php
 }
 add_action( 'wp_footer', 'lightshadestudioworks_footer' );
+
+/**
+ * Add color scheme and page slug as body classes for targeted CSS overrides.
+ */
+function lsw_add_scheme_body_classes( $classes ) {
+	$scheme = get_theme_mod( 'color_scheme_select', 'scheme_1' );
+	// Normalize underscores to hyphens so CSS selectors like .lsw-scheme-2 work
+	$classes[] = 'lsw-' . str_replace( '_', '-', sanitize_html_class( $scheme ) );
+
+	if ( is_front_page() || is_home() ) {
+		$classes[] = 'lsw-page-home';
+	}
+
+	if ( is_page() ) {
+		$slug = get_post_field( 'post_name', get_queried_object_id() );
+		if ( $slug ) {
+			$classes[] = 'lsw-page-' . sanitize_html_class( $slug );
+		}
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'lsw_add_scheme_body_classes' );
 
 /**
  * Set custom document title separator

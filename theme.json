@@ -4,16 +4,16 @@
     "appearanceTools": true,
     "color": {
       "palette": [
-        { "slug": "base-60", "color": "var(--color-60)", "name": "Primary (60%)" },
-        { "slug": "base-30", "color": "var(--color-30)", "name": "Secondary (30%)" },
-        { "slug": "secondary-light-1", "color": "var(--color-secondary-light-1)", "name": "Secondary Light Variant 1" },
-        { "slug": "secondary-light-2", "color": "var(--color-secondary-light-2)", "name": "Secondary Light Variant 2" },
-        { "slug": "base-10", "color": "var(--color-10)", "name": "Accent (10%)" },
-        { "slug": "text-heading", "color": "var(--color-text-heading)", "name": "Black Text Heading" },
-        { "slug": "text-body", "color": "var(--color-text-body)", "name": "Black Text Body" },
-        { "slug": "neutral-white", "color": "var(--color-neutral-white)", "name": "Neutral White" },
-        { "slug": "neutral-black", "color": "var(--color-neutral-black)", "name": "Neutral Black" },
-        { "slug": "neutral-grey", "color": "var(--color-neutral-grey)", "name": "Neutral Grey" }
+        { "slug": "base-60", "color": "var(--color-60, #F4F4F4)", "name": "Primary (60%)" },
+        { "slug": "base-30", "color": "var(--color-30, #8A6344)", "name": "Secondary (30%)" },
+        { "slug": "secondary-light-1", "color": "var(--color-secondary-light-1, #ECECEB)", "name": "Secondary Light Variant 1" },
+        { "slug": "secondary-light-2", "color": "var(--color-secondary-light-2, #FFFFFF)", "name": "Secondary Light Variant 2" },
+        { "slug": "base-10", "color": "var(--color-10, #EEC537)", "name": "Accent (10%)" },
+        { "slug": "text-heading", "color": "var(--color-text-heading, #8A6344)", "name": "Text Heading" },
+        { "slug": "text-body", "color": "var(--color-text-body, #57534E)", "name": "Text Body" },
+        { "slug": "neutral-white", "color": "var(--color-neutral-white, #FFFFFF)", "name": "Neutral White" },
+        { "slug": "neutral-black", "color": "var(--color-neutral-black, #1E1E1E)", "name": "Neutral Black" },
+        { "slug": "neutral-grey", "color": "var(--color-neutral-grey, #57534E)", "name": "Neutral Grey" }
       ]
     }
   }

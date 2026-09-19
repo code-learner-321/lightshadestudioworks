@@ -17,7 +17,7 @@ function lssw_setup_auto_contact_form() {
 		return;
 	}
 
-	$title    = 'Lighst Shade Studio Works Contact Form';
+	$title    = 'Light Shade Studio Works Contact Form';
 	$existing = get_posts(
 		array(
 			'post_type'      => 'wpcf7_contact_form',
@@ -76,14 +76,47 @@ add_action( 'init', 'lssw_setup_auto_contact_form' );
  * Shortcode to render auto-created contact form
  */
 function lssw_render_auto_contact_form() {
+	if ( ! class_exists( 'WPCF7_ContactForm' ) ) {
+		// CF7 plugin not active — show a fallback message
+		return '<p><em>Please install and activate the <strong>Contact Form 7</strong> plugin to display this form.</em></p>';
+	}
+
+	// Try finding the form by the (corrected) title first
 	$form = get_posts(
 		array(
 			'post_type'      => 'wpcf7_contact_form',
-			'title'          => 'Lighst Shade Studio Works Contact Form',
+			'title'          => 'Light Shade Studio Works Contact Form',
 			'posts_per_page' => 1,
 		)
 	);
-	return ! empty( $form ) ? do_shortcode( '[contact-form-7 id="' . $form[0]->ID . '"]' ) : '';
+
+	// Also try the old (typo) title in case it was already created
+	if ( empty( $form ) ) {
+		$form = get_posts(
+			array(
+				'post_type'      => 'wpcf7_contact_form',
+				'title'          => 'Lighst Shade Studio Works Contact Form',
+				'posts_per_page' => 1,
+			)
+		);
+	}
+
+	// Fall back to the first available CF7 form
+	if ( empty( $form ) ) {
+		$form = get_posts(
+			array(
+				'post_type'      => 'wpcf7_contact_form',
+				'posts_per_page' => 1,
+				'post_status'    => 'publish',
+			)
+		);
+	}
+
+	if ( ! empty( $form ) ) {
+		return do_shortcode( '[contact-form-7 id="' . $form[0]->ID . '"]' );
+	}
+
+	return '<p><em>No contact form found. Please create a form in Contact Form 7.</em></p>';
 }
 add_shortcode( 'my_contact_form', 'lssw_render_auto_contact_form' );
 

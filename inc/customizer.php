@@ -2310,11 +2310,11 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 	wp_enqueue_script( 'customize-preview' );
 
 	$schemes      = array(
-		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#1E1E1E', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
+		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#8A6344', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
 		'scheme_2' => array( '#F4F4F4', '#EDD28B', '#1B87EA', '#FAF9F5', '#ECE8E1', '#1E1E1E', '#57534E', '#FAF9F5', '#1E1E1E', '#57534E' ),
-		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#282A3A', '#2E3043', '#FFFFFF', '#D1D3E0', '#2E3043', '#FFFFFF', '#D1D3E0' ),
-		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#D4BA9C', '#EFE3D3', '#1F1914', '#332A22', '#EFE3D3', '#1F1914', '#332A22' ),
-		'scheme_5' => array( '#FFFFFF', '#F79A1F', '#EB4F47', '#FFF4E5', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#57534E' ),
+		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#21212F', '#2E3043', '#FFFFFF', '#D1D3E0', '#34364B', '#1B1B25', '#21212F' ),
+		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#DFC6AA', '#EFE3D3', '#1F1914', '#332A22', '#FFFFFF', '#1F1914', '#DFC6AA' ),
+		'scheme_5' => array( '#F8F7F5', '#F79A1F', '#EB4F47', '#FFF7EB', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#F79A1F' ),
 	);
 	$json_schemes = json_encode( $schemes );
 
@@ -2324,7 +2324,7 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 	}
 	const schemes = {$json_schemes};
 
-	function updatePreviewVars(colors) {
+	function updatePreviewVars(colors, schemeKey) {
 		document.documentElement.style.setProperty('--color-60', colors[0]);
 		document.documentElement.style.setProperty('--color-30', colors[1]);
 		document.documentElement.style.setProperty('--color-10', colors[2]);
@@ -2342,13 +2342,23 @@ function lightshadestudioworks_theme_customizer_live_preview() {
 		document.documentElement.style.setProperty('--color-neutral-white', colors[7]);
 		document.documentElement.style.setProperty('--color-neutral-black', colors[8]);
 		document.documentElement.style.setProperty('--color-neutral-grey', colors[9]);
+
+		// Update body background to match c60
+		document.documentElement.style.setProperty('--lsw-card-bg', schemeKey === 'scheme_3' ? colors[1] : '#FFFFFF');
+		document.documentElement.style.setProperty('--lsw-input-bg', schemeKey === 'scheme_3' ? colors[1] : '#FFFFFF');
+		document.documentElement.style.setProperty('--lsw-input-text', schemeKey === 'scheme_3' ? '#FFFFFF' : colors[6]);
+		document.documentElement.style.setProperty('--lsw-input-border', schemeKey === 'scheme_3' ? '#474960' : (schemeKey === 'scheme_4' ? colors[3] : '#E5E7EB'));
+		document.documentElement.style.setProperty('--global-active-link-color', colors[2]);
+
+		// Update body background
+		document.body.style.backgroundColor = colors[0];
 	}
 
 	wp.customize('color_scheme_select', function(value) {
 		value.bind(function(newval) {
 			const colors = schemes[newval];
 			if (!colors) return;
-			updatePreviewVars(colors);
+			updatePreviewVars(colors, newval);
 		});
 	});
 
@@ -2704,11 +2714,11 @@ function lightshadestudioworks_theme_customizer_controls_preview() {
 	wp_enqueue_script( 'customize-controls' );
 
 	$schemes = array(
-		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#1E1E1E', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
+		'scheme_1' => array( '#F4F4F4', '#8A6344', '#EEC537', '#ECECEB', '#FFFFFF', '#8A6344', '#57534E', '#FFFFFF', '#1E1E1E', '#57534E' ),
 		'scheme_2' => array( '#F4F4F4', '#EDD28B', '#1B87EA', '#FAF9F5', '#ECE8E1', '#1E1E1E', '#57534E', '#FAF9F5', '#1E1E1E', '#57534E' ),
-		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#282A3A', '#2E3043', '#FFFFFF', '#D1D3E0', '#2E3043', '#FFFFFF', '#D1D3E0' ),
-		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#D4BA9C', '#EFE3D3', '#1F1914', '#332A22', '#EFE3D3', '#1F1914', '#332A22' ),
-		'scheme_5' => array( '#FFFFFF', '#F79A1F', '#EB4F47', '#FFF4E5', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#57534E' ),
+		'scheme_3' => array( '#1B1B25', '#34364B', '#7EAD1F', '#21212F', '#2E3043', '#FFFFFF', '#D1D3E0', '#34364B', '#1B1B25', '#21212F' ),
+		'scheme_4' => array( '#E2CBAF', '#869E6A', '#C76026', '#DFC6AA', '#EFE3D3', '#1F1914', '#332A22', '#FFFFFF', '#1F1914', '#DFC6AA' ),
+		'scheme_5' => array( '#F8F7F5', '#F79A1F', '#EB4F47', '#FFF7EB', '#FAFAFA', '#1C1917', '#57534E', '#FFFFFF', '#1C1917', '#F79A1F' ),
 	);
 	$json_schemes = json_encode( $schemes );
 

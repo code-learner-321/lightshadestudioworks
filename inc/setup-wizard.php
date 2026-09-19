@@ -346,31 +346,7 @@ function lsw_import_image_from_url( $url, $title = '' ) {
 	return $attachment_id;
 }
 
-/**
- * Filter to override/inject custom Gutenberg blocks for portfolio pages
- */
-function lightshadestudioworks_force_portfolio_content( $content ) {
-	global $post;
 
-	if ( ! is_singular( 'page' ) || ! $post || $post->post_name !== 'portfolio' ) {
-		return $content;
-	}
-
-	$new_content    = lightshadestudioworks_render_portfolio();
-	$portfolio_page = get_page_by_path( 'portfolio', OBJECT, 'page' );
-
-	if ( $portfolio_page && $portfolio_page->post_content !== $new_content ) {
-		wp_update_post(
-			array(
-				'ID'           => $portfolio_page->ID,
-				'post_content' => $new_content,
-			)
-		);
-	}
-
-	return do_blocks( $new_content );
-}
-add_filter( 'the_content', 'lightshadestudioworks_force_portfolio_content', 9999 );
 
 /**
  * Create or update the theme's main navigation menu
