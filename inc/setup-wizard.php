@@ -297,16 +297,32 @@ function lsw_import_image_from_url( $url, $title = '' ) {
 		return null;
 	}
 
-	// Check if image already exists via mapping the original URL string value
+	$filename      = basename( parse_url( $url, PHP_URL_PATH ) );
+	$webp_filename = pathinfo( $filename, PATHINFO_FILENAME ) . '.webp';
+
+	$theme_img_path = get_template_directory() . '/assets/images/' . $webp_filename;
+	if ( ! file_exists( $theme_img_path ) ) {
+		$theme_img_path = get_template_directory() . '/assets/images/' . $filename;
+	}
+
+	$source_key = file_exists( $theme_img_path ) ? $webp_filename : $url;
+
+	// Check if image already exists via mapping
 	$existing = new WP_Query(
 		array(
 			'post_type'      => 'attachment',
 			'post_status'    => 'inherit',
 			'posts_per_page' => 1,
 			'meta_query'     => array(
+				'relation' => 'OR',
 				array(
 					'key'     => '_source_imagekit_url',
 					'value'   => $url,
+					'compare' => '=',
+				),
+				array(
+					'key'     => '_source_theme_image',
+					'value'   => $source_key,
 					'compare' => '=',
 				),
 			),
@@ -321,18 +337,34 @@ function lsw_import_image_from_url( $url, $title = '' ) {
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 
-	// Download file to temp directory
+	if ( file_exists( $theme_img_path ) ) {
+		$tmp = wp_tempnam( basename( $theme_img_path ) );
+		if ( $tmp ) {
+			copy( $theme_img_path, $tmp );
+			$file_array = array(
+				'name'     => basename( $theme_img_path ),
+				'tmp_name' => $tmp,
+			);
+			$attachment_id = media_handle_sideload( $file_array, 0, $title );
+			if ( ! is_wp_error( $attachment_id ) ) {
+				update_post_meta( $attachment_id, '_source_theme_image', $source_key );
+				return $attachment_id;
+			}
+			@unlink( $tmp );
+		}
+	}
+
+	// Fallback to download if local file is missing
 	$tmp = download_url( $url );
 	if ( is_wp_error( $tmp ) ) {
 		return null;
 	}
 
 	$file_array = array(
-		'name'     => basename( parse_url( $url, PHP_URL_PATH ) ),
+		'name'     => $filename,
 		'tmp_name' => $tmp,
 	);
 
-	// Sideload into media library
 	$attachment_id = media_handle_sideload( $file_array, 0, $title );
 
 	if ( is_wp_error( $attachment_id ) ) {
@@ -340,7 +372,6 @@ function lsw_import_image_from_url( $url, $title = '' ) {
 		return null;
 	}
 
-	// Save metadata tracking tag to prevent continuous duplications on repeated trigger clicks
 	update_post_meta( $attachment_id, '_source_imagekit_url', $url );
 
 	return $attachment_id;
@@ -524,31 +555,31 @@ function lightshadestudioworks_create_default_pages() {
 			'title'   => 'Ten Years in Photography and the Evolution of Style',
 			'slug'    => 'ten-years-photography-evolution-style',
 			'content' => $home_post1,
-			'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2147607770.jpg',
+			'img_url' => '2147607770.webp',
 		),
 		array(
 			'title'   => 'The Art of Candid Shots and Unscripted Beauty',
 			'slug'    => 'the-art-of-candid-shots-and-unscripted-beauty',
 			'content' => $home_post2,
-			'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2149887737.jpg',
+			'img_url' => '2149887737.webp',
 		),
 		array(
 			'title'   => 'Preparing Your Property for a Real Estate Shoot',
 			'slug'    => 'preparing-your-property-for-a-real-estate-shoot',
 			'content' => $home_post3,
-			'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/61.jpg',
+			'img_url' => '61.webp',
 		),
 		array(
 			'title'   => 'Finding the Right Light for Every Portrait Session',
 			'slug'    => 'finding-the-right-light-for-every-portrait-session',
 			'content' => $home_post4,
-			'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2149438606.jpg',
+			'img_url' => '2149438606.webp',
 		),
 		array(
 			'title'   => 'Chasing the Grain: Why I’m Falling Back in Love with Film Photography',
 			'slug'    => 'chasing-the-grain-why-im-falling-back-in-love-with-film-photography',
 			'content' => $home_post5,
-			'img_url' => 'https://ik.imagekit.io/fme1zlpfb/lightshadestudioworks/2150506094.jpg',
+			'img_url' => '2150506094.webp',
 		),
 	);
 
